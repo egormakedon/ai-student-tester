@@ -3,6 +3,7 @@ package by.makedon.aistudenttester.main.bean;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Role class define role of application user
@@ -52,5 +53,32 @@ public class Role extends AbstractBean {
 	
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof Role)) {
+			return false;
+		}
+		Role role = (Role) o;
+		return Objects.equals(getRoleId(), role.getRoleId()) &&
+		       Objects.equals(getRoleName(), role.getRoleName());
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(getRoleId(), getRoleName());
+	}
+	
+	@Override
+	public String toString() {
+		return "Role{" +
+		       "roleId=" + roleId +
+		       ", roleName='" + roleName + '\'' +
+		       ", active=" + active +
+		       '}';
 	}
 }

@@ -12,7 +12,7 @@ public interface BaseBean extends Serializable {
 	
 	Long getId();
 	
-	void setActiveFlag(boolean activeFlag);
+	boolean isActive();
 	
-	boolean getActiveFlag();
+	void setActive(boolean active);
 }

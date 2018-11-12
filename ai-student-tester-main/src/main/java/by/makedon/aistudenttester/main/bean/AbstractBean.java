@@ -1,20 +1,28 @@
 package by.makedon.aistudenttester.main.bean;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
 /**
  * Abstract class for define default bean settings
  *
  * @author Yahor Makedon
  */
+@MappedSuperclass
 public abstract class AbstractBean implements BaseBean {
-	protected boolean activeFlag = true;
+	@Column(name = "ACTIVEFLAG")
+	@Type(type = "yes_no")
+	protected boolean active = true;
 	
 	@Override
-	public void setActiveFlag(boolean activeFlag) {
-		this.activeFlag = activeFlag;
+	public boolean isActive() {
+		return active;
 	}
 	
 	@Override
-	public boolean getActiveFlag() {
-		return activeFlag;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }

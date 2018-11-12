@@ -3,6 +3,7 @@ package by.makedon.aistudenttester.main.bean;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Strategy entity class to define how to marking students result of testing
@@ -52,5 +53,32 @@ public class Strategy extends AbstractBean {
 	
 	public void setStrategyName(String strategyName) {
 		StrategyName = strategyName;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof Strategy)) {
+			return false;
+		}
+		Strategy strategy = (Strategy) o;
+		return Objects.equals(getStrategyId(), strategy.getStrategyId()) &&
+		       Objects.equals(getStrategyName(), strategy.getStrategyName());
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(getStrategyId(), getStrategyName());
+	}
+	
+	@Override
+	public String toString() {
+		return "Strategy{" +
+		       "StrategyId=" + StrategyId +
+		       ", StrategyName='" + StrategyName + '\'' +
+		       ", active=" + active +
+		       '}';
 	}
 }
