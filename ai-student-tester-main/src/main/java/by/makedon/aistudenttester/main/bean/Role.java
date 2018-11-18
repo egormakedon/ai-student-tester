@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author Yahor Makedon
  */
-@Entity(name = "Role")
+@Entity(name = "role")
 @Table(name = "ROLE")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Role extends AbstractBean {

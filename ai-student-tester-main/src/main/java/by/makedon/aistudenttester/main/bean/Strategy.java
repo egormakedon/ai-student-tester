@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author Yahor Makedon
  */
-@Entity(name = "Strategy")
+@Entity(name = "strategy")
 @Table(name = "STRATEGY")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Strategy extends AbstractBean {
