@@ -1,6 +1,7 @@
 package by.makedon.aistudenttester.main.bean;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -22,6 +23,7 @@ public class Mark extends AbstractBean {
 	private Long markId;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STRATEGYID")
+	@Where(clause = "strategy.active = 'Y'")
 	private Strategy strategy;
 	@Column(name = "NUMBEROFRIGHTQUESTIONS")
 	private int numberOfRightQuestions;
