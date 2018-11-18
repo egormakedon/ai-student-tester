@@ -21,7 +21,7 @@ public class Student extends AbstractBean {
 	private Long studentId;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STUDENTGROUPID")
-	@Where(clause = "studentGroup.active = 'Y'")
+	@Where(clause = "studentGroup.active = 'true'")
 	private StudentGroup studentGroup;
 	@Column(name = "STUDENTTICKET")
 	private String studentTicket;

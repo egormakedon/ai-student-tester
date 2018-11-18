@@ -23,7 +23,7 @@ public class Mark extends AbstractBean {
 	private Long markId;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STRATEGYID")
-	@Where(clause = "strategy.active = 'Y'")
+	@Where(clause = "strategy.active = 'true'")
 	private Strategy strategy;
 	@Column(name = "NUMBEROFRIGHTQUESTIONS")
 	private int numberOfRightQuestions;
