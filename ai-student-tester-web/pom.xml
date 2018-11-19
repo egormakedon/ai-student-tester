@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>ai-student-tester</artifactId>
+        <groupId>by.makedon</groupId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>ai-student-tester-web</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <build>
+        <finalName>ai-student-tester-web</finalName>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>by.makedon</groupId>
+            <artifactId>ai-student-tester-main</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+    <name>ai-student-tester-web</name>
+
+</project>

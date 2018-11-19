@@ -228,10 +228,75 @@ VALUES (1, 'Технологии инженерии знаний', 'Y');
 INSERT INTO AISTUDENTTESTER.TOPIC (SUBJECTID, TOPICNAME, ACTIVEFLAG)
 VALUES (1, 'Системы управления знаниями', 'Y');
 
+-- Insert data to table AISTUDENTTESTER.QUESTION
+-- 1
+INSERT INTO AISTUDENTTESTER.QUESTION (QUESTIONNAME, FIRSTANSWER, SECONDANSWER, THIRDANSWER,
+                                      FOURTHANSWER, FIFTHANSWER, RIGHTANSWER, ACTIVEFLAG)
+VALUES ('После какого события произошло окончательное рождение искусственного интеллекта?',
+        'доклад Лайтхилла;',
+        'после создания ЭВМ в 40-х гг. ХХ в.;',
+        'семинар в Дартсмурском колледже(США);',
+        'создание Чарльзом Бэббиджем механического калькулятора 1833 г.;',
+        'зарождение нейрокибернетики.',
+        '2',
+        'Y');
+-- 2
+INSERT INTO AISTUDENTTESTER.QUESTION (QUESTIONNAME, FIRSTANSWER, SECONDANSWER, THIRDANSWER,
+                                      FOURTHANSWER, FIFTHANSWER, RIGHTANSWER, ACTIVEFLAG)
+VALUES ('Сколько можно выделить условных поколений в истории создания и развития робототехники?',
+        'II поколения;',
+        'III поколения;',
+        'IV поколения;',
+        'V поколений;',
+        'VI поколений.',
+        '2',
+        'Y');
+-- 3
+INSERT INTO AISTUDENTTESTER.QUESTION (QUESTIONNAME, FIRSTANSWER, SECONDANSWER, THIRDANSWER,
+                                      FOURTHANSWER, FIFTHANSWER, RIGHTANSWER, ACTIVEFLAG)
+VALUES ('Практически все современные промышленные роботы принадлежат:',
+        'I поколению;',
+        'II поколению;',
+        'III поколению;',
+        'IV поколению;',
+        'V поколению.',
+        '1',
+        'Y');
+-- 4
+INSERT INTO AISTUDENTTESTER.QUESTION (QUESTIONNAME, FIRSTANSWER, SECONDANSWER, THIRDANSWER,
+                                      FOURTHANSWER, FIFTHANSWER, RIGHTANSWER, ACTIVEFLAG)
+VALUES ('Одним из направлений искусственного интеллекта, основным подходом которого является описание классов объектов через определенные значения значимых признаков, является:',
+        'создание новых архитектурных компьютеров;',
+        'распределенный искусственный интеллект;',
+        'создание многоагентных систем;',
+        'распознавание образов;',
+        'искусственная жизнь.',
+        '2',
+        'Y');
+-- 5
+INSERT INTO AISTUDENTTESTER.QUESTION (QUESTIONNAME, FIRSTANSWER, SECONDANSWER, THIRDANSWER,
+                                      FOURTHANSWER, FIFTHANSWER, RIGHTANSWER, ACTIVEFLAG)
+VALUES ('В рамках какого направления разрабатываются специальные языки для решения интеллектуальных задач, в которых традиционно упор делается на преобладание логической и символьной обработки над вычислительными процедурами - LISP, PROLOG и др.?',
+        'разработка программного обеспечения для систем ИИ;',
+        'разработка технологии искусственных агентов;',
+        'создание многоагентных систем (МАС);',
+        'создание новых архитектурных компьютеров;',
+        'создание пакетов прикладных программ, ориентированных на промышленную разработку интеллектуальных систем, например, КЕЕ, ARTS.',
+        '1',
+        'Y');
+
+-- Insert data to table AISTUDENTTESTER.QUESTIONMAPQUESTIONMAP
+INSERT INTO AISTUDENTTESTER.QUESTIONMAPQUESTIONMAP (QUESTIONID, TOPICID, ACTIVEFLAG)
+VALUES (1, 1, 'Y');
+INSERT INTO AISTUDENTTESTER.QUESTIONMAPQUESTIONMAP (QUESTIONID, TOPICID, ACTIVEFLAG)
+VALUES (2, 1, 'Y');
+INSERT INTO AISTUDENTTESTER.QUESTIONMAPQUESTIONMAP (QUESTIONID, TOPICID, ACTIVEFLAG)
+VALUES (3, 1, 'Y');
+INSERT INTO AISTUDENTTESTER.QUESTIONMAPQUESTIONMAP (QUESTIONID, TOPICID, ACTIVEFLAG)
+VALUES (4, 1, 'Y');
+INSERT INTO AISTUDENTTESTER.QUESTIONMAPQUESTIONMAP (QUESTIONID, TOPICID, ACTIVEFLAG)
+VALUES (5, 1, 'Y');
+
 -- Drop table AISTUDENTTESTER.ROLEMAP
 
 -- Drop table AISTUDENTTESTER.APPLICATIONUSER
-
--- Drop table AISTUDENTTESTER.QUESTIONMAPQUESTIONMAP
-
--- Drop table AISTUDENTTESTER.QUESTION

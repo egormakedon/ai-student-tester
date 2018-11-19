@@ -11,6 +11,7 @@
 
     <modules>
         <module>ai-student-tester-main</module>
+        <module>ai-student-tester-web</module>
     </modules>
 
     <properties>
