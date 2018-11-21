@@ -4,7 +4,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Yahor Makedon
@@ -25,6 +27,9 @@ public class Topic extends AbstractBean {
 	private Subject subject;
 	@Column(name = "TOPICNAME")
 	private String topicName;
+	
+	@ManyToMany(mappedBy = "topics")
+	private Set<Question> questions = new HashSet<>();
 	
 	/**
 	 * Default constructor
@@ -64,6 +69,14 @@ public class Topic extends AbstractBean {
 	
 	public void setTopicName(String topicName) {
 		this.topicName = topicName;
+	}
+	
+	public Set<Question> getQuestions() {
+		return questions;
+	}
+	
+	public void setQuestions(Set<Question> questions) {
+		this.questions = questions;
 	}
 	
 	@Override
