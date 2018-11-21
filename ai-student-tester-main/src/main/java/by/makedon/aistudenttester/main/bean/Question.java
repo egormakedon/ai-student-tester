@@ -53,12 +53,12 @@ public class Question extends AbstractBean {
 	
 	@Override
 	public void setId(Long id) {
-	
+		setQuestionId(id);
 	}
 	
 	@Override
 	public Long getId() {
-		return null;
+		return getQuestionId();
 	}
 	
 	public Long getQuestionId() {
