@@ -16,4 +16,6 @@ public abstract class BaseConstants {
 	public static final Long STRATEGY_MULTI_ID = 2L;
 	public static final String STRATEGY_SIMPLE_NAME = "SIMPLE";
 	public static final String STRATEGY_MULTI_NAME = "MULTI";
+	
+	public static final int QUESTION_COUNT = 20;
 }
