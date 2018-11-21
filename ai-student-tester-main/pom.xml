@@ -22,8 +22,14 @@
         <spring.version>4.3.20.RELEASE</spring.version>
         <!-- Spring data -->
         <spring.data.version>2.1.1.RELEASE</spring.data.version>
+        <!-- Spring security -->
+        <spring.security.version>4.2.7.RELEASE</spring.security.version>
         <!-- Hibernate -->
         <hibernate.version>5.3.7.Final</hibernate.version>
+        <!-- Servlet-api -->
+        <servlet-api.version>4.0.1</servlet-api.version>
+        <!-- Freemarker -->
+        <freemarker.version>2.3.28</freemarker.version>
     </properties>
 
     <build>
@@ -105,6 +111,27 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring.data.version}</version>
         </dependency>
+        <!-- Spring security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -125,6 +152,19 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-ehcache</artifactId>
             <version>${hibernate.version}</version>
+        </dependency>
+        <!-- Servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Freemarker -->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
         </dependency>
     </dependencies>
 
