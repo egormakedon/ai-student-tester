@@ -20,7 +20,7 @@ import java.util.Locale;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan
+@ComponentScan("by.makedon.aistudenttester.main")
 public class ServletConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public FreeMarkerConfigurer freeMarkerConfigurer() {

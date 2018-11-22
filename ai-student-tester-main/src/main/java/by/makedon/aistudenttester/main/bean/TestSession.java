@@ -128,7 +128,7 @@ public class TestSession extends AbstractBean {
 	@JoinColumn(name = "Q17")
 	@Where(clause = "question.active = 'true'")
 	private Question q17;
-	@Column(name = "A7")
+	@Column(name = "A17")
 	private char a17;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q18")
