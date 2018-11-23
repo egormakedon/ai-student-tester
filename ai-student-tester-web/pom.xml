@@ -22,7 +22,7 @@
     </properties>
 
     <build>
-        <finalName>ai-student-tester</finalName>
+        <finalName>tester</finalName>
 
         <pluginManagement>
             <plugins>

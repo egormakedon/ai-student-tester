@@ -2,7 +2,6 @@ package by.makedon.aistudenttester.main.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -10,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Yahor Makedon
  */
 @Controller
-public class MainController {
+public class MainPageController {
 	@PreAuthorize("permitAll()")
-	@RequestMapping(value = "/ai-student-tester", method = RequestMethod.GET)
-	public String main(Model model) {
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String getMainPage1() {
 		return "public/main";
 	}
 	
 	@PreAuthorize("permitAll()")
-	@RequestMapping(value = "/ai-student-tester/main", method = RequestMethod.GET)
-	public String main2(Model model) {
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String getMainPage2() {
 		return "public/main";
 	}
 }
