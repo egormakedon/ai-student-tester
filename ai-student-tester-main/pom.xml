@@ -21,7 +21,7 @@
         <!-- Spring framework -->
         <spring.version>4.3.20.RELEASE</spring.version>
         <!-- Spring data -->
-        <spring.data.version>2.1.1.RELEASE</spring.data.version>
+        <spring.data.version>1.11.16.RELEASE</spring.data.version>
         <!-- Spring security -->
         <spring.security.version>4.2.7.RELEASE</spring.security.version>
         <!-- Hibernate -->
@@ -30,6 +30,10 @@
         <servlet-api.version>4.0.1</servlet-api.version>
         <!-- Freemarker -->
         <freemarker.version>2.3.28</freemarker.version>
+        <!-- Jackson -->
+        <jackson.version>2.9.7</jackson.version>
+        <!-- Guava -->
+        <guava.version>27.0-jre</guava.version>
     </properties>
 
     <build>
@@ -165,6 +169,18 @@
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
             <version>${freemarker.version}</version>
+        </dependency>
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 

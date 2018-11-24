@@ -22,7 +22,7 @@ import java.util.Properties;
  * @author Yahor Makedon
  */
 @Configuration
-@EnableJpaRepositories
+@EnableJpaRepositories("by.makedon.aistudenttester.main.bean")
 @EnableTransactionManagement
 @PropertySource(value = "classpath:/application.properties")
 public class HibernateConfiguration {
