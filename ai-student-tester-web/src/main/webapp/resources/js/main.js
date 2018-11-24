@@ -8,6 +8,9 @@ var subjectNameLabel = document.getElementById('subjectNameLabelId');
 var subjectNameSelect = document.getElementById('subjectNameSelectId');
 var startTestButton = document.getElementById('startTestButtonId');
 
+var studentTicket = document.getElementById('studentTicketId');
+var subjectName = document.getElementById('subjectNameId');
+
 var groupNumberSelectLock = 0;
 var studentNameSelectLock = 0;
 var subjectNameSelectLock = 0;
@@ -110,6 +113,19 @@ function checkNumberOfParameters() {
             }
 
             break;
+    }
+
+    if (studentNameSelect.value === "") {
+        studentTicket.value = "";
+    } else {
+        let temp = studentNameSelect.value.split(' ')[0];
+        studentTicket.value = temp.substr(0, temp.length - 1);
+    }
+
+    if (subjectNameSelect.value === "") {
+        subjectName.value = "";
+    } else {
+        subjectName.value = subjectNameSelect.value;
     }
 }
 

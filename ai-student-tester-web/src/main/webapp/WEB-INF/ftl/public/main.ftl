@@ -8,9 +8,12 @@
     </head>
 
     <body>
-        <form action="<@spring.url ""/>" method="get">
+        <form action="<@spring.url "/startTest"/>" method="post">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" id="numberOfParametersId" value="0"/>
+
+            <input type="hidden" id="studentTicketId" name="studentTicket" value="">
+            <input type="hidden" id="subjectNameId" name="subjectName" value="">
 
             <label id="groupNumberLabelId"> <@spring.message "main.label.group.number"/> :
                 <select id="groupNumberSelectId" onchange="checkNumberOfParameters()">
@@ -39,7 +42,7 @@
 
             <br><br>
 
-            <input disabled id="startTestButtonId" type="button" value="<@spring.message "main.button.start.test"/>" onclick="">
+            <input disabled id="startTestButtonId" type="button" value="<@spring.message "main.button.start.test"/>">
         </form>
 
         <script src="<@spring.url "/resources/js/jquery.js"/>"></script>
