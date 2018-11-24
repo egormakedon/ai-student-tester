@@ -13,9 +13,9 @@
             <input type="hidden" id="numberOfParametersId" value="0"/>
 
             <label id="groupNumberLabelId"> <@spring.message "main.label.group.number"/> :
-                <select id="groupNumberSelectId" onchange="checkNumberOfParameters()" onclick="ajax()">
+                <select id="groupNumberSelectId" onchange="checkNumberOfParameters()">
                     <option></option>
-                    <option>BELARUS</option>
+                    <option>XXXXX</option>
                 </select>
             </label>
 
@@ -24,6 +24,7 @@
             <label hidden id="studentNameLabelId"> <@spring.message "main.label.student.name"/> :
                 <select hidden id="studentNameSelectId" onchange="checkNumberOfParameters()">
                     <option></option>
+                    <option>XXXXX</option>
                 </select>
             </label>
 
@@ -32,6 +33,7 @@
             <label hidden id="subjectNameLabelId"> <@spring.message "main.label.subject.name"/> :
                 <select hidden id="subjectNameSelectId" onchange="checkNumberOfParameters()">
                     <option></option>
+                    <option>XXXXX</option>
                 </select>
             </label>
 
@@ -41,6 +43,7 @@
         </form>
 
         <script src="<@spring.url "/resources/js/jquery.js"/>"></script>
+        <script src="<@spring.url "/resources/js/ajax.js"/>"></script>
         <script src="<@spring.url "/resources/js/main.js"/>"></script>
     </body>
 </html>
