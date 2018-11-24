@@ -13,8 +13,9 @@
             <input type="hidden" id="numberOfParametersId" value="0"/>
 
             <label id="groupNumberLabelId"> <@spring.message "main.label.group.number"/> :
-                <select id="groupNumberSelectId" onchange="checkNumberOfParameters()">
+                <select id="groupNumberSelectId" onchange="checkNumberOfParameters()" onclick="ajax()">
                     <option></option>
+                    <option>BELARUS</option>
                 </select>
             </label>
 
@@ -39,6 +40,7 @@
             <input disabled id="startTestButtonId" type="button" value="<@spring.message "main.button.start.test"/>" onclick="">
         </form>
 
+        <script src="<@spring.url "/resources/js/jquery.js"/>"></script>
         <script src="<@spring.url "/resources/js/main.js"/>"></script>
     </body>
 </html>

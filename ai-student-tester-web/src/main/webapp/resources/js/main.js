@@ -97,3 +97,15 @@ function checkNumberOfParameters() {
             break;
     }
 }
+
+function ajax(url) {
+    $.ajax({
+        type: 'GET',
+        url: "/ajax/studentGroupList",
+        success: function(result){
+            for (let i = 0; i < result.length; i++) {
+                alert(result[i].studentGroupNumber);
+            }
+        }
+    });
+}
