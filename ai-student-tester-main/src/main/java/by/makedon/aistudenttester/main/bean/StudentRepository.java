@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface StudentRepository extends CrudRepository<Student, Long> {
     List<Student> findStudentsByStudentGroup_StudentGroupNumber(String studentGroupNumber);
+    Student findStudentByStudentTicket(String studentTicket);
 }

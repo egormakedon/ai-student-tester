@@ -7,6 +7,7 @@ import by.makedon.aistudenttester.main.dto.SubjectNameDTO;
 import by.makedon.aistudenttester.main.service.StudentGroupService;
 import by.makedon.aistudenttester.main.service.StudentService;
 import by.makedon.aistudenttester.main.service.SubjectService;
+import by.makedon.aistudenttester.main.validator.StudentGroupNumberValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,8 @@ public class AjaxController {
     private StudentService studentService;
     @Autowired
     private SubjectService subjectService;
+    @Autowired
+    private StudentGroupNumberValidator studentGroupNumberValidator;
 
     @PreAuthorize("permitAll()")
     @GetMapping(value = "/studentGroupNumberList")
@@ -40,6 +43,8 @@ public class AjaxController {
     @PreAuthorize("permitAll()")
     @GetMapping(value = "/studentTicketAndFioList")
     public List<StudentTicketAndFioDTO> getStudentTicketAndFioList(@RequestParam String studentGroupNumber) {
+        studentGroupNumberValidator.validate(studentGroupNumber);
+
         return managerDTO.getStudentTicketAndFioList(studentService.getStudentListByStudentGroupNumber(studentGroupNumber));
     }
 

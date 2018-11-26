@@ -34,6 +34,8 @@
         <jackson.version>2.9.7</jackson.version>
         <!-- Guava -->
         <guava.version>27.0-jre</guava.version>
+        <!-- Commons-lang -->
+        <commons-lang.version>3.8.1</commons-lang.version>
     </properties>
 
     <build>
@@ -181,6 +183,12 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+        <!-- Commons-lang -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
         </dependency>
     </dependencies>
 
