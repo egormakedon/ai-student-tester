@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta charset="UTF-8"/>
         <title><@spring.message "main.title"/></title>
     </head>
 
@@ -42,7 +42,7 @@
 
             <br><br>
 
-            <input disabled id="startTestButtonId" type="button" value="<@spring.message "main.button.start.test"/>">
+            <input disabled id="startTestButtonId" type="submit" value="<@spring.message "main.button.start.test"/>">
         </form>
 
         <script src="<@spring.url "/resources/js/jquery.js"/>"></script>

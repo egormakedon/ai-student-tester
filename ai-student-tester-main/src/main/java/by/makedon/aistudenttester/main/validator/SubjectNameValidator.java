@@ -1,7 +1,6 @@
 package by.makedon.aistudenttester.main.validator;
 
 import by.makedon.aistudenttester.main.service.SubjectService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,12 +21,7 @@ public class SubjectNameValidator {
             throw new IllegalArgumentException("validation.subject.name.empty");
         }
 
-        subjectName = subjectName.trim();
-        if (!StringUtils.isNumeric(subjectName)) {
-            throw new IllegalArgumentException("validation.subject.name.not.number");
-        }
-
-        if (!subjectService.isSubjectExists(subjectName)) {
+        if (!subjectService.isSubjectExists(subjectName.trim())) {
             throw new IllegalArgumentException("validation.subject.name.not.exists");
         }
     }

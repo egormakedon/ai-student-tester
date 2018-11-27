@@ -36,7 +36,7 @@ public class ServletConfiguration extends WebMvcConfigurerAdapter {
 	public FreeMarkerViewResolver freeMarkerViewResolver() {
 		FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
 		
-		freeMarkerViewResolver.setContentType("text/html; charset=utf-8");
+		freeMarkerViewResolver.setContentType("text/html;charset=UTF-8");
 		freeMarkerViewResolver.setCache(true);
 		freeMarkerViewResolver.setPrefix("");
 		freeMarkerViewResolver.setSuffix(".ftl");
