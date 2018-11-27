@@ -29,6 +29,7 @@ public class Topic extends AbstractBean {
 	private String topicName;
 	
 	@ManyToMany(mappedBy = "topics")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Set<Question> questions = new HashSet<>();
 	
 	/**

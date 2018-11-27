@@ -1,5 +1,6 @@
 package by.makedon.aistudenttester.main.controller;
 
+import by.makedon.aistudenttester.main.TestGenerator;
 import by.makedon.aistudenttester.main.validator.StudentTicketValidator;
 import by.makedon.aistudenttester.main.validator.SubjectNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class StartTestController {
     private StudentTicketValidator studentTicketValidator;
     @Autowired
     private SubjectNameValidator subjectNameValidator;
+    @Autowired
+    private TestGenerator testGenerator;
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "/startTest", method = RequestMethod.POST)
@@ -25,7 +28,9 @@ public class StartTestController {
         studentTicketValidator.validate(studentTicket);
         subjectNameValidator.validate(subjectName);
 
-        //TODO
+        //TODO add to session
+
+        testGenerator.generateTest(studentTicket, subjectName); // TODO
 
         return "redirect:/main"; //TODO change url
     }
