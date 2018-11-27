@@ -2,7 +2,6 @@ package by.makedon.aistudenttester.main.service;
 
 import by.makedon.aistudenttester.main.bean.StudentGroup;
 import by.makedon.aistudenttester.main.bean.StudentGroupRepository;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public class StudentGroupService {
     private StudentGroupRepository studentGroupRepository;
 
     public List<StudentGroup> getStudentGroupList() {
-        return Lists.newArrayList(studentGroupRepository.findAll());
+        return studentGroupRepository.findStudentGroupsByActiveIsTrue();
     }
 
     public boolean isStudentGroupExists(String studentGroupNumber) {

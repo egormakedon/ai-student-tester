@@ -16,7 +16,7 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     public List<Student> getStudentListByStudentGroupNumber(String studentGroupNumber) {
-        return studentRepository.findStudentsByStudentGroup_StudentGroupNumber(studentGroupNumber);
+        return studentRepository.findStudentsByActiveIsTrueAndStudentGroup_StudentGroupNumberAndStudentGroup_ActiveIsTrue(studentGroupNumber);
     }
 
     public boolean isStudentExists(String studentTicket) {
