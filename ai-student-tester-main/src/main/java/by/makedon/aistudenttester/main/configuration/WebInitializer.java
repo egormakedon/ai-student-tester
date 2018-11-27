@@ -1,12 +1,7 @@
 package by.makedon.aistudenttester.main.configuration;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 /**
  * @author Yahor Makedon
@@ -26,22 +21,5 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
-    }
-
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext);
-
-        registerCharacterEncodingFilter(servletContext);
-    }
-
-    private void registerCharacterEncodingFilter(ServletContext servletContext) {
-        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
-
-        encodingFilter.setEncoding("UTF-8");
-        encodingFilter.setForceEncoding(true);
-
-        FilterRegistration.Dynamic characterEncodingFilter = servletContext.addFilter("characterEncodingFilter", encodingFilter);
-        characterEncodingFilter.addMappingForUrlPatterns(null, false, "/*");
     }
 }

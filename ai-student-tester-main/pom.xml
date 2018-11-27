@@ -23,7 +23,7 @@
         <!-- Spring data -->
         <spring.data.version>1.11.16.RELEASE</spring.data.version>
         <!-- Spring security -->
-        <spring.security.version>4.2.7.RELEASE</spring.security.version>
+        <spring.security.version>4.2.9.RELEASE</spring.security.version>
         <!-- Hibernate -->
         <hibernate.version>5.3.7.Final</hibernate.version>
         <!-- Servlet-api -->
