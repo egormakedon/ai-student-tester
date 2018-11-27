@@ -19,4 +19,8 @@ public class SubjectService {
     public List<Subject> getSubjectList() {
         return Lists.newArrayList(subjectRepository.findAll());
     }
+
+    public boolean isSubjectExists(String subjectName) {
+        return subjectRepository.findSubjectBySubjectNameAndActiveIsTrue(subjectName).isPresent();
+    }
 }

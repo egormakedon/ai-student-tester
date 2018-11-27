@@ -18,4 +18,8 @@ public class StudentService {
     public List<Student> getStudentListByStudentGroupNumber(String studentGroupNumber) {
         return studentRepository.findStudentsByStudentGroup_StudentGroupNumber(studentGroupNumber);
     }
+
+    public boolean isStudentExists(String studentTicket) {
+        return studentRepository.findStudentByStudentTicketAndActiveIsTrue(studentTicket).isPresent();
+    }
 }

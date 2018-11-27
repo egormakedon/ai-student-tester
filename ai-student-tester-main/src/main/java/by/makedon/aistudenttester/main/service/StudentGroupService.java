@@ -19,4 +19,8 @@ public class StudentGroupService {
     public List<StudentGroup> getStudentGroupList() {
         return Lists.newArrayList(studentGroupRepository.findAll());
     }
+
+    public boolean isStudentGroupExists(String studentGroupNumber) {
+        return studentGroupRepository.findStudentGroupByStudentGroupNumberAndActiveIsTrue(studentGroupNumber).isPresent();
+    }
 }

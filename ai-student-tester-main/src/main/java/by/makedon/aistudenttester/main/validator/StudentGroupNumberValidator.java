@@ -1,6 +1,8 @@
 package by.makedon.aistudenttester.main.validator;
 
+import by.makedon.aistudenttester.main.service.StudentGroupService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,6 +10,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class StudentGroupNumberValidator {
+    @Autowired
+    private StudentGroupService studentGroupService;
+
     public void validate(String studentGroupNumber) {
         if (studentGroupNumber == null) {
             throw new IllegalArgumentException("validation.student.group.number.null");
@@ -17,8 +22,13 @@ public class StudentGroupNumberValidator {
             throw new IllegalArgumentException("validation.student.group.number.empty");
         }
 
-        if (!StringUtils.isNumeric(studentGroupNumber.trim())) {
+        studentGroupNumber = studentGroupNumber.trim();
+        if (!StringUtils.isNumeric(studentGroupNumber)) {
             throw new IllegalArgumentException("validation.student.group.number.not.number");
+        }
+
+        if (!studentGroupService.isStudentGroupExists(studentGroupNumber)) {
+            throw new IllegalArgumentException("validation.student.group.number.not.exists");
         }
     }
 }
