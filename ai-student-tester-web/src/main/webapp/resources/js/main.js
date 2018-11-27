@@ -141,7 +141,7 @@ function groupNumberSelectFocus() {
             return;
         }
 
-        ajaxGet('/ajax/studentGroupNumberList', function(result) {
+        ajaxGet('/tester/ajax/studentGroupNumberList', function(result) {
             $('#groupNumberSelectId').children('option:not(:first)').remove();
 
             for (let i = 0; i < result.length; i++) {
@@ -175,7 +175,7 @@ function studentNameSelectFocus() {
         }
 
         let groupNumberValue = groupNumberSelect.value;
-        let url = '/ajax/studentTicketAndFioList?studentGroupNumber=' + groupNumberValue;
+        let url = '/tester/ajax/studentTicketAndFioList?studentGroupNumber=' + groupNumberValue;
 
         ajaxGet(url, function(result) {
             $('#studentNameSelectId').children('option:not(:first)').remove();
@@ -210,7 +210,7 @@ function subjectNameSelectFocus() {
             return;
         }
 
-        ajaxGet('/ajax/subjectNameList', function(result) {
+        ajaxGet('/tester/ajax/subjectNameList', function(result) {
             $('#subjectNameSelectId').children('option:not(:first)').remove();
 
             for (let i = 0; i < result.length; i++) {
