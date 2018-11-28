@@ -22,7 +22,7 @@ public class TestSession extends AbstractBean {
 	private Long testSessionId;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STUDENTID")
-	@Where(clause = "student.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Student student;
 	@Column(name = "CREATEDDATE")
 	private Date createdDate;
@@ -30,121 +30,121 @@ public class TestSession extends AbstractBean {
 	private int mark;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q1")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q1;
 	@Column(name = "A1")
 	private char a1;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q2")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q2;
 	@Column(name = "A2")
 	private char a2;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q3")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q3;
 	@Column(name = "A3")
 	private char a3;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q4")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q4;
 	@Column(name = "A4")
 	private char a4;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q5")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q5;
 	@Column(name = "A5")
 	private char a5;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q6")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q6;
 	@Column(name = "A6")
 	private char a6;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q7")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q7;
 	@Column(name = "A7")
 	private char a7;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q8")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q8;
 	@Column(name = "A8")
 	private char a8;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q9")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q9;
 	@Column(name = "A9")
 	private char a9;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q10")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q10;
 	@Column(name = "A10")
 	private char a10;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q11")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q11;
 	@Column(name = "A11")
 	private char a11;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q12")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q12;
 	@Column(name = "A12")
 	private char a12;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q13")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q13;
 	@Column(name = "A13")
 	private char a13;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q14")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q14;
 	@Column(name = "A14")
 	private char a14;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q15")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q15;
 	@Column(name = "A15")
 	private char a15;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q16")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q16;
 	@Column(name = "A16")
 	private char a16;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q17")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q17;
 	@Column(name = "A17")
 	private char a17;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q18")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q18;
 	@Column(name = "A18")
 	private char a18;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q19")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q19;
 	@Column(name = "A19")
 	private char a19;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q20")
-	@Where(clause = "question.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Question q20;
 	@Column(name = "A20")
 	private char a20;

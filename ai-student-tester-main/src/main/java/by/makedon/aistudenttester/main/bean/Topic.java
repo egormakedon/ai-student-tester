@@ -23,7 +23,7 @@ public class Topic extends AbstractBean {
 	private Long topicId;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SUBJECTID")
-	@Where(clause = "subject.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Subject subject;
 	@Column(name = "TOPICNAME")
 	private String topicName;

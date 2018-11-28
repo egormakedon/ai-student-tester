@@ -1,6 +1,7 @@
 package by.makedon.aistudenttester.main.controller;
 
-import by.makedon.aistudenttester.main.TestGenerator;
+import by.makedon.aistudenttester.main.QuestionGenerator;
+import by.makedon.aistudenttester.main.bean.Question;
 import by.makedon.aistudenttester.main.validator.StudentTicketValidator;
 import by.makedon.aistudenttester.main.validator.SubjectNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author Yahor Makedon
@@ -20,7 +23,7 @@ public class StartTestController {
     @Autowired
     private SubjectNameValidator subjectNameValidator;
     @Autowired
-    private TestGenerator testGenerator;
+    private QuestionGenerator questionGenerator;
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "/startTest", method = RequestMethod.POST)
@@ -30,7 +33,7 @@ public class StartTestController {
 
         //TODO add to session
 
-        testGenerator.generateTest(studentTicket, subjectName); // TODO
+        List<Question> questionList = questionGenerator.getQuetionList(subjectName); // TODO
 
         return "redirect:/main"; //TODO change url
     }

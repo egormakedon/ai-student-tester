@@ -1,6 +1,7 @@
 package by.makedon.aistudenttester.main.bean;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class Question extends AbstractBean {
 			joinColumns = { @JoinColumn(name = "QUESTIONID") },
 			inverseJoinColumns = { @JoinColumn(name = "TOPICID") }
 	)
-//	@Where(clause = "topic.active = 'true'")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Set<Topic> topics = new HashSet<>(1);
 	
 	/**
