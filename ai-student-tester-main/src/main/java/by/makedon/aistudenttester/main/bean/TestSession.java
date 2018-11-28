@@ -4,7 +4,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -25,7 +25,7 @@ public class TestSession extends AbstractBean {
 	@Where(clause = "ACTIVEFLAG = 'Y'")
 	private Student student;
 	@Column(name = "CREATEDDATE")
-	private Date createdDate;
+	private LocalDateTime createdDate;
 	@Column(name = "MARK")
 	private Integer mark;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -181,11 +181,11 @@ public class TestSession extends AbstractBean {
 		this.student = student;
 	}
 	
-	public Date getCreatedDate() {
+	public LocalDateTime getCreatedDate() {
 		return createdDate;
 	}
 	
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	

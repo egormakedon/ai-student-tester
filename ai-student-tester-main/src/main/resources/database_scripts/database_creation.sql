@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS AISTUDENTTESTER.MARK (
 CREATE TABLE IF NOT EXISTS AISTUDENTTESTER.TESTSESSION (
     TESTSESSIONID                   INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Test session id, PK',
     STUDENTID                       INT UNSIGNED NOT NULL COMMENT 'Student id, FK',
-    CREATEDDATE                     DATE NOT NULL COMMENT 'Created date',
+    CREATEDDATE                     DATETIME NOT NULL COMMENT 'Created date',
     MARK                            INT UNSIGNED COMMENT 'Mark',
     Q1                              INT UNSIGNED NOT NULL COMMENT 'Question 1 id, FK',
     A1                              CHAR(1) NOT NULL COMMENT 'Answer 1',

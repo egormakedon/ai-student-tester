@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Yahor Makedon
@@ -21,5 +22,9 @@ public class StudentService {
 
     public boolean isStudentExists(String studentTicket) {
         return studentRepository.findStudentByStudentTicketAndActiveIsTrue(studentTicket).isPresent();
+    }
+
+    public Optional<Student> getStudentByStudentTicket(String studentTicket) {
+        return studentRepository.findStudentByStudentTicketAndActiveIsTrue(studentTicket);
     }
 }
