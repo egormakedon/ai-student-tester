@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @author Yahor Makedon
  */
 @Service
-public class TestSessionService {
+public class TestSessionService extends AbstractService {
     @Autowired
     private TestSessionRepository testSessionRepository;
 
@@ -25,130 +25,96 @@ public class TestSessionService {
     public Question getQuestionByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
         switch (questionNumber) {
             case 1:
-
-
-                break;
+                return testSession.getQ1();
             case 2:
-
-                break;
+                return testSession.getQ2();
             case 3:
-
-                break;
+                return testSession.getQ3();
             case 4:
-
-                break;
+                return testSession.getQ4();
             case 5:
-
-                break;
+                return testSession.getQ5();
             case 6:
-
-                break;
+                return testSession.getQ6();
             case 7:
-
-                break;
+                return testSession.getQ7();
             case 8:
-
-                break;
+                return testSession.getQ8();
             case 9:
-
-                break;
+                return testSession.getQ9();
             case 10:
-
-                break;
+                return testSession.getQ10();
             case 11:
-
-                break;
+                return testSession.getQ11();
             case 12:
-
-                break;
+                return testSession.getQ12();
             case 13:
-
-                break;
+                return testSession.getQ13();
             case 14:
-
-                break;
+                return testSession.getQ14();
             case 15:
-
-                break;
+                return testSession.getQ15();
             case 16:
-
-                break;
+                return testSession.getQ16();
             case 17:
-
-                break;
+                return testSession.getQ17();
             case 18:
-
-                break;
+                return testSession.getQ18();
             case 19:
-
-                break;
+                return testSession.getQ19();
             case 20:
-
-                break;
+                return testSession.getQ20();
+            default:
+                logger.error("Invalid questionNumber - " + questionNumber);
+                throw new IllegalArgumentException("Invalid questionNumber - " + questionNumber);
+        }
     }
 
     public char getAnswerByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
         switch (questionNumber) {
             case 1:
-
-
-                break;
+                return testSession.getA1();
             case 2:
-
-                break;
+                return testSession.getA2();
             case 3:
-
-                break;
+                return testSession.getA3();
             case 4:
-
-                break;
+                return testSession.getA4();
             case 5:
-
-                break;
+                return testSession.getA5();
             case 6:
-
-                break;
+                return testSession.getA6();
             case 7:
-
-                break;
+                return testSession.getA7();
             case 8:
-
-                break;
+                return testSession.getA8();
             case 9:
-
-                break;
+                return testSession.getA9();
             case 10:
-
-                break;
+                return testSession.getA10();
             case 11:
-
-                break;
+                return testSession.getA11();
             case 12:
-
-                break;
+                return testSession.getA12();
             case 13:
-
-                break;
+                return testSession.getA13();
             case 14:
-
-                break;
+                return testSession.getA14();
             case 15:
-
-                break;
+                return testSession.getA15();
             case 16:
-
-                break;
+                return testSession.getA16();
             case 17:
-
-                break;
+                return testSession.getA17();
             case 18:
-
-                break;
+                return testSession.getA18();
             case 19:
-
-                break;
+                return testSession.getA19();
             case 20:
-
-                break;
+                return testSession.getA20();
+            default:
+                logger.error("Invalid questionNumber - " + questionNumber);
+                throw new IllegalArgumentException("Invalid questionNumber - " + questionNumber);
+        }
     }
 }

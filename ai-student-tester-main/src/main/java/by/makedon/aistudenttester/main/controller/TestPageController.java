@@ -1,6 +1,7 @@
 package by.makedon.aistudenttester.main.controller;
 
 import by.makedon.aistudenttester.main.BaseConstants;
+import by.makedon.aistudenttester.main.bean.Question;
 import by.makedon.aistudenttester.main.bean.TestSession;
 import by.makedon.aistudenttester.main.dto.ManagerDTO;
 import by.makedon.aistudenttester.main.service.TestSessionService;
@@ -29,7 +30,10 @@ public class TestPageController {
         TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
         int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
 
-        managerDTO.getQuestionAndAnswersDTO(testSession, questionNumber); //TODO
+        Question question = testSessionService.getQuestionByTestSessionAndQuestionNumber(testSession, questionNumber);
+        char answer = testSessionService.getAnswerByTestSessionAndQuestionNumber(testSession, questionNumber);
+
+        managerDTO.getQuestionAndAnswersDTO(question, answer); //TODO
 
         return "test";
     }

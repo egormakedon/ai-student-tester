@@ -1,9 +1,6 @@
 package by.makedon.aistudenttester.main.dto;
 
-import by.makedon.aistudenttester.main.bean.Student;
-import by.makedon.aistudenttester.main.bean.StudentGroup;
-import by.makedon.aistudenttester.main.bean.Subject;
-import by.makedon.aistudenttester.main.bean.TestSession;
+import by.makedon.aistudenttester.main.bean.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,7 +41,17 @@ public class ManagerDTO {
         return subjectNameDTOList;
     }
 
-    public QuestionAndAnswersDTO getQuestionAndAnswersDTO(TestSession testSession, int questionNumber) {
-        //TODO
+    public QuestionAndAnswersDTO getQuestionAndAnswersDTO(Question question, char answer) {
+        QuestionAndAnswersDTO questionAndAnswersDTO = new QuestionAndAnswersDTO();
+
+        questionAndAnswersDTO.setQuestionName(question.getQuestionName());
+        questionAndAnswersDTO.setFirstAnswer(question.getFirstAnswer());
+        questionAndAnswersDTO.setSecondAnswer(question.getSecondAnswer());
+        questionAndAnswersDTO.setThirdAnswer(question.getThirdAnswer());
+        questionAndAnswersDTO.setFourthAnswer(question.getFourthAnswer());
+        questionAndAnswersDTO.setFifthAnswer(questionAndAnswersDTO.getFifthAnswer());
+        questionAndAnswersDTO.setAnswer(answer);
+
+        return questionAndAnswersDTO;
     }
 }
