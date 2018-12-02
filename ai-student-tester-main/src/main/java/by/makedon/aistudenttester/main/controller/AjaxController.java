@@ -2,10 +2,7 @@ package by.makedon.aistudenttester.main.controller;
 
 import by.makedon.aistudenttester.main.BaseConstants;
 import by.makedon.aistudenttester.main.bean.TestSession;
-import by.makedon.aistudenttester.main.dto.ManagerDTO;
-import by.makedon.aistudenttester.main.dto.StudentGroupNumberDTO;
-import by.makedon.aistudenttester.main.dto.StudentTicketAndFioDTO;
-import by.makedon.aistudenttester.main.dto.SubjectNameDTO;
+import by.makedon.aistudenttester.main.dto.*;
 import by.makedon.aistudenttester.main.service.StudentGroupService;
 import by.makedon.aistudenttester.main.service.StudentService;
 import by.makedon.aistudenttester.main.service.SubjectService;
@@ -71,5 +68,22 @@ public class AjaxController {
         int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
 
         testSessionService.updateAnswer(testSession, questionNumber, answer.charAt(0));
+    }
+
+    @PreAuthorize("permitAll()")
+    @PostMapping(value = "/nextQuestion")
+    public void nextQuestion(HttpSession httpSession) {
+        Integer i = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
+        ++i;
+        httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, i.toString());
+        //TODO
+        //return null;
+    }
+
+    @PreAuthorize("permitAll()")
+    @PostMapping(value = "/prevQuestion")
+    public QuestionAndAnswersDTO prevQuestion(HttpSession httpSession) {
+        //TODO
+        return null;
     }
 }

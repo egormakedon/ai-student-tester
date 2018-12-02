@@ -17,7 +17,7 @@
 
         <br><br>
 
-        <form>
+        <form action="<@spring.url ""/>" method="post">
             <input id="csrfId" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input id="questionNumberId" type="hidden" name="questionNumber" value="${Session.questionNumber}">
             <input id="answerId" type="hidden" name="answer" value="${questionAndAnswersDTO.getAnswer()}">
@@ -44,6 +44,15 @@
 
             <input id="answerRadioButtonId5" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton5Change()">
             <label for="answerRadioButtonId5">${questionAndAnswersDTO.getFifthAnswer()}</label>
+
+            <br><br>
+
+            <input id="prevButtonId" type="button" value="<@spring.message "test.prev.button"/>" onclick="prevButtonClick()">
+            <input id="nextButtonId" type="button" value="<@spring.message "test.next.button"/>" onclick="nextButtonClick()">
+
+            <br><br>
+
+            <input id="completeButtonId" type="submit" value="<@spring.message "test.complete.button"/>">
         </form>
 
         <script src="<@spring.url "/resources/js/jquery.js"/>"></script>

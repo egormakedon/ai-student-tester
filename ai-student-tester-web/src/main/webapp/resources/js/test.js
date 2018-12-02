@@ -2,6 +2,9 @@ var questionNumber = document.getElementById('questionNumberId');
 var answer = document.getElementById('answerId');
 var csrf = document.getElementById('csrfId');
 
+var prevButton = document.getElementById('prevButtonId');
+var nextButton = document.getElementById('nextButtonId');
+
 function setAnswerToRadioButton() {
     switch (answer.value) {
         case '-':
@@ -62,6 +65,36 @@ function ajaxUpdateAnswer() {
 
     ajaxPost('/tester/ajax/updateAnswer', data, function(result) {
     });
+}
+
+function prevButtonClick() {
+    if(questionNumber.value === "1") {
+        return;
+    }
+
+    let data = {
+        _csrf : csrf.value
+    };
+
+    ajaxPost('/tester/ajax/prevQuestion', data, function(result) {
+    });
+
+    //TODO decrement questionNumber ?
+}
+
+function nextButtonClick() {
+    if(questionNumber.value === "20") {
+        return;
+    }
+
+    let data = {
+        _csrf : csrf.value
+    };
+
+    ajaxPost('/tester/ajax/nextQuestion', data, function(result) {
+    });
+
+    //TODO increment questionNumber ?
 }
 
 $(document).ready(function() {
