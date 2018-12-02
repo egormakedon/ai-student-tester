@@ -49,7 +49,7 @@ public class ManagerDTO {
         questionAndAnswersDTO.setSecondAnswer(question.getSecondAnswer());
         questionAndAnswersDTO.setThirdAnswer(question.getThirdAnswer());
         questionAndAnswersDTO.setFourthAnswer(question.getFourthAnswer());
-        questionAndAnswersDTO.setFifthAnswer(questionAndAnswersDTO.getFifthAnswer());
+        questionAndAnswersDTO.setFifthAnswer(question.getFifthAnswer());
         questionAndAnswersDTO.setAnswer(answer);
 
         return questionAndAnswersDTO;

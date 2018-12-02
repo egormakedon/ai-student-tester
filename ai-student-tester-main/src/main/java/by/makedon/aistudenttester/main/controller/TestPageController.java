@@ -33,8 +33,8 @@ public class TestPageController {
         Question question = testSessionService.getQuestionByTestSessionAndQuestionNumber(testSession, questionNumber);
         char answer = testSessionService.getAnswerByTestSessionAndQuestionNumber(testSession, questionNumber);
 
-        managerDTO.getQuestionAndAnswersDTO(question, answer); //TODO
+        model.addAttribute("questionAndAnswersDTO", managerDTO.getQuestionAndAnswersDTO(question, answer));
 
-        return "test";
+        return "public/test";
     }
 }

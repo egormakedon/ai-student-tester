@@ -10,10 +10,7 @@ import by.makedon.aistudenttester.main.service.SubjectService;
 import by.makedon.aistudenttester.main.validator.StudentGroupNumberValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,5 +49,11 @@ public class AjaxController {
     @GetMapping(value = "/subjectNameList")
     public List<SubjectNameDTO> getSubjectNameList() {
         return managerDTO.getSubjectNameList(subjectService.getSubjectList());
+    }
+
+    @PreAuthorize("permitAll()")
+    @PostMapping(value = "/updateAnswer")
+    public void updateAnswer(@RequestParam String answer) {
+        System.out.println(answer);
     }
 }
