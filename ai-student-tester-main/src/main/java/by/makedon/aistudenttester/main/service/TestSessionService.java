@@ -5,6 +5,7 @@ import by.makedon.aistudenttester.main.bean.TestSession;
 import by.makedon.aistudenttester.main.bean.TestSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Yahor Makedon
@@ -112,6 +113,115 @@ public class TestSessionService extends AbstractService {
                 return testSession.getA19();
             case 20:
                 return testSession.getA20();
+            default:
+                logger.error("Invalid questionNumber - " + questionNumber);
+                throw new IllegalArgumentException("Invalid questionNumber - " + questionNumber);
+        }
+    }
+
+    @Transactional
+    public void updateAnswer(TestSession testSession, int questionNumber, char answer) {
+        switch (questionNumber) {
+            case 1:
+                testSession.setA1(answer);
+                save(testSession);
+
+                break;
+            case 2:
+                testSession.setA2(answer);
+                save(testSession);
+
+                break;
+            case 3:
+                testSession.setA3(answer);
+                save(testSession);
+
+                break;
+            case 4:
+                testSession.setA4(answer);
+                save(testSession);
+
+                break;
+            case 5:
+                testSession.setA5(answer);
+                save(testSession);
+
+                break;
+            case 6:
+                testSession.setA6(answer);
+                save(testSession);
+
+                break;
+            case 7:
+                testSession.setA7(answer);
+                save(testSession);
+
+                break;
+            case 8:
+                testSession.setA8(answer);
+                save(testSession);
+
+                break;
+            case 9:
+                testSession.setA9(answer);
+                save(testSession);
+
+                break;
+            case 10:
+                testSession.setA10(answer);
+                save(testSession);
+
+                break;
+            case 11:
+                testSession.setA11(answer);
+                save(testSession);
+
+                break;
+            case 12:
+                testSession.setA12(answer);
+                save(testSession);
+
+                break;
+            case 13:
+                testSession.setA13(answer);
+                save(testSession);
+
+                break;
+            case 14:
+                testSession.setA14(answer);
+                save(testSession);
+
+                break;
+            case 15:
+                testSession.setA15(answer);
+                save(testSession);
+
+                break;
+            case 16:
+                testSession.setA16(answer);
+                save(testSession);
+
+                break;
+            case 17:
+                testSession.setA17(answer);
+                save(testSession);
+
+                break;
+            case 18:
+                testSession.setA18(answer);
+                save(testSession);
+
+                break;
+            case 19:
+                testSession.setA19(answer);
+                save(testSession);
+
+                break;
+            case 20:
+                testSession.setA20(answer);
+                save(testSession);
+
+                break;
             default:
                 logger.error("Invalid questionNumber - " + questionNumber);
                 throw new IllegalArgumentException("Invalid questionNumber - " + questionNumber);

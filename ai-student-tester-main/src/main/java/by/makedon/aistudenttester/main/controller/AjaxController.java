@@ -1,5 +1,7 @@
 package by.makedon.aistudenttester.main.controller;
 
+import by.makedon.aistudenttester.main.BaseConstants;
+import by.makedon.aistudenttester.main.bean.TestSession;
 import by.makedon.aistudenttester.main.dto.ManagerDTO;
 import by.makedon.aistudenttester.main.dto.StudentGroupNumberDTO;
 import by.makedon.aistudenttester.main.dto.StudentTicketAndFioDTO;
@@ -7,11 +9,14 @@ import by.makedon.aistudenttester.main.dto.SubjectNameDTO;
 import by.makedon.aistudenttester.main.service.StudentGroupService;
 import by.makedon.aistudenttester.main.service.StudentService;
 import by.makedon.aistudenttester.main.service.SubjectService;
+import by.makedon.aistudenttester.main.service.TestSessionService;
+import by.makedon.aistudenttester.main.validator.AnswerValidator;
 import by.makedon.aistudenttester.main.validator.StudentGroupNumberValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -22,6 +27,7 @@ import java.util.List;
 public class AjaxController {
     @Autowired
     private ManagerDTO managerDTO;
+
     @Autowired
     private StudentGroupService studentGroupService;
     @Autowired
@@ -29,7 +35,12 @@ public class AjaxController {
     @Autowired
     private SubjectService subjectService;
     @Autowired
+    private TestSessionService testSessionService;
+
+    @Autowired
     private StudentGroupNumberValidator studentGroupNumberValidator;
+    @Autowired
+    private AnswerValidator answerValidator;
 
     @PreAuthorize("permitAll()")
     @GetMapping(value = "/studentGroupNumberList")
@@ -53,7 +64,12 @@ public class AjaxController {
 
     @PreAuthorize("permitAll()")
     @PostMapping(value = "/updateAnswer")
-    public void updateAnswer(@RequestParam String answer) {
-        System.out.println(answer);
+    public void updateAnswer(@RequestParam String answer, HttpSession httpSession) {
+        answerValidator.validate(answer);
+
+        TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
+        int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
+
+        testSessionService.updateAnswer(testSession, questionNumber, answer.charAt(0));
     }
 }
