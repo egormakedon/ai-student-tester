@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author Yahor Makedon
  */
 @Controller
+@RequestMapping(value = "/test")
 public class TestPageController {
     @Autowired
     private TestSessionService testSessionService;
@@ -25,8 +26,8 @@ public class TestPageController {
     private ManagerDTO managerDTO;
 
     @PreAuthorize("permitAll()")
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public String getTestPage(HttpSession httpSession, Model model) {
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String getTestPage1(HttpSession httpSession, Model model) {
         TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
         int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
 
@@ -36,5 +37,35 @@ public class TestPageController {
         model.addAttribute("questionAndAnswersDTO", managerDTO.getQuestionAndAnswersDTO(question, answer));
 
         return "public/test";
+    }
+
+    @PreAuthorize("permitAll()")
+    @RequestMapping(value = "/nextQuestion", method = RequestMethod.GET)
+    public String getTestPage2(HttpSession httpSession) {
+        Integer questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
+
+        if (questionNumber == 20) {
+            return "redirect:/test";
+        }
+
+        ++questionNumber;
+        httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, questionNumber.toString());
+
+        return "redirect:/test";
+    }
+
+    @PreAuthorize("permitAll()")
+    @RequestMapping(value = "/prevQuestion", method = RequestMethod.GET)
+    public String getTestPage3(HttpSession httpSession) {
+        Integer questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
+
+        if (questionNumber == 1) {
+            return "redirect:/test";
+        }
+
+        --questionNumber;
+        httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, questionNumber.toString());
+
+        return "redirect:/test";
     }
 }

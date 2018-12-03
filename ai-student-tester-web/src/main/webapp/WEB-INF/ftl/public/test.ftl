@@ -17,9 +17,8 @@
 
         <br><br>
 
-        <form action="<@spring.url ""/>" method="post">
+        <form>
             <input id="csrfId" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input id="questionNumberId" type="hidden" name="questionNumber" value="${Session.questionNumber}">
             <input id="answerId" type="hidden" name="answer" value="${questionAndAnswersDTO.getAnswer()}">
 
             <input id="answerRadioButtonId1" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton1Change()">
@@ -47,8 +46,8 @@
 
             <br><br>
 
-            <input id="prevButtonId" type="button" value="<@spring.message "test.prev.button"/>" onclick="prevButtonClick()">
-            <input id="nextButtonId" type="button" value="<@spring.message "test.next.button"/>" onclick="nextButtonClick()">
+            <input id="prevButtonId" type="submit" formaction="<@spring.url "/test/prevQuestion"/>" formmethod="get" value="<@spring.message "test.prev.button"/>">
+            <input id="nextButtonId" type="submit" formaction="<@spring.url "/test/nextQuestion"/>" formmethod="get" value="<@spring.message "test.next.button"/>">
 
             <br><br>
 
