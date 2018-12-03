@@ -51,7 +51,7 @@
 
             <br><br>
 
-            <input id="completeButtonId" type="submit" value="<@spring.message "test.complete.button"/>">
+            <input id="completeButtonId" type="submit" formaction="<@spring.url "/completeTest"/>" formmethod="post" value="<@spring.message "test.complete.button"/>">
         </form>
 
         <script src="<@spring.url "/resources/js/jquery.js"/>"></script>

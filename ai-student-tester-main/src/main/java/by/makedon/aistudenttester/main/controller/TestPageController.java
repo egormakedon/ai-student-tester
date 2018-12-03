@@ -4,6 +4,8 @@ import by.makedon.aistudenttester.main.BaseConstants;
 import by.makedon.aistudenttester.main.bean.Question;
 import by.makedon.aistudenttester.main.bean.TestSession;
 import by.makedon.aistudenttester.main.dto.ManagerDTO;
+import by.makedon.aistudenttester.main.service.AnswerService;
+import by.makedon.aistudenttester.main.service.QuestionService;
 import by.makedon.aistudenttester.main.service.TestSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +25,10 @@ public class TestPageController {
     @Autowired
     private TestSessionService testSessionService;
     @Autowired
+    private QuestionService questionService;
+    @Autowired
+    private AnswerService answerService;
+    @Autowired
     private ManagerDTO managerDTO;
 
     @PreAuthorize("permitAll()")
@@ -31,8 +37,8 @@ public class TestPageController {
         TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
         int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
 
-        Question question = testSessionService.getQuestionByTestSessionAndQuestionNumber(testSession, questionNumber);
-        char answer = testSessionService.getAnswerByTestSessionAndQuestionNumber(testSession, questionNumber);
+        Question question = questionService.getQuestionByTestSessionAndQuestionNumber(testSession, questionNumber);
+        char answer = answerService.getAnswerByTestSessionAndQuestionNumber(testSession, questionNumber);
 
         model.addAttribute("questionAndAnswersDTO", managerDTO.getQuestionAndAnswersDTO(question, answer));
 

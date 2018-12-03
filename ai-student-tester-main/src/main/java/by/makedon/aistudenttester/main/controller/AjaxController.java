@@ -6,10 +6,7 @@ import by.makedon.aistudenttester.main.dto.ManagerDTO;
 import by.makedon.aistudenttester.main.dto.StudentGroupNumberDTO;
 import by.makedon.aistudenttester.main.dto.StudentTicketAndFioDTO;
 import by.makedon.aistudenttester.main.dto.SubjectNameDTO;
-import by.makedon.aistudenttester.main.service.StudentGroupService;
-import by.makedon.aistudenttester.main.service.StudentService;
-import by.makedon.aistudenttester.main.service.SubjectService;
-import by.makedon.aistudenttester.main.service.TestSessionService;
+import by.makedon.aistudenttester.main.service.*;
 import by.makedon.aistudenttester.main.validator.AnswerValidator;
 import by.makedon.aistudenttester.main.validator.StudentGroupNumberValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +33,8 @@ public class AjaxController {
     private SubjectService subjectService;
     @Autowired
     private TestSessionService testSessionService;
+    @Autowired
+    private AnswerService answerService;
 
     @Autowired
     private StudentGroupNumberValidator studentGroupNumberValidator;
@@ -70,6 +69,6 @@ public class AjaxController {
         TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
         int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
 
-        testSessionService.updateAnswer(testSession, questionNumber, answer.charAt(0));
+        answerService.updateAnswer(testSession, questionNumber, answer.charAt(0));
     }
 }
