@@ -6,6 +6,9 @@ import by.makedon.aistudenttester.main.bean.TestSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Yahor Makedon
  */
@@ -60,5 +63,31 @@ public class QuestionService extends AbstractService {
                 logger.error("Invalid questionNumber - " + questionNumber);
                 throw new IllegalArgumentException("Invalid questionNumber - " + questionNumber);
         }
+    }
+
+    public List<Question> getQuestionListByTestSession(TestSession testSession) {
+        List<Question> questionList = new ArrayList<>(20);
+
+        questionList.add(testSession.getQ1());
+        questionList.add(testSession.getQ2());
+        questionList.add(testSession.getQ3());
+        questionList.add(testSession.getQ4());
+        questionList.add(testSession.getQ5());
+        questionList.add(testSession.getQ6());
+        questionList.add(testSession.getQ7());
+        questionList.add(testSession.getQ8());
+        questionList.add(testSession.getQ9());
+        questionList.add(testSession.getQ10());
+        questionList.add(testSession.getQ11());
+        questionList.add(testSession.getQ12());
+        questionList.add(testSession.getQ13());
+        questionList.add(testSession.getQ14());
+        questionList.add(testSession.getQ15());
+        questionList.add(testSession.getQ16());
+        questionList.add(testSession.getQ18());
+        questionList.add(testSession.getQ19());
+        questionList.add(testSession.getQ20());
+
+        return questionList;
     }
 }

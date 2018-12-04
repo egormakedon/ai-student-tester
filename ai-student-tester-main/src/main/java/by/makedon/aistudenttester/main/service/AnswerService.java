@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Yahor Makedon
  */
@@ -168,5 +171,31 @@ public class AnswerService extends AbstractService {
                 logger.error("Invalid questionNumber - " + questionNumber);
                 throw new IllegalArgumentException("Invalid questionNumber - " + questionNumber);
         }
+    }
+
+    public List<Character> getAnswerListByTestSession(TestSession testSession) {
+        List<Character> answerList = new ArrayList<>(20);
+
+        answerList.add(testSession.getA1());
+        answerList.add(testSession.getA2());
+        answerList.add(testSession.getA3());
+        answerList.add(testSession.getA4());
+        answerList.add(testSession.getA5());
+        answerList.add(testSession.getA6());
+        answerList.add(testSession.getA7());
+        answerList.add(testSession.getA8());
+        answerList.add(testSession.getA9());
+        answerList.add(testSession.getA10());
+        answerList.add(testSession.getA11());
+        answerList.add(testSession.getA12());
+        answerList.add(testSession.getA13());
+        answerList.add(testSession.getA14());
+        answerList.add(testSession.getA15());
+        answerList.add(testSession.getA16());
+        answerList.add(testSession.getA18());
+        answerList.add(testSession.getA19());
+        answerList.add(testSession.getA20());
+
+        return answerList;
     }
 }
