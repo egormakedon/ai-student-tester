@@ -192,6 +192,7 @@ public class AnswerService extends AbstractService {
         answerList.add(testSession.getA14());
         answerList.add(testSession.getA15());
         answerList.add(testSession.getA16());
+        answerList.add(testSession.getA17());
         answerList.add(testSession.getA18());
         answerList.add(testSession.getA19());
         answerList.add(testSession.getA20());

@@ -58,14 +58,15 @@ public class ManagerDTO {
     public TestResultDTO getTestResultDTO(TestSession testSession) {
         TestResultDTO testResultDTO = new TestResultDTO();
 
-        testResultDTO.setTestSessionId(String.valueOf(testSession.getTestSessionId()));
+        testResultDTO.setTestSessionId(testSession.getTestSessionId().toString());
         testResultDTO.setStudentGroupNumber(testSession.getStudent().getStudentGroup().getStudentGroupNumber());
         testResultDTO.setStudentTicket(testSession.getStudent().getStudentTicket());
         testResultDTO.setLastName(testSession.getStudent().getLastName());
         testResultDTO.setFirstName(testSession.getStudent().getFirstName());
         testResultDTO.setMiddleName(testSession.getStudent().getMiddleName());
-        testResultDTO.setCreatedDate(testResultDTO.getCreatedDate());
-        testResultDTO.setFinishedDate(testResultDTO.getFinishedDate());
+        testResultDTO.setCreatedDate(testSession.getCreatedDate().toString());
+        testResultDTO.setFinishedDate(testSession.getFinishedDate().toString());
+        testResultDTO.setMark(testSession.getMark().toString());
 
         return testResultDTO;
     }

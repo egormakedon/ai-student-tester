@@ -84,6 +84,7 @@ public class QuestionService extends AbstractService {
         questionList.add(testSession.getQ14());
         questionList.add(testSession.getQ15());
         questionList.add(testSession.getQ16());
+        questionList.add(testSession.getQ17());
         questionList.add(testSession.getQ18());
         questionList.add(testSession.getQ19());
         questionList.add(testSession.getQ20());

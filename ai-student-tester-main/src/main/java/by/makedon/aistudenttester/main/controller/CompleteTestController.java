@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 
 /**
  * @author Yahor Makedon
@@ -29,6 +30,7 @@ public class CompleteTestController extends AbstractService {
         TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
 
         markCalculationService.calculateMark(testSession);
+        testSession.setFinishedDate(LocalDateTime.now());
         testSessionService.save(testSession);
 
         httpSession.removeAttribute(BaseConstants.QUESTION_NUMBER);
