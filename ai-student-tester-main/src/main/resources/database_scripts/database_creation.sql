@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS AISTUDENTTESTER.STUDENT (
     STUDENTTICKET         VARCHAR(200) NOT NULL COMMENT 'Student ticket',
     FIRSTNAME             VARCHAR(200) NOT NULL COMMENT 'Firstname',
     LASTNAME              VARCHAR(200) NOT NULL COMMENT 'Lastname',
-    MIDDLENAME            VARCHAR(200) COMMENT 'Middlename',
+    MIDDLENAME            VARCHAR(200) NOT NULL COMMENT 'Middlename',
     ACTIVEFLAG            CHAR(1) NOT NULL COMMENT 'Active flag',
 
     PRIMARY KEY(STUDENTID),
@@ -196,6 +196,7 @@ CREATE TABLE IF NOT EXISTS AISTUDENTTESTER.TESTSESSION (
     TESTSESSIONID                   INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Test session id, PK',
     STUDENTID                       INT UNSIGNED NOT NULL COMMENT 'Student id, FK',
     CREATEDDATE                     DATETIME NOT NULL COMMENT 'Created date',
+    FINISHEDDATE                    DATETIME COMMENT 'Finished date',
     MARK                            INT UNSIGNED COMMENT 'Mark',
     Q1                              INT UNSIGNED NOT NULL COMMENT 'Question 1 id, FK',
     A1                              CHAR(1) NOT NULL COMMENT 'Answer 1',

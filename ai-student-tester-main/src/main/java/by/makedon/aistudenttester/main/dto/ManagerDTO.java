@@ -54,4 +54,19 @@ public class ManagerDTO {
 
         return questionAndAnswersDTO;
     }
+
+    public TestResultDTO getTestResultDTO(TestSession testSession) {
+        TestResultDTO testResultDTO = new TestResultDTO();
+
+        testResultDTO.setTestSessionId(String.valueOf(testSession.getTestSessionId()));
+        testResultDTO.setStudentGroupNumber(testSession.getStudent().getStudentGroup().getStudentGroupNumber());
+        testResultDTO.setStudentTicket(testSession.getStudent().getStudentTicket());
+        testResultDTO.setLastName(testSession.getStudent().getLastName());
+        testResultDTO.setFirstName(testSession.getStudent().getFirstName());
+        testResultDTO.setMiddleName(testSession.getStudent().getMiddleName());
+        testResultDTO.setCreatedDate(testResultDTO.getCreatedDate());
+        testResultDTO.setFinishedDate(testResultDTO.getFinishedDate());
+
+        return testResultDTO;
+    }
 }

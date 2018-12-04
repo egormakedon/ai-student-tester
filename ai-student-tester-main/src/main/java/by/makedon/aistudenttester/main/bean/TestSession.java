@@ -26,6 +26,8 @@ public class TestSession extends AbstractBean {
 	private Student student;
 	@Column(name = "CREATEDDATE")
 	private LocalDateTime createdDate;
+	@Column(name = "FINISHEDDATE")
+	private LocalDateTime finishedDate;
 	@Column(name = "MARK")
 	private Integer mark;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -187,6 +189,14 @@ public class TestSession extends AbstractBean {
 	
 	public void setCreatedDate(LocalDateTime createdDate) {
 		this.createdDate = createdDate;
+	}
+	
+	public LocalDateTime getFinishedDate() {
+		return finishedDate;
+	}
+	
+	public void setFinishedDate(LocalDateTime finishedDate) {
+		this.finishedDate = finishedDate;
 	}
 	
 	public Integer getMark() {
@@ -549,6 +559,7 @@ public class TestSession extends AbstractBean {
 		       Objects.equals(getTestSessionId(), that.getTestSessionId()) &&
 		       Objects.equals(getStudent(), that.getStudent()) &&
 		       Objects.equals(getCreatedDate(), that.getCreatedDate()) &&
+		       Objects.equals(getFinishedDate(), that.getFinishedDate()) &&
 		       Objects.equals(getMark(), that.getMark()) &&
 		       Objects.equals(getQ1(), that.getQ1()) &&
 		       Objects.equals(getQ2(), that.getQ2()) &&
@@ -575,12 +586,13 @@ public class TestSession extends AbstractBean {
 	@Override
 	public int hashCode() {
 		return Objects
-				.hash(getTestSessionId(), getStudent(), getCreatedDate(), getMark(), getQ1(), getA1(), getQ2(), getA2(),
-				      getQ3(), getA3(), getQ4(), getA4(), getQ5(), getA5(), getQ6(), getA6(), getQ7(), getA7(), getQ8(),
-				      getA8(), getQ9(), getA9(), getQ10(), getA10(), getQ11(), getA11(), getQ12(), getA12(), getQ13(),
-				      getA13(), getQ14(), getA14(), getQ15(), getA15(), getQ16(), getA16(), getQ17(), getA17(),
-				      getQ18(),
-				      getA18(), getQ19(), getA19(), getQ20(), getA20());
+				.hash(getTestSessionId(), getStudent(), getCreatedDate(), getFinishedDate(), getMark(), getQ1(),
+				      getA1(),
+				      getQ2(), getA2(), getQ3(), getA3(), getQ4(), getA4(), getQ5(), getA5(), getQ6(), getA6(), getQ7(),
+				      getA7(), getQ8(), getA8(), getQ9(), getA9(), getQ10(), getA10(), getQ11(), getA11(), getQ12(),
+				      getA12(), getQ13(), getA13(), getQ14(), getA14(), getQ15(), getA15(), getQ16(), getA16(),
+				      getQ17(),
+				      getA17(), getQ18(), getA18(), getQ19(), getA19(), getQ20(), getA20());
 	}
 	
 	@Override
@@ -589,6 +601,7 @@ public class TestSession extends AbstractBean {
 		       "testSessionId=" + testSessionId +
 		       ", student=" + student +
 		       ", createdDate=" + createdDate +
+		       ", finishedDate=" + finishedDate +
 		       ", mark=" + mark +
 		       ", q1=" + q1 +
 		       ", a1=" + a1 +

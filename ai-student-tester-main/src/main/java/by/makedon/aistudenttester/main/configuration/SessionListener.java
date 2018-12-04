@@ -24,8 +24,6 @@ public class SessionListener implements HttpSessionListener {
         httpSession.setMaxInactiveInterval(ONE_HOUR);
 
         httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, "false");
-        httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, "");
-        httpSession.setAttribute(BaseConstants.TEST_SESSION_ID, "");
     }
 
     @Override
