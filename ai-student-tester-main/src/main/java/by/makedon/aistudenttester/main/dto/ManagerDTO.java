@@ -3,6 +3,7 @@ package by.makedon.aistudenttester.main.dto;
 import by.makedon.aistudenttester.main.bean.*;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,8 +65,8 @@ public class ManagerDTO {
         testResultDTO.setLastName(testSession.getStudent().getLastName());
         testResultDTO.setFirstName(testSession.getStudent().getFirstName());
         testResultDTO.setMiddleName(testSession.getStudent().getMiddleName());
-        testResultDTO.setCreatedDate(testSession.getCreatedDate().toString());
-        testResultDTO.setFinishedDate(testSession.getFinishedDate().toString());
+        testResultDTO.setCreatedDate(testSession.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
+        testResultDTO.setFinishedDate(testSession.getFinishedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss")));
         testResultDTO.setMark(testSession.getMark().toString());
 
         return testResultDTO;

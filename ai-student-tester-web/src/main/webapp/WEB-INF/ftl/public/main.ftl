@@ -43,6 +43,10 @@
             <br><br>
 
             <input disabled id="startTestButtonId" type="submit" value="<@spring.message "main.button.start.test"/>">
+
+            <br><br>
+
+            <a href="<@spring.url "/result"/>"><@spring.message "main.show.last.result"/></a>
         </form>
 
         <script src="<@spring.url "/resources/js/jquery.js"/>"></script>

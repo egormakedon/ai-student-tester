@@ -4,49 +4,28 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8"/>
-        <title><@spring.message "main.title"/></title>
+        <title><@spring.message "result.title"/></title>
     </head>
 
     <body>
-        <form action="<@spring.url "/startTest"/>" method="post">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input type="hidden" id="numberOfParametersId" value="0"/>
+        <a href="<@spring.url "/"/>"><@spring.message "general.go.to.home.page"/></a>
 
-            <input type="hidden" id="studentTicketId" name="studentTicket" value="">
-            <input type="hidden" id="subjectNameId" name="subjectName" value="">
+        <br><br>
 
-            <label id="groupNumberLabelId"> <@spring.message "main.label.group.number"/> :
-                <select id="groupNumberSelectId" onchange="checkNumberOfParameters()">
-                    <option></option>
-                    <option>XXXXX</option>
-                </select>
-            </label>
-
-            <br><br>
-
-            <label hidden id="studentNameLabelId"> <@spring.message "main.label.student.name"/> :
-                <select hidden id="studentNameSelectId" onchange="checkNumberOfParameters()">
-                    <option></option>
-                    <option>XXXXX</option>
-                </select>
-            </label>
-
-            <br><br>
-
-            <label hidden id="subjectNameLabelId"> <@spring.message "main.label.subject.name"/> :
-                <select hidden id="subjectNameSelectId" onchange="checkNumberOfParameters()">
-                    <option></option>
-                    <option>XXXXX</option>
-                </select>
-            </label>
-
-            <br><br>
-
-            <input disabled id="startTestButtonId" type="submit" value="<@spring.message "main.button.start.test"/>">
-        </form>
-
-        <script src="<@spring.url "/resources/js/jquery.js"/>"></script>
-        <script src="<@spring.url "/resources/js/ajax.js"/>"></script>
-        <script src="<@spring.url "/resources/js/main.js"/>"></script>
+        <#if testResultDTO ??>
+            <@spring.message "result.test.number"/> ${testResultDTO.getTestSessionId()}
+            <br>
+            <@spring.message "result.group.number"/> ${testResultDTO.getStudentGroupNumber()}
+            <br>
+            <@spring.message "result.student"/>: ${testResultDTO.getStudentTicket()}; ${testResultDTO.getLastName()} ${testResultDTO.getFirstName()} ${testResultDTO.getMiddleName()}
+            <br>
+            <@spring.message "result.created.date"/>: ${testResultDTO.getCreatedDate()}
+            <br>
+            <@spring.message "result.finished.date"/>: ${testResultDTO.getFinishedDate()}
+            <br>
+            <@spring.message "result.mark"/>: ${testResultDTO.getMark()}
+         <#else>
+            <@spring.message "result.complete.test.to.show.result"/>
+        </#if>
     </body>
 </html>
