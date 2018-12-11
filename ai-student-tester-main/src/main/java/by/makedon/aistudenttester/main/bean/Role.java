@@ -1,9 +1,12 @@
 package by.makedon.aistudenttester.main.bean;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Role class define role of application user
@@ -22,6 +25,10 @@ public class Role extends AbstractBean {
 	private Long roleId;
 	@Column(name = "ROLENAME")
 	private String roleName;
+
+	@ManyToMany(mappedBy = "roles")
+	@Where(clause = "ACTIVEFLAG = 'Y'")
+	private Set<ApplicationUser> applicationUsers = new HashSet<>();
 	
 	/**
 	 * Default constructor
@@ -53,6 +60,14 @@ public class Role extends AbstractBean {
 	
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+	
+	public Set<ApplicationUser> getApplicationUsers() {
+		return applicationUsers;
+	}
+	
+	public void setApplicationUsers(Set<ApplicationUser> applicationUsers) {
+		this.applicationUsers = applicationUsers;
 	}
 	
 	@Override
