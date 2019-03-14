@@ -7,40 +7,67 @@
     <groupId>by.makedon</groupId>
     <artifactId>ai-student-tester</artifactId>
     <version>1.0</version>
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>ai-student-tester-main</module>
-        <module>ai-student-tester-web</module>
-    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.3.RELEASE</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
-        <project.version>1.8</project.version>
-        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+        <java.version>1.8</java.version>
+
+        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+        <!--<project.build.outputEncoding>UTF-8</project.build.outputEncoding>-->
+        <!--<project.version>1.8</project.version>-->
+        <!--<maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>-->
     </properties>
 
     <build>
-        <finalName>ai-student-tester</finalName>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven.compiler.plugin.version}</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
+    <!--<build>-->
+        <!--<finalName>ai-student-tester</finalName>-->
+
+        <!--<pluginManagement>-->
+            <!--<plugins>-->
+                <!--<plugin>-->
+                    <!--<groupId>org.apache.maven.plugins</groupId>-->
+                    <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                    <!--<version>${maven.compiler.plugin.version}</version>-->
+                    <!--<configuration>-->
+                        <!--<source>1.8</source>-->
+                        <!--<target>1.8</target>-->
+                    <!--</configuration>-->
+                <!--</plugin>-->
+            <!--</plugins>-->
+        <!--</pluginManagement>-->
+    <!--</build>-->
+
     <name>ai-student-tester</name>
-    <description>Web application for testing BSUIR AI's students</description>
+    <description>Web application on Spring Boot for testing BSUIR AI's students.</description>
     <inceptionYear>2018</inceptionYear>
     <developers>
         <developer>
