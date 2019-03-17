@@ -13,7 +13,7 @@ public class MainPageController {
 	@PreAuthorize("permitAll()")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getMainPage1() {
-		return "main";
+		return "m";
 	}
 	
 	@PreAuthorize("permitAll()")
