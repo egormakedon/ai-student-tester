@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.main.controller;
+package by.makedon.aistudenttester.controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

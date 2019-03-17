@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.config;
 
-import by.makedon.aistudenttester.BaseConstants;
+import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;

@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester;
+package by.makedon.aistudenttester.util;
 
 public abstract class BaseConstants {
 	// ACTIVE FLAG

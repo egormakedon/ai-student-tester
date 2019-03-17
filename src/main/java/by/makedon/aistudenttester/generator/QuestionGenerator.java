@@ -1,8 +1,9 @@
-package by.makedon.aistudenttester;
+package by.makedon.aistudenttester.generator;
 
-import by.makedon.aistudenttester.main.bean.Question;
-import by.makedon.aistudenttester.main.bean.Topic;
-import by.makedon.aistudenttester.main.service.TopicService;
+import by.makedon.aistudenttester.domain.Question;
+import by.makedon.aistudenttester.domain.Topic;
+import by.makedon.aistudenttester.service.TopicService;
+import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,6 @@ import java.util.Set;
  */
 @Component
 public class QuestionGenerator {
-    @Autowired
     private TopicService topicService;
 
     public List<Question> getQuetionList(String subjectName) {
@@ -69,5 +69,10 @@ public class QuestionGenerator {
                 }
             }
         }
+    }
+
+    @Autowired
+    public void setTopicService(TopicService topicService) {
+        this.topicService = topicService;
     }
 }

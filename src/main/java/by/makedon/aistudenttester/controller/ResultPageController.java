@@ -1,9 +1,9 @@
-package by.makedon.aistudenttester.main.controller;
+package by.makedon.aistudenttester.controller;
 
-import by.makedon.aistudenttester.main.BaseConstants;
-import by.makedon.aistudenttester.main.bean.TestSession;
-import by.makedon.aistudenttester.main.dto.ManagerDTO;
-import by.makedon.aistudenttester.main.service.TestSessionService;
+import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.dto.ManagerDTO;
+import by.makedon.aistudenttester.service.TestSessionService;
+import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,20 +18,28 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class ResultPageController {
-    @Autowired
     private TestSessionService testSessionService;
-    @Autowired
     private ManagerDTO managerDTO;
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     public String getResultPage(HttpSession httpSession, Model model) {
         if (httpSession.getAttribute(BaseConstants.TEST_SESSION_ID) != null) {
-            TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
+            TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
 
             model.addAttribute("testResultDTO", managerDTO.getTestResultDTO(testSession));
         }
 
         return "public/result";
+    }
+
+    @Autowired
+    public void setTestSessionService(TestSessionService testSessionService) {
+        this.testSessionService = testSessionService;
+    }
+
+    @Autowired
+    public void setManagerDTO(ManagerDTO managerDTO) {
+        this.managerDTO = managerDTO;
     }
 }

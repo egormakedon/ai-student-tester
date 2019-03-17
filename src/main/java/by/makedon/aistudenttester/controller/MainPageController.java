@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.main.controller;
+package by.makedon.aistudenttester.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -13,12 +13,12 @@ public class MainPageController {
 	@PreAuthorize("permitAll()")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getMainPage1() {
-		return "public/main";
+		return "main";
 	}
 	
 	@PreAuthorize("permitAll()")
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String getMainPage2() {
-		return "public/main";
+		return "main";
 	}
 }

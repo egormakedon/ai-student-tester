@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.validator;
+package by.makedon.aistudenttester.domain.validator;
 
-import by.makedon.aistudenttester.main.service.StudentGroupService;
+import by.makedon.aistudenttester.service.StudentGroupService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class StudentGroupNumberValidator extends AbstractValidator {
-    @Autowired
     private StudentGroupService studentGroupService;
 
     public void validate(String studentGroupNumber) {
@@ -30,9 +29,14 @@ public class StudentGroupNumberValidator extends AbstractValidator {
             throw new IllegalArgumentException("validation.student.group.number.not.number");
         }
 
-        if (!studentGroupService.isStudentGroupExists(studentGroupNumber)) {
+        if (!studentGroupService.isStudentGroupExists(Long.valueOf(studentGroupNumber))) {
             logger.error("Student group number doesn't exist");
             throw new IllegalArgumentException("validation.student.group.number.not.exists");
         }
+    }
+
+    @Autowired
+    public void setStudentGroupService(StudentGroupService studentGroupService) {
+        this.studentGroupService = studentGroupService;
     }
 }

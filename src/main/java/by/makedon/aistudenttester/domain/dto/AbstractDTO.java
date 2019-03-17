@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.main.dto;
+package by.makedon.aistudenttester.domain.dto;
 
 import java.io.Serializable;
 

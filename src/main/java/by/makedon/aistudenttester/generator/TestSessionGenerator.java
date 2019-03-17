@@ -1,8 +1,9 @@
-package by.makedon.aistudenttester;
+package by.makedon.aistudenttester.generator;
 
-import by.makedon.aistudenttester.main.bean.Question;
-import by.makedon.aistudenttester.main.bean.TestSession;
-import by.makedon.aistudenttester.main.service.StudentService;
+import by.makedon.aistudenttester.domain.Question;
+import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.service.StudentService;
+import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,12 +15,10 @@ import java.util.List;
  */
 @Component
 public class TestSessionGenerator {
-    @Autowired
     private QuestionGenerator questionGenerator;
-    @Autowired
     private StudentService studentService;
 
-    public TestSession getTestSession(String studentTicket, String subjectName) {
+    public TestSession getTestSession(long studentTicket, String subjectName) {
         TestSession testSession = new TestSession();
 
         testSession.setStudent(studentService.getStudentByStudentTicket(studentTicket).get());
@@ -117,5 +116,15 @@ public class TestSessionGenerator {
 
                 break;
         }
+    }
+
+    @Autowired
+    public void setQuestionGenerator(QuestionGenerator questionGenerator) {
+        this.questionGenerator = questionGenerator;
+    }
+
+    @Autowired
+    public void setStudentService(StudentService studentService) {
+        this.studentService = studentService;
     }
 }

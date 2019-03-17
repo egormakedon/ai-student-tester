@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.validator;
+package by.makedon.aistudenttester.domain.validator;
 
-import by.makedon.aistudenttester.main.service.StudentService;
+import by.makedon.aistudenttester.service.StudentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class StudentTicketValidator extends AbstractValidator {
-    @Autowired
     private StudentService studentService;
 
     public void validate(String studentTicket) {
@@ -30,9 +29,14 @@ public class StudentTicketValidator extends AbstractValidator {
             throw new IllegalArgumentException("validation.student.ticket.not.number");
         }
 
-        if (!studentService.isStudentExists(studentTicket)) {
+        if (!studentService.isStudentExists(Long.valueOf(studentTicket))) {
             logger.error("Student ticket doesn't exist");
             throw new IllegalArgumentException("validation.student.ticket.not.exists");
         }
+    }
+
+    @Autowired
+    public void setStudentService(StudentService studentService) {
+        this.studentService = studentService;
     }
 }

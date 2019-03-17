@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.validator;
+package by.makedon.aistudenttester.domain.validator;
 
-import by.makedon.aistudenttester.main.service.SubjectService;
+import by.makedon.aistudenttester.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SubjectNameValidator extends AbstractValidator {
-    @Autowired
     private SubjectService subjectService;
 
     public void validate(String subjectName) {
@@ -27,5 +26,10 @@ public class SubjectNameValidator extends AbstractValidator {
             logger.error("Subject name doesn't exist");
             throw new IllegalArgumentException("validation.subject.name.not.exists");
         }
+    }
+
+    @Autowired
+    public void setSubjectService(SubjectService subjectService) {
+        this.subjectService = subjectService;
     }
 }

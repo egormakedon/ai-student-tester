@@ -3,72 +3,37 @@ package by.makedon.aistudenttester.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
-
-import java.util.Locale;
 
 /**
  * @author Yahor Makedon
  */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-	@Bean
-	public FreeMarkerConfigurer freeMarkerConfigurer() {
-		FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
-		
-		freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/ftl/");
-		freeMarkerConfigurer.setDefaultEncoding("UTF-8");
-		
-		return freeMarkerConfigurer;
-	}
-	
-	@Bean(name = "viewResolver")
-	public FreeMarkerViewResolver freeMarkerViewResolver() {
-		FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
-		
-		freeMarkerViewResolver.setContentType("text/html;charset=UTF-8");
-		freeMarkerViewResolver.setCache(true);
-		freeMarkerViewResolver.setPrefix("");
-		freeMarkerViewResolver.setSuffix(".ftl");
-		
-		return freeMarkerViewResolver;
-	}
-	
 	@Bean(name = "messageSource")
 	public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource() {
 		ReloadableResourceBundleMessageSource rbMessageSource = new ReloadableResourceBundleMessageSource();
-		
 		rbMessageSource.addBasenames("classpath:/property/message", "classpath:/property/validation");
 		rbMessageSource.setDefaultEncoding("UTF-8");
-		
 		return rbMessageSource;
 	}
-	
-	@Bean(name = "localeResolver")
-	public CookieLocaleResolver cookieLocaleResolver() {
-		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-		
-		localeResolver.setDefaultLocale(new Locale("ru", ""));
-		
-		return localeResolver;
+
+	@Bean
+	public SessionListener sessionListener() {
+		return new SessionListener();
 	}
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-		
-		interceptor.setParamName("locale");
-		registry.addInterceptor(interceptor);
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
+
+
 }

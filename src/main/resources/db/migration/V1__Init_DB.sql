@@ -11,12 +11,12 @@ INSERT INTO hibernate_sequence VALUES ( 1 );
 CREATE TABLE IF NOT EXISTS aistudenttesterdb.Question
 (
     QuestionID      BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    QuestionName    VARCHAR(2048) NOT NULL,
-    FirstAnswer     VARCHAR(2048) NOT NULL,
-    SecondAnswer    VARCHAR(2048) NOT NULL,
-    ThirdAnswer     VARCHAR(2048) NOT NULL,
-    FourthAnswer    VARCHAR(2048) NOT NULL,
-    FifthAnswer     VARCHAR(2048) NOT NULL,
+    QuestionName    VARCHAR(1000) NOT NULL,
+    FirstAnswer     VARCHAR(1000) NOT NULL,
+    SecondAnswer    VARCHAR(1000) NOT NULL,
+    ThirdAnswer     VARCHAR(1000) NOT NULL,
+    FourthAnswer    VARCHAR(1000) NOT NULL,
+    FifthAnswer     VARCHAR(1000) NOT NULL,
     RightAnswer     INT UNSIGNED NOT NULL,
     ActiveFlag      CHAR(1) NOT NULL,
 

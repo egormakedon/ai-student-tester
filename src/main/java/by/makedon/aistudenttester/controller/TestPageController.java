@@ -1,12 +1,12 @@
-package by.makedon.aistudenttester.main.controller;
+package by.makedon.aistudenttester.controller;
 
-import by.makedon.aistudenttester.main.BaseConstants;
-import by.makedon.aistudenttester.main.bean.Question;
-import by.makedon.aistudenttester.main.bean.TestSession;
-import by.makedon.aistudenttester.main.dto.ManagerDTO;
-import by.makedon.aistudenttester.main.service.AnswerService;
-import by.makedon.aistudenttester.main.service.QuestionService;
-import by.makedon.aistudenttester.main.service.TestSessionService;
+import by.makedon.aistudenttester.domain.Question;
+import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.dto.ManagerDTO;
+import by.makedon.aistudenttester.service.AnswerService;
+import by.makedon.aistudenttester.service.QuestionService;
+import by.makedon.aistudenttester.service.TestSessionService;
+import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -22,23 +22,19 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping(value = "/test")
 public class TestPageController {
-    @Autowired
     private TestSessionService testSessionService;
-    @Autowired
     private QuestionService questionService;
-    @Autowired
     private AnswerService answerService;
-    @Autowired
     private ManagerDTO managerDTO;
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String getTestPage1(HttpSession httpSession, Model model) {
-        TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
+        TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
         int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
 
         Question question = questionService.getQuestionByTestSessionAndQuestionNumber(testSession, questionNumber);
-        char answer = answerService.getAnswerByTestSessionAndQuestionNumber(testSession, questionNumber);
+        int answer = answerService.getAnswerByTestSessionAndQuestionNumber(testSession, questionNumber);
 
         model.addAttribute("questionAndAnswersDTO", managerDTO.getQuestionAndAnswersDTO(question, answer));
 
@@ -73,5 +69,25 @@ public class TestPageController {
         httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, questionNumber.toString());
 
         return "redirect:/test";
+    }
+
+    @Autowired
+    public void setTestSessionService(TestSessionService testSessionService) {
+        this.testSessionService = testSessionService;
+    }
+
+    @Autowired
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
+    }
+
+    @Autowired
+    public void setAnswerService(AnswerService answerService) {
+        this.answerService = answerService;
+    }
+
+    @Autowired
+    public void setManagerDTO(ManagerDTO managerDTO) {
+        this.managerDTO = managerDTO;
     }
 }

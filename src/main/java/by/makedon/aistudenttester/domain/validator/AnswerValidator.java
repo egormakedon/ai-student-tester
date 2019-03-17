@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.main.validator;
+package by.makedon.aistudenttester.domain.validator;
 
 import org.springframework.stereotype.Component;
 

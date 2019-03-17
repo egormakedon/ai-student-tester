@@ -1,10 +1,10 @@
-package by.makedon.aistudenttester.main.controller;
+package by.makedon.aistudenttester.controller;
 
-import by.makedon.aistudenttester.main.BaseConstants;
-import by.makedon.aistudenttester.main.bean.TestSession;
-import by.makedon.aistudenttester.main.service.AbstractService;
-import by.makedon.aistudenttester.main.service.MarkCalculationService;
-import by.makedon.aistudenttester.main.service.TestSessionService;
+import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.service.AbstractService;
+import by.makedon.aistudenttester.service.MarkCalculationService;
+import by.makedon.aistudenttester.service.TestSessionService;
+import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,15 +19,13 @@ import java.time.LocalDateTime;
  */
 @Controller
 public class CompleteTestController extends AbstractService {
-    @Autowired
     private MarkCalculationService markCalculationService;
-    @Autowired
     private TestSessionService testSessionService;
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "/completeTest", method = RequestMethod.POST)
     public String completeTest(HttpSession httpSession) {
-        TestSession testSession = testSessionService.getTestSessionById((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
+        TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
 
         markCalculationService.calculateMark(testSession);
         testSession.setFinishedDate(LocalDateTime.now());
@@ -38,5 +36,15 @@ public class CompleteTestController extends AbstractService {
         httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, "false");
 
         return "redirect:/result";
+    }
+
+    @Autowired
+    public void setMarkCalculationService(MarkCalculationService markCalculationService) {
+        this.markCalculationService = markCalculationService;
+    }
+
+    @Autowired
+    public void setTestSessionService(TestSessionService testSessionService) {
+        this.testSessionService = testSessionService;
     }
 }

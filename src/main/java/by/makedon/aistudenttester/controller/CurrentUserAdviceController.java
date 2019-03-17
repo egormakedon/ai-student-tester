@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.main.controller;
+package by.makedon.aistudenttester.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;

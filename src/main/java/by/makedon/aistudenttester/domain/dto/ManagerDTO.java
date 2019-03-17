@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.dto;
+package by.makedon.aistudenttester.domain.dto;
 
-import by.makedon.aistudenttester.main.bean.*;
+import by.makedon.aistudenttester.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
@@ -42,7 +42,7 @@ public class ManagerDTO {
         return subjectNameDTOList;
     }
 
-    public QuestionAndAnswersDTO getQuestionAndAnswersDTO(Question question, char answer) {
+    public QuestionAndAnswersDTO getQuestionAndAnswersDTO(Question question, int answer) {
         QuestionAndAnswersDTO questionAndAnswersDTO = new QuestionAndAnswersDTO();
 
         questionAndAnswersDTO.setQuestionName(question.getQuestionName());
@@ -59,9 +59,9 @@ public class ManagerDTO {
     public TestResultDTO getTestResultDTO(TestSession testSession) {
         TestResultDTO testResultDTO = new TestResultDTO();
 
-        testResultDTO.setTestSessionId(testSession.getTestSessionId().toString());
-        testResultDTO.setStudentGroupNumber(testSession.getStudent().getStudentGroup().getStudentGroupNumber());
-        testResultDTO.setStudentTicket(testSession.getStudent().getStudentTicket());
+        testResultDTO.setTestSessionId(testSession.getTestSessionID().toString());
+        testResultDTO.setStudentGroupNumber(String.valueOf(testSession.getStudent().getStudentGroup().getStudentGroupNumber()));
+        testResultDTO.setStudentTicket(String.valueOf(testSession.getStudent().getStudentTicket()));
         testResultDTO.setLastName(testSession.getStudent().getLastName());
         testResultDTO.setFirstName(testSession.getStudent().getFirstName());
         testResultDTO.setMiddleName(testSession.getStudent().getMiddleName());

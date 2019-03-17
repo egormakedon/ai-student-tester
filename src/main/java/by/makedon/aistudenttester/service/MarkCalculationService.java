@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.BaseConstants;
+import by.makedon.aistudenttester.util.BaseConstants;
 import by.makedon.aistudenttester.domain.Question;
 import by.makedon.aistudenttester.domain.TestSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,12 @@ public class MarkCalculationService extends AbstractService {
 
     private int getNumberOfRightQuestions(TestSession testSession) {
         List<Question> questionList = questionService.getQuestionListByTestSession(testSession);
-        List<Character> answerList = answerService.getAnswerListByTestSession(testSession);
+        List<Integer> answerList = answerService.getAnswerListByTestSession(testSession);
 
         int numberOfRightQuestions = 0;
 
         for (int index = 0; index < BaseConstants.QUESTION_COUNT; index++) {
-            char answer = answerList.get(index);
+            int answer = answerList.get(index);
             int rightAnswer = questionList.get(index).getRightAnswer();
 
             if (answer == rightAnswer) {
