@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@ToString(of = {"markID", "numberOfRightQuestions", "mark"})
+@ToString(exclude = {"strategy"})
 public class Mark extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	

@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Yahor Makedon
  */
 public enum  Role implements Serializable {
-	USER, ADMIN
+	ADMIN
 }

@@ -1,79 +1,34 @@
 package by.makedon.aistudenttester.domain;
 
-import javax.persistence.*;
-import java.util.Objects;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Yahor Makedon
  */
 @Entity
-@Table(name = "SUBJECT")
+@Data
+@NoArgsConstructor
 public class Subject extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "SUBJECTID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long subjectId;
-	@Column(name = "SUBJECTNAME")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long subjectID;
 	private String subjectName;
-	
-	/**
-	 * Default constructor
-	 */
-	public Subject() {
+
+	@Override
+	public void setID(Long id) {
+		setSubjectID(id);
 	}
 	
 	@Override
-	public void setId(Long id) {
-		setSubjectId(id);
-	}
-	
-	@Override
-	public Long getId() {
-		return getSubjectId();
-	}
-	
-	public Long getSubjectId() {
-		return subjectId;
-	}
-	
-	public void setSubjectId(Long subjectId) {
-		this.subjectId = subjectId;
-	}
-	
-	public String getSubjectName() {
-		return subjectName;
-	}
-	
-	public void setSubjectName(String subjectName) {
-		this.subjectName = subjectName;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (!(o instanceof Subject)) {
-			return false;
-		}
-		Subject subject = (Subject) o;
-		return Objects.equals(getSubjectId(), subject.getSubjectId()) &&
-		       Objects.equals(getSubjectName(), subject.getSubjectName());
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(getSubjectId(), getSubjectName());
-	}
-	
-	@Override
-	public String toString() {
-		return "Subject{" +
-		       "subjectId=" + subjectId +
-		       ", subjectName='" + subjectName + '\'' +
-		       ", active=" + active +
-		       '}';
+	public Long getID() {
+		return getSubjectID();
 	}
 }

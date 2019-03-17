@@ -1,109 +1,47 @@
 package by.makedon.aistudenttester.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
  * @author Yahor Makedon
  */
 @Entity
-@Table(name = "TOPIC")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = {"topicID", "topicName"})
+@ToString(of = {"topicID", "topicName"})
 public class Topic extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	
 	@Id
-	@Column(name = "TOPICID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long topicId;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SUBJECTID")
-	@Where(clause = "ACTIVEFLAG = 'Y'")
-	private Subject subject;
-	@Column(name = "TOPICNAME")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long topicID;
 	private String topicName;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "SubjectID")
+	@Where(clause = "ActiveFlag = 'Y'")
+	private Subject subject;
 	
-	@ManyToMany(mappedBy = "topics")
-	@Where(clause = "ACTIVEFLAG = 'Y'")
+	@ManyToMany(mappedBy = "topics", fetch = FetchType.LAZY)
+	@Where(clause = "ActiveFlag = 'Y'")
 	private Set<Question> questions = new HashSet<>();
 	
-	/**
-	 * Default constructor
-	 */
-	public Topic() {
+	@Override
+	public void setID(Long id) {
+		setTopicID(id);
 	}
 	
 	@Override
-	public void setId(Long id) {
-		setTopicId(id);
-	}
-	
-	@Override
-	public Long getId() {
-		return getTopicId();
-	}
-	
-	public Long getTopicId() {
-		return topicId;
-	}
-	
-	public void setTopicId(Long topicId) {
-		this.topicId = topicId;
-	}
-	
-	public Subject getSubject() {
-		return subject;
-	}
-	
-	public void setSubject(Subject subject) {
-		this.subject = subject;
-	}
-	
-	public String getTopicName() {
-		return topicName;
-	}
-	
-	public void setTopicName(String topicName) {
-		this.topicName = topicName;
-	}
-	
-	public Set<Question> getQuestions() {
-		return questions;
-	}
-	
-	public void setQuestions(Set<Question> questions) {
-		this.questions = questions;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (!(o instanceof Topic)) {
-			return false;
-		}
-		Topic topic = (Topic) o;
-		return Objects.equals(getTopicId(), topic.getTopicId()) &&
-		       Objects.equals(getSubject(), topic.getSubject()) &&
-		       Objects.equals(getTopicName(), topic.getTopicName());
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(getTopicId(), getSubject(), getTopicName());
-	}
-	
-	@Override
-	public String toString() {
-		return "Topic{" +
-		       "topicId=" + topicId +
-		       ", subject=" + subject +
-		       ", topicName='" + topicName + '\'' +
-		       ", active=" + active +
-		       '}';
+	public Long getID() {
+		return getTopicID();
 	}
 }
