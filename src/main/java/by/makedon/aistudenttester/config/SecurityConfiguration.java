@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.main.configuration;
+package by.makedon.aistudenttester.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

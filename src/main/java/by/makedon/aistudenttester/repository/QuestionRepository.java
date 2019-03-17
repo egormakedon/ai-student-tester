@@ -1,9 +1,10 @@
 package by.makedon.aistudenttester.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import by.makedon.aistudenttester.domain.Question;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author Yahor Makedon
  */
-public interface QuestionRepository extends CrudRepository<Question, Long> {
+public interface QuestionRepository extends JpaRepository<Question, Long> {
 }

@@ -1,9 +1,10 @@
 package by.makedon.aistudenttester.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import by.makedon.aistudenttester.domain.TestSession;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author Yahor Makedon
  */
-public interface TestSessionRepository extends CrudRepository<TestSession, Long> {
+public interface TestSessionRepository extends JpaRepository<TestSession, Long> {
 }

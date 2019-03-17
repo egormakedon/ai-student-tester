@@ -1,12 +1,13 @@
 package by.makedon.aistudenttester.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import by.makedon.aistudenttester.domain.Topic;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 /**
  * @author Yahor Makedon
  */
-public interface TopicRepository extends CrudRepository<Topic, Long> {
+public interface TopicRepository extends JpaRepository<Topic, Long> {
     List<Topic> findTopicsByActiveIsTrueAndSubject_SubjectNameAndSubject_ActiveIsTrue(String subjectName);
 }
