@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.service;
+package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.main.bean.Topic;
+import by.makedon.aistudenttester.domain.Topic;
 import by.makedon.aistudenttester.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,14 @@ import java.util.List;
  */
 @Service
 public class TopicService {
-    @Autowired
     private TopicRepository topicRepository;
 
     public List<Topic> getTopicListBySubjectName(String subjectName) {
         return topicRepository.findTopicsByActiveIsTrueAndSubject_SubjectNameAndSubject_ActiveIsTrue(subjectName);
+    }
+
+    @Autowired
+    public void setTopicRepository(TopicRepository topicRepository) {
+        this.topicRepository = topicRepository;
     }
 }

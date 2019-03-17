@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.service;
+package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.main.bean.TestSession;
+import by.makedon.aistudenttester.domain.TestSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +13,9 @@ import java.util.List;
  */
 @Service
 public class AnswerService extends AbstractService {
-    @Autowired
     private TestSessionService testSessionService;
 
-    public char getAnswerByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
+    public int getAnswerByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
         switch (questionNumber) {
             case 1:
                 return testSession.getA1();
@@ -173,8 +172,8 @@ public class AnswerService extends AbstractService {
         }
     }
 
-    public List<Character> getAnswerListByTestSession(TestSession testSession) {
-        List<Character> answerList = new ArrayList<>(20);
+    public List<Integer> getAnswerListByTestSession(TestSession testSession) {
+        List<Integer> answerList = new ArrayList<>(20);
 
         answerList.add(testSession.getA1());
         answerList.add(testSession.getA2());
@@ -198,5 +197,10 @@ public class AnswerService extends AbstractService {
         answerList.add(testSession.getA20());
 
         return answerList;
+    }
+
+    @Autowired
+    public void setTestSessionService(TestSessionService testSessionService) {
+        this.testSessionService = testSessionService;
     }
 }

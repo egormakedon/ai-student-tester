@@ -1,8 +1,8 @@
-package by.makedon.aistudenttester.main.service;
+package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.main.bean.Question;
+import by.makedon.aistudenttester.domain.Question;
+import by.makedon.aistudenttester.domain.TestSession;
 import by.makedon.aistudenttester.repository.QuestionRepository;
-import by.makedon.aistudenttester.main.bean.TestSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Service
 public class QuestionService extends AbstractService {
-    @Autowired
     private QuestionRepository questionRepository;
 
     public Question getQuestionByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
@@ -90,5 +89,10 @@ public class QuestionService extends AbstractService {
         questionList.add(testSession.getQ20());
 
         return questionList;
+    }
+
+    @Autowired
+    public void setQuestionRepository(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
     }
 }

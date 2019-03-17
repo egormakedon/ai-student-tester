@@ -1,13 +1,11 @@
 package by.makedon.aistudenttester.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
@@ -19,9 +17,7 @@ import java.util.Locale;
  * @author Yahor Makedon
  */
 @Configuration
-@EnableWebMvc
-@ComponentScan("by.makedon.aistudenttester.main")
-public class ServletConfiguration extends WebMvcConfigurerAdapter {
+public class MvcConfig implements WebMvcConfigurer {
 	@Bean
 	public FreeMarkerConfigurer freeMarkerConfigurer() {
 		FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();

@@ -1,8 +1,8 @@
-package by.makedon.aistudenttester.main.service;
+package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.main.BaseConstants;
-import by.makedon.aistudenttester.main.bean.Question;
-import by.makedon.aistudenttester.main.bean.TestSession;
+import by.makedon.aistudenttester.BaseConstants;
+import by.makedon.aistudenttester.domain.Question;
+import by.makedon.aistudenttester.domain.TestSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,8 @@ import java.util.List;
  */
 @Service
 public class MarkCalculationService extends AbstractService {
-    @Autowired
     private QuestionService questionService;
-    @Autowired
     private AnswerService answerService;
-    @Autowired
     private MarkService markService;
 
     public void calculateMark(TestSession testSession) {
@@ -35,7 +32,7 @@ public class MarkCalculationService extends AbstractService {
 
         for (int index = 0; index < BaseConstants.QUESTION_COUNT; index++) {
             char answer = answerList.get(index);
-            char rightAnswer = questionList.get(index).getRightAnswer();
+            int rightAnswer = questionList.get(index).getRightAnswer();
 
             if (answer == rightAnswer) {
                 ++numberOfRightQuestions;
@@ -43,5 +40,20 @@ public class MarkCalculationService extends AbstractService {
         }
 
         return numberOfRightQuestions;
+    }
+
+    @Autowired
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
+    }
+
+    @Autowired
+    public void setAnswerService(AnswerService answerService) {
+        this.answerService = answerService;
+    }
+
+    @Autowired
+    public void setMarkService(MarkService markService) {
+        this.markService = markService;
     }
 }

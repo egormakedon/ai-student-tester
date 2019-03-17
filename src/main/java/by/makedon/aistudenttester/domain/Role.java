@@ -1,5 +1,7 @@
 package by.makedon.aistudenttester.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,11 @@ import java.io.Serializable;
  *
  * @author Yahor Makedon
  */
-public enum  Role implements Serializable {
-	ADMIN
+public enum Role implements Serializable, GrantedAuthority {
+	ADMIN;
+
+	@Override
+	public String getAuthority() {
+		return name();
+	}
 }

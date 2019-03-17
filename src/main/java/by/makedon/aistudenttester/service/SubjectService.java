@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.service;
+package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.main.bean.Subject;
+import by.makedon.aistudenttester.domain.Subject;
 import by.makedon.aistudenttester.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Service
 public class SubjectService {
-    @Autowired
     private SubjectRepository subjectRepository;
 
     public List<Subject> getSubjectList() {
@@ -21,5 +20,10 @@ public class SubjectService {
 
     public boolean isSubjectExists(String subjectName) {
         return subjectRepository.findSubjectBySubjectNameAndActiveIsTrue(subjectName).isPresent();
+    }
+
+    @Autowired
+    public void setSubjectRepository(SubjectRepository subjectRepository) {
+        this.subjectRepository = subjectRepository;
     }
 }

@@ -1,8 +1,11 @@
-package by.makedon.aistudenttester.main.service;
+package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.main.bean.ApplicationUser;
+import by.makedon.aistudenttester.domain.ApplicationUser;
 import by.makedon.aistudenttester.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,11 +14,23 @@ import java.util.Optional;
  * @author Yahor Makedon
  */
 @Service
-public class ApplicationUserService {
-    @Autowired
-    private ApplicationUserRepository applicationUserRepository;
+public class ApplicationUserService extends AbstractService implements UserDetailsService {
+    private ApplicationUserRepository userRepository;
 
-    public Optional<ApplicationUser> findApplicationUserByUsername(String username) {
-        return applicationUserRepository.findApplicationUserByUsernameAndActiveIsTrue(username);
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<ApplicationUser> optionalApplicationUser = userRepository.findApplicationUserByUsernameAndActiveIsTrue(username);
+
+        if (!optionalApplicationUser.isPresent()) {
+            logger.error("User " + username + " doesn't exists");
+            throw new UsernameNotFoundException("validation.username.doesnt.exists");
+        }
+
+        return optionalApplicationUser.get();
+    }
+
+    @Autowired
+    public void setUserRepository(ApplicationUserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 }

@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.service;
+package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.main.bean.TestSession;
+import by.makedon.aistudenttester.domain.TestSession;
 import by.makedon.aistudenttester.repository.TestSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,14 +10,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestSessionService extends AbstractService {
-    @Autowired
     private TestSessionRepository testSessionRepository;
 
     public TestSession save(TestSession testSession) {
         return testSessionRepository.save(testSession);
     }
 
-    public TestSession getTestSessionById(Long testSessionId) {
-        return testSessionRepository.findOne(testSessionId);
+    public TestSession getTestSessionByID(Long testSessionID) {
+        return testSessionRepository.findTestSessionByTestSessionID(testSessionID);
+    }
+
+    @Autowired
+    public void setTestSessionRepository(TestSessionRepository testSessionRepository) {
+        this.testSessionRepository = testSessionRepository;
     }
 }

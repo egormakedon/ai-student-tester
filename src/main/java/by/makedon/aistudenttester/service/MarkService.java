@@ -1,6 +1,6 @@
-package by.makedon.aistudenttester.main.service;
+package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.main.bean.Mark;
+import by.makedon.aistudenttester.domain.Mark;
 import by.makedon.aistudenttester.repository.MarkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +10,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MarkService extends AbstractService {
-    @Autowired
     private MarkRepository markRepository;
 
     public Mark getMarkByNumberOfRightQuestions(int numberOfRightQuestions) {
         return markRepository.findMarkByNumberOfRightQuestionsAndActiveIsTrueAndStrategy_ActiveIsTrue(numberOfRightQuestions);
+    }
+
+    @Autowired
+    public void setMarkRepository(MarkRepository markRepository) {
+        this.markRepository = markRepository;
     }
 }
