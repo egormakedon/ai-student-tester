@@ -18,7 +18,7 @@
             </div>
             <div class="form-group row">
                 <div class="col">
-                    <select class="custom-select">
+                    <select class="custom-select" id="studentGroupSelectorID" onchange="getStudentList()">
                         <option selected><@spring.message "main.choose.group"/></option>
                         <#list studentGroupList as studentGroup>
                             <option name="studentGroup">${studentGroup.studentGroupNumber}</option>
@@ -28,7 +28,7 @@
             </div>
             <div class="form-group row">
                 <div class="col">
-                    <select class="custom-select">
+                    <select class="custom-select" id="studentSelectorID">
                         <option selected><@spring.message "main.choose.student"/></option>
                     </select>
                 </div>
@@ -42,4 +42,7 @@
 
         <input type="hidden" name="${_csrf}" value="${_csrf.token}"/>
     </form>
+
+    <script src="/static/js/ajax.js"></script>
+    <script src="/static/js/main.js"></script>
 </@c.page>
