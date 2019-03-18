@@ -22,6 +22,8 @@ public class SubjectService {
         return subjectRepository.findSubjectBySubjectNameAndActiveIsTrue(subjectName).isPresent();
     }
 
+//  Getters/Setters
+
     @Autowired
     public void setSubjectRepository(SubjectRepository subjectRepository) {
         this.subjectRepository = subjectRepository;

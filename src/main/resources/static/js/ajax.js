@@ -1,11 +1,11 @@
 'use strict';
 
-var hostname = "localhost:8080";
+var hostname = "";
 
 function ajaxGet(url, output) {
     $.ajax({
         type: 'GET',
-        url: url,
+        url: hostname + url,
         success: function(result) {
             output(result);
         }
@@ -15,7 +15,7 @@ function ajaxGet(url, output) {
 function ajaxPost(url, data, output) {
     $.ajax({
         type: 'POST',
-        url: url,
+        url: hostname + url,
         data: data,
         success: function(result) {
             output(result);

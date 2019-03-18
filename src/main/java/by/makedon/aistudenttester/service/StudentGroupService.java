@@ -22,6 +22,8 @@ public class StudentGroupService {
         return studentGroupRepository.findStudentGroupByStudentGroupNumberAndActiveIsTrue(studentGroupNumber).isPresent();
     }
 
+//  Getters/Setters
+
     @Autowired
     public void setStudentGroupRepository(StudentGroupRepository studentGroupRepository) {
         this.studentGroupRepository = studentGroupRepository;

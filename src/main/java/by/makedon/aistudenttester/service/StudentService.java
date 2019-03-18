@@ -27,6 +27,8 @@ public class StudentService extends AbstractService {
         return studentRepository.findStudentByStudentTicketAndActiveIsTrue(studentTicket);
     }
 
+//  Getters/Setters
+
     @Autowired
     public void setStudentRepository(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
