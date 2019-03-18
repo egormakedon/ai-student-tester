@@ -4,6 +4,7 @@
 <#import "/spring.ftl" as spring>
 
 <@c.page "kek">
-    Привет, как дела? <br>
-    <@spring.message "main.title"/>
+    <form action="/studentGroupNumberList" method="get">
+        <button class="btn btn-primary" type="submit">hyi</button>
+    </form>
 </@c.page>

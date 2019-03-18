@@ -3,6 +3,7 @@ package by.makedon.aistudenttester.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -22,11 +23,17 @@ public class Question extends AbstractBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long questionID;
+	@Type(type = "text")
 	private String questionName;
+	@Type(type = "text")
 	private String firstAnswer;
+	@Type(type = "text")
 	private String secondAnswer;
+	@Type(type = "text")
 	private String thirdAnswer;
+	@Type(type = "text")
 	private String fourthAnswer;
+	@Type(type = "text")
 	private String fifthAnswer;
 	private int rightAnswer;
 	

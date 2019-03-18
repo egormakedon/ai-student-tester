@@ -6,6 +6,13 @@ CREATE TABLE hibernate_sequence
     ENGINE = InnoDB;
 INSERT INTO hibernate_sequence VALUES ( 1 );
 INSERT INTO hibernate_sequence VALUES ( 1 );
+INSERT INTO hibernate_sequence VALUES ( 1 );
+INSERT INTO hibernate_sequence VALUES ( 1 );
+INSERT INTO hibernate_sequence VALUES ( 1 );
+INSERT INTO hibernate_sequence VALUES ( 1 );
+INSERT INTO hibernate_sequence VALUES ( 1 );
+INSERT INTO hibernate_sequence VALUES ( 1 );
+INSERT INTO hibernate_sequence VALUES ( 1 );
 
 -- Create table Question
 CREATE TABLE IF NOT EXISTS aistudenttesterdb.Question
@@ -96,12 +103,12 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.RoleMap
 (
     RoleMapID            BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     ApplicationUserID    BIGINT UNSIGNED NOT NULL,
-    RoleName             VARCHAR(100) NOT NULL,
+    Roles                VARCHAR(100) NOT NULL,
     ActiveFlag           CHAR(1) NOT NULL,
 
     PRIMARY KEY(RoleMapID),
     INDEX ApplicationUserID_Index (ApplicationUserID ASC),
-    INDEX RoleName_Index (RoleName ASC),
+    INDEX Roles_Index (Roles ASC),
 
     CONSTRAINT ApplicationUserID
     FOREIGN KEY (ApplicationUserID)
