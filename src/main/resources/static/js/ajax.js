@@ -1,5 +1,7 @@
 'use strict';
 
+var hostname = "localhost:8080";
+
 function ajaxGet(url, output) {
     $.ajax({
         type: 'GET',
