@@ -12,7 +12,11 @@
     </head>
 
     <body>
-        <#nested>
+        <#include "navbar.ftl">
+
+        <div class="container">
+            <#nested>
+        </div>
 
         <script src="/static/js/jquery.js"></script>
         <script src="/static/js/popper.js"></script>

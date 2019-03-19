@@ -54,6 +54,8 @@ public class MainController {
 			return "redirect:/?error=true";
 		}
 
+		// TODO start test logic
+
 		return "main";
 	}
 
