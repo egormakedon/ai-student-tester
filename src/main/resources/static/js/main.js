@@ -1,25 +1,31 @@
 'use strict';
 
 function getStudentList() {
-    let studentGroupSelector = document.getElementById('studentGroupSelectorID');
+    $('#studentSelectorID').children('option:not(:first)').remove();
+
     let studentSelector = document.getElementById('studentSelectorID');
+    let studentGroupNumber = +$('#studentGroupSelectorID option:selected').text().split(/\s/).join('');
 
-    // TODO Remove &nbsp
-    let url = '/ajax/studentList/' + studentGroupSelector.value;
+    if (!isNaN(studentGroupNumber)) {
+        let url = '/ajax/studentList/' + studentGroupNumber;
 
-    ajaxGet(url, function(result) {
-        $('#studentSelectorID').children('option:not(:first)').remove();
+        ajaxGet(url, function(result) {
+            if (!jQuery.isEmptyObject(result)) {
+                for (let i = 0; i < result.length; i++) {
+                    let option = document.createElement('option');
 
-        if (!jQuery.isEmptyObject(result)) {
-            for (let i = 0; i < result.length; i++) {
-                let option = document.createElement('option');
+                    option.text = result[i].lastName + ' ' + result[i].firstName + ' ' + result[i].middleName;
+                    option.setAttribute('value', result[i].studentID);
 
-                // TODO Add name attribute
-                // TODO Refactor text
-                option.text = result[i].firstName + ' ' + result[i].lastName;
-
-                studentSelector.add(option);
+                    studentSelector.add(option);
+                }
             }
-        }
-    });
+        });
+    }
+}
+
+function setInputValues() {
+    $("input[name='subjectID']").val($('#subjectSelectorID option:selected').attr('value'));
+    $("input[name='studentGroupID']").val($('#studentGroupSelectorID option:selected').attr('value'));
+    $("input[name='studentID']").val($('#studentSelectorID option:selected').attr('value'));
 }

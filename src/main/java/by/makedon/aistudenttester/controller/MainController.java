@@ -25,12 +25,16 @@ public class MainController {
 	private StudentService studentService;
 
 	@GetMapping
-	public String getMain(Model model) {
+	public String getMain(Model model, @RequestParam(required = false) Boolean error) {
 		List<Subject> subjectList = subjectService.getSubjectList();
 		List<StudentGroup> studentGroupList = studentGroupService.getStudentGroupList();
 
 		model.addAttribute("subjectList", subjectList);
 		model.addAttribute("studentGroupList", studentGroupList);
+
+		if (error != null && error) {
+			model.addAttribute("mainError", "main.validation");
+		}
 
 		return "main";
 	}
@@ -41,8 +45,16 @@ public class MainController {
 	}
 
 	@PostMapping
-	public void startTest() {
+	public String startTest(
+			Model model,
+			@RequestParam(value = "subjectID") Subject subject,
+			@RequestParam(value = "studentGroupID") StudentGroup studentGroup,
+			@RequestParam(value = "studentID") Student student) {
+		if (subject == null || studentGroup == null || student == null) {
+			return "redirect:/?error=true";
+		}
 
+		return "main";
 	}
 
 //	Getters/Setters
