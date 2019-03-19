@@ -3,15 +3,19 @@ package by.makedon.aistudenttester.controller;
 import by.makedon.aistudenttester.domain.Student;
 import by.makedon.aistudenttester.domain.StudentGroup;
 import by.makedon.aistudenttester.domain.Subject;
+import by.makedon.aistudenttester.domain.TestSession;
 import by.makedon.aistudenttester.service.StudentGroupService;
 import by.makedon.aistudenttester.service.StudentService;
 import by.makedon.aistudenttester.service.SubjectService;
+import by.makedon.aistudenttester.service.TestSessionService;
+import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -23,6 +27,7 @@ public class MainController {
 	private SubjectService subjectService;
 	private StudentGroupService studentGroupService;
 	private StudentService studentService;
+	private TestSessionService testSessionService;
 
 	@GetMapping
 	public String getMain(Model model, @RequestParam(required = false) Boolean error) {
@@ -47,6 +52,7 @@ public class MainController {
 	@PostMapping
 	public String startTest(
 			Model model,
+			HttpSession httpSession,
 			@RequestParam(value = "subjectID") Subject subject,
 			@RequestParam(value = "studentGroupID") StudentGroup studentGroup,
 			@RequestParam(value = "studentID") Student student) {
@@ -54,9 +60,13 @@ public class MainController {
 			return "redirect:/?error=true";
 		}
 
-		// TODO start test logic
+		TestSession testSession = testSessionService.generateTest(subject, student);
 
-		return "main";
+		httpSession.setAttribute(BaseConstants.TEST_SESSION_ID, testSession.getID());
+		httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, 1);
+		httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, true);
+
+		return "redirect:/test";
 	}
 
 //	Getters/Setters
@@ -74,5 +84,10 @@ public class MainController {
 	@Autowired
 	public void setStudentService(StudentService studentService) {
 		this.studentService = studentService;
+	}
+
+	@Autowired
+	public void setTestSessionService(TestSessionService testSessionService) {
+		this.testSessionService = testSessionService;
 	}
 }
