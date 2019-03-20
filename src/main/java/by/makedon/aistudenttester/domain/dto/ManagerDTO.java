@@ -1,6 +1,5 @@
 package by.makedon.aistudenttester.domain.dto;
 
-import by.makedon.aistudenttester.domain.Question;
 import by.makedon.aistudenttester.domain.TestSession;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +10,6 @@ import java.time.format.DateTimeFormatter;
  */
 @Service
 public class ManagerDTO {
-    public QuestionAndAnswersDTO getQuestionAndAnswersDTO(Question question, int answer) {
-        QuestionAndAnswersDTO questionAndAnswersDTO = new QuestionAndAnswersDTO();
-
-        questionAndAnswersDTO.setQuestionName(question.getQuestionName());
-        questionAndAnswersDTO.setFirstAnswer(question.getFirstAnswer());
-        questionAndAnswersDTO.setSecondAnswer(question.getSecondAnswer());
-        questionAndAnswersDTO.setThirdAnswer(question.getThirdAnswer());
-        questionAndAnswersDTO.setFourthAnswer(question.getFourthAnswer());
-        questionAndAnswersDTO.setFifthAnswer(question.getFifthAnswer());
-        questionAndAnswersDTO.setAnswer(answer);
-
-        return questionAndAnswersDTO;
-    }
-
     public TestResultDTO getTestResultDTO(TestSession testSession) {
         TestResultDTO testResultDTO = new TestResultDTO();
 

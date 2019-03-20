@@ -1,61 +1,64 @@
 <#ftl encoding="UTF-8">
-<#import "/spring.ftl" as spring/>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <title><@spring.message "test.title"/></title>
-    </head>
 
-    <body>
-        <@spring.message "test.question.number"/>
-        ${Session.questionNumber}
+<#import "parts/common.ftl" as c>
+<#import "/spring.ftl" as spring>
 
-        <br>
+<@c.page "test.title">
+    <#--<div class="container">-->
+        <#--<@spring.message "test.question.number"/>-->
+        <#--${Session.questionNumber}-->
+    <#--</div>-->
+</@c.page>
 
-        ${questionAndAnswersDTO.getQuestionName()}
 
-        <br><br>
 
-        <form>
-            <input id="csrfId" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <input id="answerId" type="hidden" name="answer" value="${questionAndAnswersDTO.getAnswer()}">
+<#--<body>-->
+<#---->
 
-            <input id="answerRadioButtonId1" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton1Change()">
-            <label for="answerRadioButtonId1">${questionAndAnswersDTO.getFirstAnswer()}</label>
+<#--<br>-->
 
-            <br>
+<#--${questionAndAnswersDTO.getQuestionName()}-->
 
-            <input id="answerRadioButtonId2" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton2Change()">
-            <label for="answerRadioButtonId2">${questionAndAnswersDTO.getSecondAnswer()}</label>
+<#--<br><br>-->
 
-            <br>
+<#--<form>-->
+<#--<input id="csrfId" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+<#--<input id="answerId" type="hidden" name="answer" value="${questionAndAnswersDTO.getAnswer()}">-->
 
-            <input id="answerRadioButtonId3" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton3Change()">
-            <label for="answerRadioButtonId3">${questionAndAnswersDTO.getThirdAnswer()}</label>
+<#--<input id="answerRadioButtonId1" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton1Change()">-->
+<#--<label for="answerRadioButtonId1">${questionAndAnswersDTO.getFirstAnswer()}</label>-->
 
-            <br>
+<#--<br>-->
 
-            <input id="answerRadioButtonId4" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton4Change()">
-            <label for="answerRadioButtonId4">${questionAndAnswersDTO.getFourthAnswer()}</label>
+<#--<input id="answerRadioButtonId2" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton2Change()">-->
+<#--<label for="answerRadioButtonId2">${questionAndAnswersDTO.getSecondAnswer()}</label>-->
 
-            <br>
+<#--<br>-->
 
-            <input id="answerRadioButtonId5" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton5Change()">
-            <label for="answerRadioButtonId5">${questionAndAnswersDTO.getFifthAnswer()}</label>
+<#--<input id="answerRadioButtonId3" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton3Change()">-->
+<#--<label for="answerRadioButtonId3">${questionAndAnswersDTO.getThirdAnswer()}</label>-->
 
-            <br><br>
+<#--<br>-->
 
-            <input id="prevButtonId" type="submit" formaction="<@spring.url "/test/prevQuestion"/>" formmethod="get" value="<@spring.message "test.prev.button"/>">
-            <input id="nextButtonId" type="submit" formaction="<@spring.url "/test/nextQuestion"/>" formmethod="get" value="<@spring.message "test.next.button"/>">
+<#--<input id="answerRadioButtonId4" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton4Change()">-->
+<#--<label for="answerRadioButtonId4">${questionAndAnswersDTO.getFourthAnswer()}</label>-->
 
-            <br><br>
+<#--<br>-->
 
-            <input id="completeButtonId" type="submit" formaction="<@spring.url "/completeTest"/>" formmethod="post" value="<@spring.message "test.complete.button"/>">
-        </form>
+<#--<input id="answerRadioButtonId5" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton5Change()">-->
+<#--<label for="answerRadioButtonId5">${questionAndAnswersDTO.getFifthAnswer()}</label>-->
 
-        <script src="<@spring.url "/resources/js/jquery.js"/>"></script>
-        <script src="<@spring.url "/resources/js/ajax.js"/>"></script>
-        <script src="<@spring.url "/resources/js/test.js"/>"></script>
-    </body>
-</html>
+<#--<br><br>-->
+
+<#--<input id="prevButtonId" type="submit" formaction="<@spring.url "/test/prevQuestion"/>" formmethod="get" value="<@spring.message "test.prev.button"/>">-->
+<#--<input id="nextButtonId" type="submit" formaction="<@spring.url "/test/nextQuestion"/>" formmethod="get" value="<@spring.message "test.next.button"/>">-->
+
+<#--<br><br>-->
+
+<#--<input id="completeButtonId" type="submit" formaction="<@spring.url "/completeTest"/>" formmethod="post" value="<@spring.message "test.complete.button"/>">-->
+<#--</form>-->
+
+<#--<script src="<@spring.url "/resources/js/jquery.js"/>"></script>-->
+<#--<script src="<@spring.url "/resources/js/ajax.js"/>"></script>-->
+<#--<script src="<@spring.url "/resources/js/test.js"/>"></script>-->
+<#--</body>-->

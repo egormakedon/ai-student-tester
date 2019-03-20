@@ -3,6 +3,7 @@ package by.makedon.aistudenttester.service;
 import by.makedon.aistudenttester.domain.Question;
 import by.makedon.aistudenttester.domain.TestSession;
 import by.makedon.aistudenttester.repository.QuestionRepository;
+import by.makedon.aistudenttester.util.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,8 +60,8 @@ public class QuestionService extends AbstractService {
             case 20:
                 return testSession.getQ20();
             default:
-                logger.error("Invalid questionNumber - " + questionNumber);
-                throw new IllegalArgumentException("Invalid questionNumber - " + questionNumber);
+                logger.error("Error question number: " + questionNumber + ". Question number must be from 1 to 20");
+                throw new BaseException("Error question number: " + questionNumber + ". Question number must be from 1 to 20");
         }
     }
 
@@ -90,6 +91,8 @@ public class QuestionService extends AbstractService {
 
         return questionList;
     }
+
+//  Getters/Setters
 
     @Autowired
     public void setQuestionRepository(QuestionRepository questionRepository) {

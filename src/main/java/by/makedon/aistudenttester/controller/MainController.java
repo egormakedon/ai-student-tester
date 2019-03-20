@@ -63,10 +63,10 @@ public class MainController {
 		TestSession testSession = testSessionService.generateTest(subject, student);
 
 		httpSession.setAttribute(BaseConstants.TEST_SESSION_ID, testSession.getID());
-		httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, 1);
+		httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, "1");
 		httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, "true");
 
-		return "redirect:/test";
+		return "redirect:/test/1";
 	}
 
 //	Getters/Setters
