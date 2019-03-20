@@ -14,9 +14,11 @@ import java.util.List;
 public class TopicService {
     private TopicRepository topicRepository;
 
-    public List<Topic> getTopicListBySubjectName(String subjectName) {
-        return topicRepository.findTopicsByActiveIsTrueAndSubject_SubjectNameAndSubject_ActiveIsTrue(subjectName);
+    public List<Topic> getTopicListBySubjectID(Long subjectID) {
+        return topicRepository.findTopicsByActiveIsTrueAndSubject_SubjectIDAndSubject_ActiveIsTrue(subjectID);
     }
+
+//  Getters/Setters
 
     @Autowired
     public void setTopicRepository(TopicRepository topicRepository) {

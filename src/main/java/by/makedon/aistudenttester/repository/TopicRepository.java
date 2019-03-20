@@ -9,5 +9,5 @@ import java.util.List;
  * @author Yahor Makedon
  */
 public interface TopicRepository extends JpaRepository<Topic, Long> {
-    List<Topic> findTopicsByActiveIsTrueAndSubject_SubjectNameAndSubject_ActiveIsTrue(String subjectName);
+    List<Topic> findTopicsByActiveIsTrueAndSubject_SubjectIDAndSubject_ActiveIsTrue(Long subjectID);
 }
