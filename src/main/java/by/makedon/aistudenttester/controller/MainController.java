@@ -64,7 +64,7 @@ public class MainController {
 
 		httpSession.setAttribute(BaseConstants.TEST_SESSION_ID, testSession.getID());
 		httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, 1);
-		httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, true);
+		httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, "true");
 
 		return "redirect:/test";
 	}

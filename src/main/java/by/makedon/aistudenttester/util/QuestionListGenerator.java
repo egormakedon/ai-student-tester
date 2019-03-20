@@ -4,6 +4,8 @@ import by.makedon.aistudenttester.domain.Question;
 import by.makedon.aistudenttester.domain.Subject;
 import by.makedon.aistudenttester.domain.Topic;
 import by.makedon.aistudenttester.service.TopicService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +21,7 @@ import java.util.stream.IntStream;
  */
 @Component
 public class QuestionListGenerator {
+    private static final Logger logger = LoggerFactory.getLogger(QuestionListGenerator.class);
     private TopicService topicService;
 
     public List<Question> generate(Subject subject) {
@@ -36,6 +39,11 @@ public class QuestionListGenerator {
         int allQuestionsCount = topicList.stream().map(Topic::getQuestions)
                                                   .mapToInt(Set::size)
                                                   .sum();
+
+        if (allQuestionsCount < BaseConstants.QUESTION_COUNT) {
+            logger.error("Number of questions: " + allQuestionsCount + ".\nNumber of questions for the subject must be equal or more than 20!!!");
+            throw new IllegalArgumentException("Number of questions: " + allQuestionsCount + ".\nNumber of questions for the subject must be equal or more than 20!!!");
+        }
 
         List<Integer> questionCountList = IntStream.range(0, topicList.size() - 1).map(index ->
                 (int) Math.floor((double) BaseConstants.QUESTION_COUNT *
