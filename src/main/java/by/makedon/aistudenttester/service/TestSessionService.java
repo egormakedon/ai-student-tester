@@ -10,6 +10,7 @@ import by.makedon.aistudenttester.util.QuestionListGenerator;
 import by.makedon.aistudenttester.util.TestSessionBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +32,7 @@ public class TestSessionService extends AbstractService {
         return testSessionRepository.findTestSessionByTestSessionID(testSessionID);
     }
 
+    @Transactional
     public TestSession generateTest(Subject subject, Student student) {
         TestSession testSession = new TestSession();
 
@@ -44,7 +46,7 @@ public class TestSessionService extends AbstractService {
                 .forEach(index -> builder.build(questionList.get(index), index + 1));
         builder.build();
 
-        return testSession;
+        return testSessionRepository.save(testSession);
     }
 
 //  Getters/Setters

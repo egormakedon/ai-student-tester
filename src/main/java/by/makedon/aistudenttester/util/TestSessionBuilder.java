@@ -86,7 +86,7 @@ public final class TestSessionBuilder {
 				return builder;
 			default:
 				logger.error("Error index: " + index + ". Index must be from 1 to 20");
-				throw new IllegalArgumentException("Error index: " + index + ". Index must be from 1 to 20");
+				throw new BaseException("Error index: " + index + ". Index must be from 1 to 20");
 		}
 	}
 

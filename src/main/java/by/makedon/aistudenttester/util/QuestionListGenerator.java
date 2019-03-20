@@ -42,7 +42,7 @@ public class QuestionListGenerator {
 
         if (allQuestionsCount < BaseConstants.QUESTION_COUNT) {
             logger.error("Number of questions: " + allQuestionsCount + ".\nNumber of questions for the subject must be equal or more than 20!!!");
-            throw new IllegalArgumentException("Number of questions: " + allQuestionsCount + ".\nNumber of questions for the subject must be equal or more than 20!!!");
+            throw new BaseException("Number of questions: " + allQuestionsCount + ".\nNumber of questions for the subject must be equal or more than 20!!!");
         }
 
         List<Integer> questionCountList = IntStream.range(0, topicList.size() - 1).map(index ->
