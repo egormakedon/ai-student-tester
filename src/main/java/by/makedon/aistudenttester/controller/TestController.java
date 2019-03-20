@@ -81,6 +81,17 @@ public class TestController {
         return "redirect:/test";
     }
 
+//    @PreAuthorize("permitAll()")
+//    @PostMapping(value = "/updateAnswer")
+//    public void updateAnswer(@RequestParam String answer, HttpSession httpSession) {
+//        answerValidator.validate(answer);
+//
+//        TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
+//        int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
+//
+//        answerService.updateAnswer(testSession, questionNumber, answer.charAt(0));
+//    }
+
 //  Getters/Setters
 
     @Autowired

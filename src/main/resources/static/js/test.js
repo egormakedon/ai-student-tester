@@ -1,54 +1,54 @@
-var csrf = document.getElementById('csrfId');
-var answer = document.getElementById('answerId');
+var csrf = document.getElementById('csrfID');
+var answer = document.getElementById('answerID');
 
 function setAnswerToRadioButton() {
     switch (answer.value) {
-        case '-':
+        case '0':
             return;
         case '1':
-            $('#answerRadioButtonId1').prop("checked", true);
+            $('#answer1ID').prop("checked", true);
 
             break;
         case '2':
-            $('#answerRadioButtonId2').prop("checked", true);
+            $('#answer2ID').prop("checked", true);
 
             break;
         case '3':
-            $('#answerRadioButtonId3').prop("checked", true);
+            $('#answer3ID').prop("checked", true);
 
             break;
         case '4':
-            $('#answerRadioButtonId4').prop("checked", true);
+            $('#answer4ID').prop("checked", true);
 
             break;
         case '5':
-            $('#answerRadioButtonId5').prop("checked", true);
+            $('#answer5ID').prop("checked", true);
 
             break;
     }
 }
 
-function answerRadioButton1Change() {
+function answer1Change() {
     answer.value = '1';
     ajaxUpdateAnswer();
 }
 
-function answerRadioButton2Change() {
+function answer2Change() {
     answer.value = '2';
     ajaxUpdateAnswer();
 }
 
-function answerRadioButton3Change() {
+function answer3Change() {
     answer.value = '3';
     ajaxUpdateAnswer();
 }
 
-function answerRadioButton4Change() {
+function answer4Change() {
     answer.value = '4';
     ajaxUpdateAnswer();
 }
 
-function answerRadioButton5Change() {
+function answern5Change() {
     answer.value = '5';
     ajaxUpdateAnswer();
 }
@@ -63,6 +63,6 @@ function ajaxUpdateAnswer() {
     });
 }
 
-$(document).ready(function() {
-    setAnswerToRadioButton();
-});
+// $(document).ready(function() {
+//     setAnswerToRadioButton();
+// });

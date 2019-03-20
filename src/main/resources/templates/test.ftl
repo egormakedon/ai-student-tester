@@ -4,61 +4,79 @@
 <#import "/spring.ftl" as spring>
 
 <@c.page "test.title">
-    <#--<div class="container">-->
-        <#--<@spring.message "test.question.number"/>-->
-        <#--${Session.questionNumber}-->
-    <#--</div>-->
+    <div class="container mt-5">
+        <blockquote class="blockquote text-center">
+            <h4>
+                <@spring.message "test.question.number"/>
+                ${Session.questionNumber}.
+                ${question.questionName}
+            </h4>
+        </blockquote>
+    </div>
+    <div class="container mt-5">
+        <form>
+            <div class="form-group row">
+                <div class="col">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="answer1ID" name="answerGroup" class="custom-control-input" onchange="answer1Change()">
+                        <label class="custom-control-label" for="answer1ID">1) ${question.firstAnswer}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="answer2ID" name="answerGroup" class="custom-control-input" onchange="answer2Change()">
+                        <label class="custom-control-label" for="answer2ID">2) ${question.secondAnswer}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="answer3ID" name="answerGroup" class="custom-control-input" onchange="answer3Change()">
+                        <label class="custom-control-label" for="answer3ID">3) ${question.thirdAnswer}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="answer4ID" name="answerGroup" class="custom-control-input" onchange="answer4Change()">
+                        <label class="custom-control-label" for="answer4ID">4) ${question.fourthAnswer}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="answer5ID" name="answerGroup" class="custom-control-input" onchange="answer5Change()">
+                        <label class="custom-control-label" for="answer5ID">5) ${question.fifthAnswer}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mt-5">
+                <div class="col">
+                    <blockquote class="blockquote text-center">
+                        <button class="btn btn-primary btn-sm" id="prevButtonID" type="submit" formaction="/test/prevQuestion" formmethod="get"><@spring.message "test.prev.button"/></button>
+                        <button class="btn btn-primary btn-sm" id="nextButtonID" type="submit" formaction="/test/nextQuestion" formmethod="get"><@spring.message "test.next.button"/></button>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <div class="col">
+                    <blockquote class="blockquote text-center">
+                        <button class="btn btn-primary btn-sm" id="completeButtonID" type="submit" formaction="/completeTest" formmethod="post"><@spring.message "test.complete.button"/></button>
+                    </blockquote>
+                </div>
+            </div>
+
+            <input id="answerID" type="hidden" name="answer" value="${answer}">
+
+            <input id="csrfID" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+    </div>
+
+    <script src="/static/js/ajax.js"></script>
+    <script src="/static/js/test.js"></script>
 </@c.page>
-
-
-
-<#--<body>-->
-<#---->
-
-<#--<br>-->
-
-<#--${questionAndAnswersDTO.getQuestionName()}-->
-
-<#--<br><br>-->
-
-<#--<form>-->
-<#--<input id="csrfId" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-<#--<input id="answerId" type="hidden" name="answer" value="${questionAndAnswersDTO.getAnswer()}">-->
-
-<#--<input id="answerRadioButtonId1" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton1Change()">-->
-<#--<label for="answerRadioButtonId1">${questionAndAnswersDTO.getFirstAnswer()}</label>-->
-
-<#--<br>-->
-
-<#--<input id="answerRadioButtonId2" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton2Change()">-->
-<#--<label for="answerRadioButtonId2">${questionAndAnswersDTO.getSecondAnswer()}</label>-->
-
-<#--<br>-->
-
-<#--<input id="answerRadioButtonId3" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton3Change()">-->
-<#--<label for="answerRadioButtonId3">${questionAndAnswersDTO.getThirdAnswer()}</label>-->
-
-<#--<br>-->
-
-<#--<input id="answerRadioButtonId4" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton4Change()">-->
-<#--<label for="answerRadioButtonId4">${questionAndAnswersDTO.getFourthAnswer()}</label>-->
-
-<#--<br>-->
-
-<#--<input id="answerRadioButtonId5" name="answerRadioButtonGroup" type="radio" onchange="answerRadioButton5Change()">-->
-<#--<label for="answerRadioButtonId5">${questionAndAnswersDTO.getFifthAnswer()}</label>-->
-
-<#--<br><br>-->
-
-<#--<input id="prevButtonId" type="submit" formaction="<@spring.url "/test/prevQuestion"/>" formmethod="get" value="<@spring.message "test.prev.button"/>">-->
-<#--<input id="nextButtonId" type="submit" formaction="<@spring.url "/test/nextQuestion"/>" formmethod="get" value="<@spring.message "test.next.button"/>">-->
-
-<#--<br><br>-->
-
-<#--<input id="completeButtonId" type="submit" formaction="<@spring.url "/completeTest"/>" formmethod="post" value="<@spring.message "test.complete.button"/>">-->
-<#--</form>-->
-
-<#--<script src="<@spring.url "/resources/js/jquery.js"/>"></script>-->
-<#--<script src="<@spring.url "/resources/js/ajax.js"/>"></script>-->
-<#--<script src="<@spring.url "/resources/js/test.js"/>"></script>-->
-<#--</body>-->
