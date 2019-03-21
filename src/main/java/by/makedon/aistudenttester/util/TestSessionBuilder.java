@@ -2,8 +2,6 @@ package by.makedon.aistudenttester.util;
 
 import by.makedon.aistudenttester.domain.Question;
 import by.makedon.aistudenttester.domain.TestSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Class builder for TestSession entity.
@@ -11,7 +9,6 @@ import org.slf4j.LoggerFactory;
  * @author Yahor Makedon
  */
 public final class TestSessionBuilder {
-	private static final Logger logger = LoggerFactory.getLogger(TestSessionBuilder.class);
 	private static final TestSessionBuilder builder = new TestSessionBuilder();
 	private static TestSession testSession = null;
 
@@ -85,7 +82,6 @@ public final class TestSessionBuilder {
 				testSession.setQ20(question);
 				return builder;
 			default:
-				logger.error("Error index: " + index + ". Index must be from 1 to 20");
 				throw new BaseException("Error index: " + index + ". Index must be from 1 to 20");
 		}
 	}

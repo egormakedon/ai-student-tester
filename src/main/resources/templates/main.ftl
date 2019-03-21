@@ -58,6 +58,9 @@
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
 
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/popper.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/ajax.js"></script>
     <script src="/static/js/main.js"></script>
 </@c.page>

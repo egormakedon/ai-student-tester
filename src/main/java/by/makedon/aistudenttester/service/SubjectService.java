@@ -18,10 +18,6 @@ public class SubjectService {
         return subjectRepository.findSubjectsByActiveIsTrue();
     }
 
-    public boolean isSubjectExists(String subjectName) {
-        return subjectRepository.findSubjectBySubjectNameAndActiveIsTrue(subjectName).isPresent();
-    }
-
 //  Getters/Setters
 
     @Autowired

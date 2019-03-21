@@ -17,10 +17,6 @@
         <div class="container">
             <#nested>
         </div>
-
-        <script src="/static/js/jquery.js"></script>
-        <script src="/static/js/popper.js"></script>
-        <script src="/static/js/bootstrap.js"></script>
     </body>
 </html>
 

@@ -7,23 +7,18 @@ function setAnswerToRadioButton() {
             return;
         case '1':
             $('#answer1ID').prop("checked", true);
-
             break;
         case '2':
             $('#answer2ID').prop("checked", true);
-
             break;
         case '3':
             $('#answer3ID').prop("checked", true);
-
             break;
         case '4':
             $('#answer4ID').prop("checked", true);
-
             break;
         case '5':
             $('#answer5ID').prop("checked", true);
-
             break;
     }
 }
@@ -48,7 +43,7 @@ function answer4Change() {
     ajaxUpdateAnswer();
 }
 
-function answern5Change() {
+function answer5Change() {
     answer.value = '5';
     ajaxUpdateAnswer();
 }
@@ -59,10 +54,11 @@ function ajaxUpdateAnswer() {
         _csrf: csrf.value
     };
 
-    ajaxPost('/tester/ajax/updateAnswer', data, function (result) {
+    ajaxPost('/test/ajax/update', data, function (result) {
+        location.reload();
     });
 }
 
-// $(document).ready(function() {
-//     setAnswerToRadioButton();
-// });
+$(document).ready(function() {
+    setAnswerToRadioButton();
+});

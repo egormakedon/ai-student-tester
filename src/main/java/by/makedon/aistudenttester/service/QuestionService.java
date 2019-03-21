@@ -14,7 +14,7 @@ import java.util.List;
  * @author Yahor Makedon
  */
 @Service
-public class QuestionService extends AbstractService {
+public class QuestionService {
     private QuestionRepository questionRepository;
 
     public Question getQuestionByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
@@ -60,7 +60,6 @@ public class QuestionService extends AbstractService {
             case 20:
                 return testSession.getQ20();
             default:
-                logger.error("Error question number: " + questionNumber + ". Question number must be from 1 to 20");
                 throw new BaseException("Error question number: " + questionNumber + ". Question number must be from 1 to 20");
         }
     }

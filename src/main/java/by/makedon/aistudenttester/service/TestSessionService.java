@@ -20,7 +20,7 @@ import java.util.stream.IntStream;
  * @author Yahor Makedon
  */
 @Service
-public class TestSessionService extends AbstractService {
+public class TestSessionService {
     private TestSessionRepository testSessionRepository;
     private QuestionListGenerator questionListGenerator;
 

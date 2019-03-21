@@ -18,10 +18,6 @@ public class StudentGroupService {
         return studentGroupRepository.findStudentGroupsByActiveIsTrue();
     }
 
-    public boolean isStudentGroupExists(long studentGroupNumber) {
-        return studentGroupRepository.findStudentGroupByStudentGroupNumberAndActiveIsTrue(studentGroupNumber).isPresent();
-    }
-
 //  Getters/Setters
 
     @Autowired

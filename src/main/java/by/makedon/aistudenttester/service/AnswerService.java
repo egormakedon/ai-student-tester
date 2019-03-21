@@ -1,6 +1,7 @@
 package by.makedon.aistudenttester.service;
 
 import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.util.BaseConstants;
 import by.makedon.aistudenttester.util.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Yahor Makedon
  */
 @Service
-public class AnswerService extends AbstractService {
+public class AnswerService {
     private TestSessionService testSessionService;
 
     public int getAnswerByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
@@ -59,122 +60,100 @@ public class AnswerService extends AbstractService {
             case 20:
                 return testSession.getA20();
             default:
-                logger.error("Error question number: " + questionNumber + ". Question number must be from 1 to 20");
                 throw new BaseException("Error question number: " + questionNumber + ". Question number must be from 1 to 20");
         }
     }
 
     @Transactional
-    public void updateAnswer(TestSession testSession, int questionNumber, char answer) {
+    public void updateAnswer(TestSession testSession, int questionNumber, int answer) {
         switch (questionNumber) {
             case 1:
                 testSession.setA1(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 2:
                 testSession.setA2(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 3:
                 testSession.setA3(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 4:
                 testSession.setA4(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 5:
                 testSession.setA5(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 6:
                 testSession.setA6(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 7:
                 testSession.setA7(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 8:
                 testSession.setA8(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 9:
                 testSession.setA9(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 10:
                 testSession.setA10(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 11:
                 testSession.setA11(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 12:
                 testSession.setA12(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 13:
                 testSession.setA13(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 14:
                 testSession.setA14(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 15:
                 testSession.setA15(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 16:
                 testSession.setA16(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 17:
                 testSession.setA17(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 18:
                 testSession.setA18(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 19:
                 testSession.setA19(answer);
                 testSessionService.save(testSession);
-
                 break;
             case 20:
                 testSession.setA20(answer);
                 testSessionService.save(testSession);
-
                 break;
             default:
-                logger.error("Invalid questionNumber - " + questionNumber);
-                throw new IllegalArgumentException("Invalid questionNumber - " + questionNumber);
+                throw new BaseException("Error question number: " + questionNumber + ". Question number must be from 1 to 20");
         }
     }
 
     public List<Integer> getAnswerListByTestSession(TestSession testSession) {
-        List<Integer> answerList = new ArrayList<>(20);
+        List<Integer> answerList = new ArrayList<>(BaseConstants.QUESTION_COUNT);
 
         answerList.add(testSession.getA1());
         answerList.add(testSession.getA2());
@@ -199,6 +178,8 @@ public class AnswerService extends AbstractService {
 
         return answerList;
     }
+
+//  Getters/Setters
 
     @Autowired
     public void setTestSessionService(TestSessionService testSessionService) {

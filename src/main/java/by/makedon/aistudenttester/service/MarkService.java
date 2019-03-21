@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @author Yahor Makedon
  */
 @Service
-public class MarkService extends AbstractService {
+public class MarkService {
     private MarkRepository markRepository;
 
     public Mark getMarkByNumberOfRightQuestions(int numberOfRightQuestions) {

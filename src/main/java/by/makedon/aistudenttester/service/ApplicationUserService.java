@@ -14,7 +14,7 @@ import java.util.Optional;
  * @author Yahor Makedon
  */
 @Service
-public class ApplicationUserService extends AbstractService implements UserDetailsService {
+public class ApplicationUserService implements UserDetailsService {
     private ApplicationUserRepository userRepository;
 
     @Override
@@ -22,7 +22,6 @@ public class ApplicationUserService extends AbstractService implements UserDetai
         Optional<ApplicationUser> optionalApplicationUser = userRepository.findApplicationUserByUsernameAndActiveIsTrue(username);
 
         if (!optionalApplicationUser.isPresent()) {
-            logger.error("User " + username + " doesn't exists");
             throw new UsernameNotFoundException("validation.username.doesnt.exists");
         }
 

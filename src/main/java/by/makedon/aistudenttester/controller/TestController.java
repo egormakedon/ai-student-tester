@@ -6,15 +6,15 @@ import by.makedon.aistudenttester.service.AnswerService;
 import by.makedon.aistudenttester.service.QuestionService;
 import by.makedon.aistudenttester.service.TestSessionService;
 import by.makedon.aistudenttester.util.BaseConstants;
+import by.makedon.aistudenttester.util.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author Yahor Makedon
@@ -33,9 +33,11 @@ public class TestController {
 
         Question question = questionService.getQuestionByTestSessionAndQuestionNumber(testSession, questionNumber);
         int answer = answerService.getAnswerByTestSessionAndQuestionNumber(testSession, questionNumber);
+        List<Integer> answerList = answerService.getAnswerListByTestSession(testSession);
 
         model.addAttribute("question", question);
         model.addAttribute("answer", answer);
+        model.addAttribute("answerList", answerList);
 
         return "test";
     }
@@ -44,8 +46,8 @@ public class TestController {
     public String getTest(Model model, HttpSession httpSession, @PathVariable int questionNumber) {
         if (questionNumber < 1) {
             questionNumber = 1;
-        } else if (questionNumber > 20) {
-            questionNumber = 20;
+        } else if (questionNumber > BaseConstants.QUESTION_COUNT) {
+            questionNumber = BaseConstants.QUESTION_COUNT;
         }
 
         httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, String.valueOf(questionNumber));
@@ -53,44 +55,44 @@ public class TestController {
         return "redirect:/test";
     }
 
-    @RequestMapping(value = "/nextQuestion", method = RequestMethod.GET)
-    public String getTestPage2(HttpSession httpSession) {
-        Integer questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
+    @GetMapping("/next")
+    public String next(Model model, HttpSession httpSession) {
+        int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
 
-        if (questionNumber == 20) {
+        if (questionNumber == BaseConstants.QUESTION_COUNT) {
             return "redirect:/test";
         }
 
-        ++questionNumber;
-        httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, questionNumber.toString());
+        httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, String.valueOf(++questionNumber));
 
         return "redirect:/test";
     }
 
-    @RequestMapping(value = "/prevQuestion", method = RequestMethod.GET)
-    public String getTestPage3(HttpSession httpSession) {
-        Integer questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
+    @GetMapping("/prev")
+    public String prev(Model model, HttpSession httpSession) {
+        int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
 
         if (questionNumber == 1) {
             return "redirect:/test";
         }
 
-        --questionNumber;
-        httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, questionNumber.toString());
+        httpSession.setAttribute(BaseConstants.QUESTION_NUMBER, String.valueOf(--questionNumber));
 
         return "redirect:/test";
     }
 
-//    @PreAuthorize("permitAll()")
-//    @PostMapping(value = "/updateAnswer")
-//    public void updateAnswer(@RequestParam String answer, HttpSession httpSession) {
-//        answerValidator.validate(answer);
-//
-//        TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
-//        int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
-//
-//        answerService.updateAnswer(testSession, questionNumber, answer.charAt(0));
-//    }
+    @PostMapping("/ajax/update")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateAnswer(Model model, HttpSession httpSession, @RequestParam int answer) {
+        if (answer < 0 || answer > 5) {
+            throw new BaseException("Error answer: " + answer + ". Answer must be from 0 to 5");
+        }
+
+        TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
+        int questionNumber = Integer.valueOf((String) httpSession.getAttribute(BaseConstants.QUESTION_NUMBER));
+
+        answerService.updateAnswer(testSession, questionNumber, answer);
+    }
 
 //  Getters/Setters
 

@@ -12,7 +12,7 @@ import java.util.Optional;
  * @author Yahor Makedon
  */
 @Service
-public class StudentService extends AbstractService {
+public class StudentService {
     private StudentRepository studentRepository;
 
     public List<Student> getStudentListByStudentGroupNumber(long studentGroupNumber) {

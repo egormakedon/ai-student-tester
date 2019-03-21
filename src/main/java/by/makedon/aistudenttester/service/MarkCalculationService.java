@@ -12,7 +12,7 @@ import java.util.List;
  * @author Yahor Makedon
  */
 @Service
-public class MarkCalculationService extends AbstractService {
+public class MarkCalculationService {
     private QuestionService questionService;
     private AnswerService answerService;
     private MarkService markService;

@@ -1,7 +1,6 @@
 package by.makedon.aistudenttester.controller;
 
 import by.makedon.aistudenttester.domain.TestSession;
-import by.makedon.aistudenttester.service.AbstractService;
 import by.makedon.aistudenttester.service.MarkCalculationService;
 import by.makedon.aistudenttester.service.TestSessionService;
 import by.makedon.aistudenttester.util.BaseConstants;
@@ -18,7 +17,7 @@ import java.time.LocalDateTime;
  * @author Yahor Makedon
  */
 @Controller
-public class CompleteTestController extends AbstractService {
+public class CompleteTestController {
     private MarkCalculationService markCalculationService;
     private TestSessionService testSessionService;
 
