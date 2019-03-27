@@ -1,7 +1,6 @@
 package by.makedon.aistudenttester.controller;
 
 import by.makedon.aistudenttester.domain.TestSession;
-import by.makedon.aistudenttester.domain.dto.ManagerDTO;
 import by.makedon.aistudenttester.service.TestSessionService;
 import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ResultPageController {
     private TestSessionService testSessionService;
-    private ManagerDTO managerDTO;
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "/result", method = RequestMethod.GET)
@@ -27,7 +25,7 @@ public class ResultPageController {
         if (httpSession.getAttribute(BaseConstants.TEST_SESSION_ID) != null) {
             TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
 
-            model.addAttribute("testResultDTO", managerDTO.getTestResultDTO(testSession));
+//            model.addAttribute("testResultDTO", managerDTO.getTestResultDTO(testSession));
         }
 
         return "public/result";
@@ -36,10 +34,5 @@ public class ResultPageController {
     @Autowired
     public void setTestSessionService(TestSessionService testSessionService) {
         this.testSessionService = testSessionService;
-    }
-
-    @Autowired
-    public void setManagerDTO(ManagerDTO managerDTO) {
-        this.managerDTO = managerDTO;
     }
 }

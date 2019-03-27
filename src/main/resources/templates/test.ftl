@@ -23,9 +23,9 @@
 
                             <#list answerList as answer1>
                                 <#if answer1 == 0>
-                                    <li class="page-item"><a class="page-link bg-danger" href="/test/${answer1_index + 1}">${answer1_index + 1}</a></li>
+                                    <li class="page-item"><a class="page-link text-white bg-secondary" href="/test/${answer1_index + 1}">${answer1_index + 1}</a></li>
                                 <#else>
-                                    <li class="page-item"><a class="page-link bg-success" href="/test/${answer1_index + 1}">${answer1_index + 1}</a></li>
+                                    <li class="page-item"><a class="page-link text-white bg-info" href="/test/${answer1_index + 1}">${answer1_index + 1}</a></li>
                                 </#if>
                             </#list>
 

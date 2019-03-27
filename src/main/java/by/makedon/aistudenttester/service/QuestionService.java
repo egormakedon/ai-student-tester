@@ -2,9 +2,8 @@ package by.makedon.aistudenttester.service;
 
 import by.makedon.aistudenttester.domain.Question;
 import by.makedon.aistudenttester.domain.TestSession;
-import by.makedon.aistudenttester.repository.QuestionRepository;
+import by.makedon.aistudenttester.util.BaseConstants;
 import by.makedon.aistudenttester.util.BaseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,8 +14,6 @@ import java.util.List;
  */
 @Service
 public class QuestionService {
-    private QuestionRepository questionRepository;
-
     public Question getQuestionByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
         switch (questionNumber) {
             case 1:
@@ -65,7 +62,7 @@ public class QuestionService {
     }
 
     public List<Question> getQuestionListByTestSession(TestSession testSession) {
-        List<Question> questionList = new ArrayList<>(20);
+        List<Question> questionList = new ArrayList<>(BaseConstants.QUESTION_COUNT);
 
         questionList.add(testSession.getQ1());
         questionList.add(testSession.getQ2());
@@ -89,12 +86,5 @@ public class QuestionService {
         questionList.add(testSession.getQ20());
 
         return questionList;
-    }
-
-//  Getters/Setters
-
-    @Autowired
-    public void setQuestionRepository(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
     }
 }
