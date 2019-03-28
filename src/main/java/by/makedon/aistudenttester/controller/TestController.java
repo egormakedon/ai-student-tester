@@ -105,6 +105,7 @@ public class TestController {
 
         testSession.setMark(mark);
         testSession.setFinishedDate(LocalDateTime.now());
+        testSession.setActive(true);
         testSessionService.save(testSession);
 
         httpSession.removeAttribute(BaseConstants.QUESTION_NUMBER);

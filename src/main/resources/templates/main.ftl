@@ -45,7 +45,7 @@
             <div class="form-group row">
                 <div class="col">
                     <blockquote class="blockquote text-center">
-                        <button class="btn btn-primary" type="submit" onclick="setInputValues()"><@spring.message "main.button.start.test"/></button>
+                        <button style="background-color: #044d58" class="btn btn-primary" type="submit" onclick="setInputValues()"><@spring.message "main.button.start.test"/></button>
                     </blockquote>
                 </div>
             </div>

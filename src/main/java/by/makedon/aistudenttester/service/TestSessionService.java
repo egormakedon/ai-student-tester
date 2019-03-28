@@ -38,6 +38,7 @@ public class TestSessionService {
 
         testSession.setStudent(student);
         testSession.setCreatedDate(LocalDateTime.now());
+        testSession.setActive(false);
 
         List<Question> questionList = questionListGenerator.generate(subject);
 

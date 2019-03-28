@@ -57,6 +57,6 @@ public class TestSessionSecurityFilter extends GenericFilterBean {
     private boolean isStrictecServletPath(String servletPath) {
         return servletPath.startsWith("/test") || servletPath.startsWith("/ajax/updateAnswer")
                 || servletPath.startsWith("/test/nextQuestion") || servletPath.startsWith("/test/prevQuestion")
-                || servletPath.startsWith("/completeTest") || servletPath.startsWith("/static");
+                || servletPath.startsWith("/result") || servletPath.startsWith("/static");
     }
 }

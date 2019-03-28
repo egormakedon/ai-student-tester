@@ -89,12 +89,10 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.ApplicationUser
     ApplicationUserID    BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     Username             VARCHAR(100) NOT NULL,
     Password             VARCHAR(100) NOT NULL,
-    Email                VARCHAR(100) NOT NULL,
     ActiveFlag           CHAR(1) NOT NULL,
 
     PRIMARY KEY(ApplicationUserID),
-    UNIQUE INDEX Username_Index (Username ASC),
-    UNIQUE INDEX Email_Index (Email ASC)
+    UNIQUE INDEX Username_Index (Username ASC)
 )
     ENGINE = InnoDB;
 

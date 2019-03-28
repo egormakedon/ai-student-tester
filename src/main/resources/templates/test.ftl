@@ -77,7 +77,7 @@
                 </div>
                 <div class="container">
                     <blockquote class="blockquote text-center">
-                        <button class="btn btn-primary btn-md" type="submit" formmethod="post"><@spring.message "test.complete.button"/></button>
+                        <button style="background-color: #044d58" class="btn btn-primary btn-md" type="submit" formmethod="post"><@spring.message "test.complete.button"/></button>
                     </blockquote>
                 </div>
 
