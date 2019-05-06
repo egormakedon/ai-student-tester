@@ -28,6 +28,7 @@ public class ApplicationUser extends AbstractBean implements UserDetails {
     private Long applicationUserID;
     private String username;
     private String password;
+    private String displayName;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "RoleMap", joinColumns = @JoinColumn(name = "ApplicationUserID"))
