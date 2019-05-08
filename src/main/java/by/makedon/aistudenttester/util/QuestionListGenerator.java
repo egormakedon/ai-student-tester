@@ -1,8 +1,8 @@
 package by.makedon.aistudenttester.util;
 
-import by.makedon.aistudenttester.domain.Question;
-import by.makedon.aistudenttester.domain.Subject;
-import by.makedon.aistudenttester.domain.Topic;
+import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.Subject;
+import by.makedon.aistudenttester.domain.bean.Topic;
 import by.makedon.aistudenttester.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

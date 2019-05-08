@@ -1,5 +1,6 @@
-package by.makedon.aistudenttester.domain;
+package by.makedon.aistudenttester.domain.bean;
 
+import by.makedon.aistudenttester.domain.AbstractBean;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,26 +10,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
+ * Strategy entity class to define how to marking students result of testing
+ *
  * @author Yahor Makedon
  */
 @Entity
 @Data
 @NoArgsConstructor
-public class Subject extends AbstractBean {
+public class Strategy extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long subjectID;
-	private String subjectName;
+	private Long StrategyID;
 
+	private String StrategyName;
+	
 	@Override
 	public void setID(Long id) {
-		setSubjectID(id);
+		setStrategyID(id);
 	}
 	
 	@Override
 	public Long getID() {
-		return getSubjectID();
+		return getStrategyID();
 	}
 }

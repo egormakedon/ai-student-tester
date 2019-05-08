@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.domain;
+package by.makedon.aistudenttester.domain.bean;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -11,6 +11,8 @@ import java.io.Serializable;
  */
 public enum Role implements Serializable, GrantedAuthority {
 	ADMIN;
+
+	public static final long serialVersionUID = 1L;
 
 	@Override
 	public String getAuthority() {

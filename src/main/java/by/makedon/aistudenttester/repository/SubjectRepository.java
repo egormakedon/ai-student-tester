@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.repository;
 
-import by.makedon.aistudenttester.domain.Subject;
+import by.makedon.aistudenttester.domain.bean.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

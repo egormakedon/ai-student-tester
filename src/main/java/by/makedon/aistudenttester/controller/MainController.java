@@ -1,9 +1,9 @@
 package by.makedon.aistudenttester.controller;
 
-import by.makedon.aistudenttester.domain.Student;
-import by.makedon.aistudenttester.domain.StudentGroup;
-import by.makedon.aistudenttester.domain.Subject;
-import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.bean.Student;
+import by.makedon.aistudenttester.domain.bean.StudentGroup;
+import by.makedon.aistudenttester.domain.bean.Subject;
+import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.service.StudentGroupService;
 import by.makedon.aistudenttester.service.StudentService;
 import by.makedon.aistudenttester.service.SubjectService;

@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.repository;
 
-import by.makedon.aistudenttester.domain.ApplicationUser;
+import by.makedon.aistudenttester.domain.bean.ApplicationUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.repository;
 
-import by.makedon.aistudenttester.domain.Mark;
+import by.makedon.aistudenttester.domain.bean.Mark;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

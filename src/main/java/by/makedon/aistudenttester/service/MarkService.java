@@ -1,7 +1,7 @@
 package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.domain.Question;
-import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.repository.MarkRepository;
 import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;

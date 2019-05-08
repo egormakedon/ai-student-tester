@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.util.BaseConstants;
 import by.makedon.aistudenttester.util.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;

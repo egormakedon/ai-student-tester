@@ -1,5 +1,8 @@
-package by.makedon.aistudenttester.domain;
+package by.makedon.aistudenttester.domain.bean;
 
+import by.makedon.aistudenttester.domain.AbstractBean;
+import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.Student;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

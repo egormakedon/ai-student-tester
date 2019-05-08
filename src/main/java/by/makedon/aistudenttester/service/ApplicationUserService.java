@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.domain.ApplicationUser;
+import by.makedon.aistudenttester.domain.bean.ApplicationUser;
 import by.makedon.aistudenttester.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

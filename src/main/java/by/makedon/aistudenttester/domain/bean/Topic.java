@@ -1,5 +1,8 @@
-package by.makedon.aistudenttester.domain;
+package by.makedon.aistudenttester.domain.bean;
 
+import by.makedon.aistudenttester.domain.AbstractBean;
+import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.Subject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -24,6 +27,7 @@ public class Topic extends AbstractBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long topicID;
+
 	private String topicName;
 
 	@ManyToOne(fetch = FetchType.EAGER)

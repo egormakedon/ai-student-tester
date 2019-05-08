@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.config;
+package by.makedon.aistudenttester.config.filter;
 
 import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.web.filter.GenericFilterBean;
@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * @author Yahor Makedon
  */
-public class TestSessionSecurityFilter extends GenericFilterBean {
+public class TestFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;

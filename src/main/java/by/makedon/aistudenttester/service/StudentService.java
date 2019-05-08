@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.domain.Student;
+import by.makedon.aistudenttester.domain.bean.Student;
 import by.makedon.aistudenttester.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

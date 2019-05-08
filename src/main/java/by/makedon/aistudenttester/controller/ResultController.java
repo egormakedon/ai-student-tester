@@ -1,6 +1,6 @@
 package by.makedon.aistudenttester.controller;
 
-import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.service.TestSessionService;
 import by.makedon.aistudenttester.util.BaseConstants;
 import org.apache.commons.lang3.time.DurationFormatUtils;

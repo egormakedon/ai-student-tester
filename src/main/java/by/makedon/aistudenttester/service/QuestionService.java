@@ -1,7 +1,7 @@
 package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.domain.Question;
-import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.util.BaseConstants;
 import by.makedon.aistudenttester.util.BaseException;
 import org.springframework.stereotype.Service;

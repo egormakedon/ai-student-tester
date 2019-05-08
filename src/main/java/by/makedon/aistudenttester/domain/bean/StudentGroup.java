@@ -1,5 +1,6 @@
-package by.makedon.aistudenttester.domain;
+package by.makedon.aistudenttester.domain.bean;
 
+import by.makedon.aistudenttester.domain.AbstractBean;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class StudentGroup extends AbstractBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long studentGroupID;
+
 	private long studentGroupNumber;
 	private int studentGroupYear;
 	

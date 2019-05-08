@@ -1,9 +1,9 @@
 package by.makedon.aistudenttester.service;
 
-import by.makedon.aistudenttester.domain.Question;
-import by.makedon.aistudenttester.domain.Student;
-import by.makedon.aistudenttester.domain.Subject;
-import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.Student;
+import by.makedon.aistudenttester.domain.bean.Subject;
+import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.repository.TestSessionRepository;
 import by.makedon.aistudenttester.util.BaseConstants;
 import by.makedon.aistudenttester.util.QuestionListGenerator;

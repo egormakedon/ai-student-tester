@@ -15,7 +15,8 @@ public class ErrorHandlingController {
 
 	@ExceptionHandler(Exception.class)
 	public void handle(Exception e) {
-		logger.error("", e);
-		throw new BaseException(e);
+		logger.error(e.getMessage(), e);
+		throw new BaseException(e.getMessage(), e);
+		// TODO Return to error page
 	}
 }

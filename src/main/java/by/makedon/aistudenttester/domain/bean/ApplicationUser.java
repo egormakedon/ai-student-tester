@@ -1,5 +1,6 @@
-package by.makedon.aistudenttester.domain;
+package by.makedon.aistudenttester.domain.bean;
 
+import by.makedon.aistudenttester.domain.AbstractBean;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class ApplicationUser extends AbstractBean implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long applicationUserID;
+
     private String username;
     private String password;
     private String displayName;

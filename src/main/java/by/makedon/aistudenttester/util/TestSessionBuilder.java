@@ -1,7 +1,7 @@
 package by.makedon.aistudenttester.util;
 
-import by.makedon.aistudenttester.domain.Question;
-import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.TestSession;
 
 /**
  * Class builder for TestSession entity.

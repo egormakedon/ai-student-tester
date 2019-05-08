@@ -1,7 +1,7 @@
 package by.makedon.aistudenttester.controller;
 
-import by.makedon.aistudenttester.domain.Question;
-import by.makedon.aistudenttester.domain.TestSession;
+import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.service.AnswerService;
 import by.makedon.aistudenttester.service.MarkService;
 import by.makedon.aistudenttester.service.QuestionService;
