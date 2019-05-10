@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private ApplicationUserService userService;
 	private CharacterEncodingFilter characterEncodingFilter;
 	private TestFilter testFilter;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder()
@@ -38,8 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.addFilterAfter(testFilter, BasicAuthenticationFilter.class);
 
 		//TODO
-		http
-				.authorizeRequests()
+		http.authorizeRequests()
 				.antMatchers("/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService)
-			.passwordEncoder(bCryptPasswordEncoder());
+			.passwordEncoder(bCryptPasswordEncoder);
 	}
 
 //	Getters/Setters
@@ -72,5 +72,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void setTestFilter(TestFilter testFilter) {
 		this.testFilter = testFilter;
+	}
+
+	@Autowired
+	public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 }

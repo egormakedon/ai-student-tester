@@ -11,52 +11,54 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Yahor Makedon
  */
 public class TestFilter extends GenericFilterBean {
+    private static Map<String, Boolean> urlMap;
+
+    static {
+        urlMap = new HashMap<>();
+
+        urlMap.put("/test", true);
+        urlMap.put("/static", false);
+    }
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+        HttpSession httpSession = httpServletRequest.getSession();
 
-        if (!checkHttpSessionIsCreated(httpServletRequest) || checkResourcesOrErrorServletPath(httpServletRequest)) {
+        String servletPath = httpServletRequest.getServletPath();
+        boolean containsUrl = containsUrl(servletPath);
+
+        if (containsUrl && !getValue(servletPath)) {
             filterChain.doFilter(servletRequest, servletResponse);
-
             return;
         }
 
-        if (isStrictecServletPath(httpServletRequest.getServletPath())) {
-            if (Boolean.valueOf((String) httpServletRequest.getSession().getAttribute(BaseConstants.IS_TEST_STARTED))) {
-                filterChain.doFilter(servletRequest, servletResponse);
-            } else {
-                httpServletResponse.sendRedirect("/");
-            }
-        } else {
-            if (Boolean.valueOf((String) httpServletRequest.getSession().getAttribute(BaseConstants.IS_TEST_STARTED))) {
-                httpServletResponse.sendRedirect("/test");
-            } else {
-                filterChain.doFilter(servletRequest, servletResponse);
-            }
+        boolean isTestStarted = Boolean.valueOf((String) httpSession.getAttribute(BaseConstants.IS_TEST_STARTED));
+
+        if (isTestStarted && containsUrl && getValue(servletPath)) {
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else if (isTestStarted && !containsUrl) {
+            httpServletResponse.sendRedirect("/test");
+        } else if (!isTestStarted && containsUrl && getValue(servletPath)) {
+            httpServletResponse.sendRedirect("/");
+        } else if (!isTestStarted && !containsUrl) {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
-    private boolean checkHttpSessionIsCreated(HttpServletRequest httpServletRequest) {
-        HttpSession httpSession = httpServletRequest.getSession();
-
-        return httpSession != null && httpSession.getAttribute(BaseConstants.IS_TEST_STARTED) != null;
+    private boolean containsUrl(String servletPath) {
+        return urlMap.keySet().stream().anyMatch(servletPath::startsWith);
     }
 
-    private boolean checkResourcesOrErrorServletPath(HttpServletRequest httpServletRequest) {
-        String servletPath = httpServletRequest.getServletPath();
-
-        return servletPath.startsWith("/error") || servletPath.startsWith("/resources/");
-    }
-
-    private boolean isStrictecServletPath(String servletPath) {
-        return servletPath.startsWith("/test") || servletPath.startsWith("/ajax/updateAnswer")
-                || servletPath.startsWith("/test/nextQuestion") || servletPath.startsWith("/test/prevQuestion")
-                || servletPath.startsWith("/result") || servletPath.startsWith("/static");
+    private boolean getValue(String servletPath) {
+        return urlMap.get(urlMap.keySet().stream().filter(servletPath::startsWith).findFirst().get());
     }
 }
