@@ -1,5 +1,6 @@
 package by.makedon.aistudenttester.config;
 
+import by.makedon.aistudenttester.config.filter.AdminFilter;
 import by.makedon.aistudenttester.config.filter.TestFilter;
 import by.makedon.aistudenttester.config.listener.SessionListener;
 import org.springframework.context.annotation.Bean;
@@ -42,6 +43,11 @@ public class MvcConfig implements WebMvcConfigurer {
 	public TestFilter testFilter()
 	{
 		return new TestFilter();
+	}
+
+	@Bean
+	public AdminFilter adminFilter() {
+		return new AdminFilter();
 	}
 
 	@Override

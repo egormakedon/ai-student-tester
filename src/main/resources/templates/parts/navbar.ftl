@@ -1,5 +1,7 @@
+<#include "security.ftl">
+
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href=<#if isAdmin>"/admin"<#else>"/"</#if>>
         <img src="/static/img/bsuir.png" width="30" height="30" class="d-inline-block align-top" alt="">
         <@spring.message "navbar.title"/>
     </a>
@@ -8,11 +10,30 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/result"><@spring.message "navbar.result"/></a>
-            </li>
+            <#if isAdmin>
+            <#else>
+                <li class="nav-item">
+                    <a class="nav-link" href="/result"><@spring.message "navbar.result"/></a>
+                </li>
+            </#if>
         </ul>
 
-        <a style="background-color: #044d58" class="btn btn-primary btn-md" href="/login"><@spring.message "navbar.log.in"/></a>
+        <#if isAdmin>
+            <div class="dropdown">
+                <button style="background-color: #044d58" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ${displayName}
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <form>
+                        <button class="dropdown-item" type="submit" formaction="/admin/profile" formmethod="get"><@spring.message "admin.profile"/></button>
+                        <button class="dropdown-item" type="submit" formaction="/logout" formmethod="post"><@spring.message "navbar.log.out"/></button>
+
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+                </div>
+            </div>
+        <#else>
+            <a style="background-color: #044d58" class="btn btn-primary" href="/login"><@spring.message "navbar.log.in"/></a>
+        </#if>
     </div>
 </nav>

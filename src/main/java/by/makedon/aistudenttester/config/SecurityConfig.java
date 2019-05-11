@@ -1,5 +1,6 @@
 package by.makedon.aistudenttester.config;
 
+import by.makedon.aistudenttester.config.filter.AdminFilter;
 import by.makedon.aistudenttester.config.filter.TestFilter;
 import by.makedon.aistudenttester.service.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,10 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private ApplicationUserService userService;
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	private CharacterEncodingFilter characterEncodingFilter;
 	private TestFilter testFilter;
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private AdminFilter adminFilter;
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder()
@@ -35,20 +37,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.addFilterBefore(characterEncodingFilter, CsrfFilter.class);
-		http.addFilterAfter(testFilter, BasicAuthenticationFilter.class);
-
-		//TODO
-		http.authorizeRequests()
-				.antMatchers("/**").permitAll()
-				.anyRequest().authenticated()
+		http
+				.authorizeRequests()
+					.antMatchers("/**").permitAll()
+					.anyRequest().authenticated()
 				.and()
-				.formLogin()
-				.loginPage("/login")
-				.permitAll()
+					.formLogin()
+					.usernameParameter("username")
+					.passwordParameter("password")
+					.loginPage("/login")
+					.defaultSuccessUrl("/admin")
+					.failureUrl("/login?error")
+					.permitAll()
 				.and()
-				.logout()
-				.permitAll();
+					.logout()
+					.logoutUrl("/logout")
+					.logoutSuccessUrl("/")
+					.clearAuthentication(true)
+					.permitAll()
+				.and()
+					.addFilterBefore(characterEncodingFilter, CsrfFilter.class)
+					.addFilterAfter(testFilter, BasicAuthenticationFilter.class)
+					.addFilterBefore(adminFilter, TestFilter.class);
 	}
 
 	@Override
@@ -65,6 +75,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Autowired
+	public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	}
+
+	@Autowired
 	public void setCharacterEncodingFilter(CharacterEncodingFilter characterEncodingFilter) {
 		this.characterEncodingFilter = characterEncodingFilter;
 	}
@@ -75,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Autowired
-	public void setbCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+	public void setAdminFilter(AdminFilter adminFilter) {
+		this.adminFilter = adminFilter;
 	}
 }

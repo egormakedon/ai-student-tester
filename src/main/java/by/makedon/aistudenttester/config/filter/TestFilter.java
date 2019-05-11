@@ -1,6 +1,7 @@
 package by.makedon.aistudenttester.config.filter;
 
 import by.makedon.aistudenttester.util.BaseConstants;
+import by.makedon.aistudenttester.util.BaseException;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -24,7 +25,9 @@ public class TestFilter extends GenericFilterBean {
         urlMap = new HashMap<>();
 
         urlMap.put("/test", true);
+
         urlMap.put("/static", false);
+        urlMap.put("/error", false);
     }
 
     @Override
@@ -51,6 +54,8 @@ public class TestFilter extends GenericFilterBean {
             httpServletResponse.sendRedirect("/");
         } else if (!isTestStarted && !containsUrl) {
             filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            throw new BaseException("Unexpected behavior!");
         }
     }
 

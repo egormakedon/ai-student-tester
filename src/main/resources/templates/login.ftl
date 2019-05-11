@@ -6,6 +6,15 @@
 <@c.page "log.in.title">
     <form method="post">
         <div class="container mt-5">
+            <#if RequestParameters.error??>
+                <div class="form-group row align-items-center justify-content-center">
+                    <div class="col-3">
+                        <div class="alert alert-danger" role="alert">
+                            <@spring.message "log.in.validation"/>
+                        </div>
+                    </div>
+                </div>
+            </#if>
             <div class="form-group row align-items-center justify-content-center">
                 <div class="col-3">
                     <input class="form-control" type="text" name="username" placeholder="<@spring.message "log.in.username"/>">
@@ -18,7 +27,7 @@
             </div>
             <div class="form-group row align-items-center justify-content-center">
                 <div class="col-3">
-                    <button style="background-color: #044d58" class="btn btn-primary btn-md" type="submit"><@spring.message "log.in.button"/></button>
+                    <button style="background-color: #044d58" class="btn btn-primary" type="submit"><@spring.message "log.in.button"/></button>
                 </div>
             </div>
         </div>

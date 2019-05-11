@@ -22,11 +22,13 @@ public class ApplicationUserService implements UserDetailsService {
         Optional<ApplicationUser> optionalApplicationUser = userRepository.findApplicationUserByUsernameAndActiveIsTrue(username);
 
         if (!optionalApplicationUser.isPresent()) {
-            throw new UsernameNotFoundException("validation.username.doesnt.exists");
+            throw new UsernameNotFoundException(String.format("Application user with %s username doesn't exist", username));
         }
 
         return optionalApplicationUser.get();
     }
+
+//  Getters/Setters
 
     @Autowired
     public void setUserRepository(ApplicationUserRepository userRepository) {
