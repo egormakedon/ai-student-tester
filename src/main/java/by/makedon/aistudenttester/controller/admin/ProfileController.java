@@ -7,19 +7,20 @@ import by.makedon.aistudenttester.dto.validator.ProfileDtoValidator;
 import by.makedon.aistudenttester.service.ApplicationUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,6 +79,21 @@ public class ProfileController {
 
 		redirectAttributes.addAttribute("errors", errors);
 		return "redirect:/admin/profile";
+	}
+
+	@PostMapping("/ajax/remove")
+	@ResponseStatus(HttpStatus.OK)
+	public void removeProfile(Model model,
+	                          Authentication authentication,
+	                          SecurityContextLogoutHandler logoutHandler,
+	                          HttpServletRequest request,
+	                          HttpServletResponse response) {
+		ApplicationUser applicationUser = (ApplicationUser) authentication.getPrincipal();
+		applicationUser.setActive(false);
+		applicationUser = userService.save(applicationUser);
+		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(applicationUser, applicationUser.getPassword(), applicationUser.getAuthorities()));
+
+		logoutHandler.logout(request, response, SecurityContextHolder.getContext().getAuthentication());
 	}
 
 //	Getters/Setters

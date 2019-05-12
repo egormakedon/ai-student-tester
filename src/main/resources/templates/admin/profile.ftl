@@ -83,12 +83,15 @@
         </div>
         <div class="row mt-5">
             <div class="col">
-                <form action="/admin/profile/remove" method="post">
+                <form>
                     <div class="form-group row">
                         <div class="col-auto">
-                            <button class="btn btn-danger btn-md" type="submit"><@spring.message "profile.remove.account"/></button>
+                            <button class="btn btn-danger btn-md" type="button" onclick="ajaxRemoveProfile()"><@spring.message "profile.remove.account"/></button>
                         </div>
                     </div>
+
+                    <input id="confirmationMessageID" type="hidden" value="<@spring.message "profile.remove.account.confirmation.message"/>">
+                    <input id="csrfID" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
             </div>
         </div>
@@ -97,4 +100,6 @@
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/ajax.js"></script>
+    <script src="/static/js/profile.js"></script>
 </@c.page>
