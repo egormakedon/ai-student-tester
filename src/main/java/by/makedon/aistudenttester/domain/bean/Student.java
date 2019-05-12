@@ -31,6 +31,10 @@ public class Student extends AbstractBean {
 	@JoinColumn(name = "StudentGroupID")
 	@Where(clause = "ActiveFlag = 'Y'")
 	private StudentGroup studentGroup;
+
+	public String getName() {
+		return String.format("%s %s.%s.", lastName, firstName.charAt(0), middleName.charAt(0));
+	}
 	
 	@Override
 	public void setID(Long id) {

@@ -10,6 +10,9 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+
+import java.util.Locale;
 
 /**
  * @author Yahor Makedon
@@ -21,8 +24,14 @@ public class MvcConfig implements WebMvcConfigurer {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 		messageSource.addBasenames("classpath:/bundles/message");
 		messageSource.setDefaultEncoding("UTF-8");
-
 		return messageSource;
+	}
+
+	@Bean(name = "localeResolver")
+	public CookieLocaleResolver localeResolver() {
+		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+		localeResolver.setDefaultLocale(new Locale("ru", ""));
+		return localeResolver;
 	}
 
 	@Bean

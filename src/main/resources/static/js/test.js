@@ -1,3 +1,5 @@
+'use strict';
+
 var csrf = document.getElementById('csrfID');
 var answer = document.getElementById('answerID');
 

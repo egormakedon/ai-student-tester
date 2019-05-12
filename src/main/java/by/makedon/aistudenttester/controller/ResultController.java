@@ -18,6 +18,9 @@ import java.time.format.DateTimeFormatter;
  */
 @Controller
 public class ResultController {
+    private static final String TIME_FORMAT = "HH:mm:ss";
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd, HH:mm:ss";
+
     private TestSessionService testSessionService;
 
     @GetMapping("/result")
@@ -26,11 +29,13 @@ public class ResultController {
             TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
 
             Duration duration = Duration.between(testSession.getCreatedDate(), testSession.getFinishedDate());
-            model.addAttribute("duration", DurationFormatUtils.formatDuration(duration.toMillis(), "HH:mm:ss"));
+            model.addAttribute("duration", DurationFormatUtils.formatDuration(duration.toMillis(), TIME_FORMAT));
+
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+            model.addAttribute("createdDate", testSession.getCreatedDate().format(dateTimeFormatter));
+            model.addAttribute("finishedDate", testSession.getFinishedDate().format(dateTimeFormatter));
 
             model.addAttribute("testSessionID", testSession.getTestSessionID());
-            model.addAttribute("createdDate", testSession.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss")));
-            model.addAttribute("finishedDate", testSession.getFinishedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss")));
             model.addAttribute("studentGroupNumber", testSession.getStudent().getStudentGroup().getStudentGroupNumber());
             model.addAttribute("studentTicket", testSession.getStudent().getStudentTicket());
             model.addAttribute("firstName", testSession.getStudent().getFirstName());

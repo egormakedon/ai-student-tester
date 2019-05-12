@@ -24,6 +24,7 @@ public class TestSessionService {
     private TestSessionRepository testSessionRepository;
     private QuestionListGenerator questionListGenerator;
 
+    @Transactional
     public TestSession save(TestSession testSession) {
         return testSessionRepository.save(testSession);
     }
@@ -48,6 +49,10 @@ public class TestSessionService {
         builder.build();
 
         return testSessionRepository.save(testSession);
+    }
+
+    public List<TestSession> getTestSessionList() {
+        return testSessionRepository.findTestSessionsByActiveIsTrue();
     }
 
 //  Getters/Setters

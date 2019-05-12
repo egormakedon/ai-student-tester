@@ -1,3 +1,5 @@
+'use strict';
+
 var csrf = document.getElementById('csrfID');
 
 function ajaxRemoveProfile() {
