@@ -1,6 +1,7 @@
 <#ftl encoding="UTF-8">
 
 <#import "parts/common.ftl" as c>
+<#import "parts/confirmationModal.ftl" as m>
 <#import "/spring.ftl" as spring>
 
 <@c.page "test.title">
@@ -77,16 +78,17 @@
                 </div>
                 <div class="container">
                     <blockquote class="blockquote text-center">
-                        <button style="background-color: #044d58" class="btn btn-primary btn-md" type="submit" formmethod="post"><@spring.message "test.complete.button"/></button>
+                        <button style="background-color: #044d58" class="btn btn-primary" type="button" data-toggle="modal" data-target="#confirmationModalID"><@spring.message "test.complete.button"/></button>
                     </blockquote>
                 </div>
 
                 <input id="answerID" type="hidden" name="answer" value="${answer}">
-
                 <input id="csrfID" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
     </div>
+
+    <@m.confirmationModal "test.complete.confirmation.modal.title" "test.complete.confirmation.modal.body" "ajaxCompleteTest()"/>
 
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>

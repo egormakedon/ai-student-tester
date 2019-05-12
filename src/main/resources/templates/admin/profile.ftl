@@ -1,6 +1,7 @@
 <#ftl encoding="UTF-8">
 
 <#import "../parts/common.ftl" as c>
+<#import "../parts/confirmationModal.ftl" as m>
 <#import "/spring.ftl" as spring>
 
 <@c.page "profile.title">
@@ -77,7 +78,7 @@
                         </div>
                     </div>
 
-                    <input id="csrfID" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
             </div>
         </div>
@@ -86,16 +87,17 @@
                 <form>
                     <div class="form-group row">
                         <div class="col-auto">
-                            <button class="btn btn-danger btn-md" type="button" onclick="ajaxRemoveProfile()"><@spring.message "profile.remove.account"/></button>
+                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmationModalID"><@spring.message "profile.remove.account"/></button>
                         </div>
                     </div>
 
-                    <input id="confirmationMessageID" type="hidden" value="<@spring.message "profile.remove.account.confirmation.message"/>">
                     <input id="csrfID" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
             </div>
         </div>
     </div>
+
+    <@m.confirmationModal "profile.remove.confirmation.modal.title" "profile.remove.confirmation.modal.body" "ajaxRemoveProfile()"/>
 
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>

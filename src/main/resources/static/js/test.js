@@ -59,6 +59,16 @@ function ajaxUpdateAnswer() {
     });
 }
 
+function ajaxCompleteTest() {
+    let data = {
+        _csrf: csrf.value
+    };
+
+    ajaxPost('/test/ajax/complete', data, function (result) {
+        location.replace(hostname + "/result");
+    });
+}
+
 $(document).ready(function() {
     setAnswerToRadioButton();
 });

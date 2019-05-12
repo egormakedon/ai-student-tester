@@ -97,8 +97,9 @@ public class TestController {
         answerService.updateAnswer(testSession, questionNumber, answer);
     }
 
-    @PostMapping
-    public String completeTest(Model model, HttpSession httpSession) {
+    @PostMapping("/ajax/complete")
+    @ResponseStatus(HttpStatus.OK)
+    public void completeTest(Model model, HttpSession httpSession) {
         TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
 
         int mark = markService.calculateMark(testSession);
@@ -112,8 +113,6 @@ public class TestController {
         httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, "false");
 
         //TODO Tread to remove TestSessionID
-
-        return "redirect:/result";
     }
 
 //  Getters/Setters
