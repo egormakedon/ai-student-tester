@@ -3,6 +3,7 @@ package by.makedon.aistudenttester.config;
 import by.makedon.aistudenttester.config.filter.AdminFilter;
 import by.makedon.aistudenttester.config.filter.TestFilter;
 import by.makedon.aistudenttester.config.listener.SessionListener;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -30,24 +31,27 @@ public class MvcConfig implements WebMvcConfigurer {
 	}
 
 	@Bean
-	public CharacterEncodingFilter encodingFilter()
-	{
-		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
-		encodingFilter.setEncoding("UTF-8");
-		encodingFilter.setForceEncoding(true);
-
-		return encodingFilter;
+	public FilterRegistrationBean<CharacterEncodingFilter> encodingFilter() {
+		FilterRegistrationBean<CharacterEncodingFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new CharacterEncodingFilter("UTF-8", true));
+		registrationBean.addUrlPatterns("/*");
+		return registrationBean;
 	}
 
 	@Bean
-	public TestFilter testFilter()
-	{
-		return new TestFilter();
+	public FilterRegistrationBean<AdminFilter> adminFilter() {
+		FilterRegistrationBean<AdminFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new AdminFilter());
+		registrationBean.addUrlPatterns("/*");
+		return registrationBean;
 	}
 
 	@Bean
-	public AdminFilter adminFilter() {
-		return new AdminFilter();
+	public FilterRegistrationBean<TestFilter> testFilter() {
+		FilterRegistrationBean<TestFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new TestFilter());
+		registrationBean.addUrlPatterns("/*");
+		return registrationBean;
 	}
 
 	@Override

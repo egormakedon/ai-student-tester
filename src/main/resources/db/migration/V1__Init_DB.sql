@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.QuestionMap
 CREATE TABLE IF NOT EXISTS aistudenttesterdb.ApplicationUser
 (
     ApplicationUserID    BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    Username             VARCHAR(100) NOT NULL,
-    Password             VARCHAR(100) NOT NULL,
-    DisplayName          VARCHAR(100) NOT NULL,
+    Username             VARCHAR(20) NOT NULL,
+    Password             VARCHAR(200) NOT NULL,
+    DisplayName          VARCHAR(30) NOT NULL,
     ActiveFlag           CHAR(1) NOT NULL,
 
     PRIMARY KEY(ApplicationUserID),

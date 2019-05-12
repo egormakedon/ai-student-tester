@@ -1,4 +1,4 @@
-package by.makedon.aistudenttester.controller;
+package by.makedon.aistudenttester.controller.admin;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

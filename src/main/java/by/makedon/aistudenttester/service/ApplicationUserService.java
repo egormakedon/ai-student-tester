@@ -17,6 +17,10 @@ import java.util.Optional;
 public class ApplicationUserService implements UserDetailsService {
     private ApplicationUserRepository userRepository;
 
+    public ApplicationUser save(ApplicationUser applicationUser) {
+        return userRepository.save(applicationUser);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<ApplicationUser> optionalApplicationUser = userRepository.findApplicationUserByUsernameAndActiveIsTrue(username);
