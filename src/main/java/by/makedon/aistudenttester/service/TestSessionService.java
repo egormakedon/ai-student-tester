@@ -51,8 +51,8 @@ public class TestSessionService {
         return testSessionRepository.save(testSession);
     }
 
-    public List<TestSession> getTestSessionList() {
-        return testSessionRepository.findTestSessionsByActiveIsTrue();
+    public List<TestSession> getTestSessionListOrderByFinishedDate() {
+        return testSessionRepository.findTestSessionsByActiveIsTrueOrderByFinishedDateDesc();
     }
 
 //  Getters/Setters

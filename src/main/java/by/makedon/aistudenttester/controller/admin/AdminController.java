@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,10 +41,10 @@ public class AdminController {
 
 	@GetMapping
 	public String getAdmin(Model model,
-	                       @PageableDefault(value = 1, size = 1) Pageable pageable,
+	                       @PageableDefault(value = 20, size = 20) Pageable pageable,
 	                       @RequestParam(value = "studentGroupID", required = false) StudentGroup studentGroup,
 	                       @RequestParam(value = "studentID", required = false) Student student) {
-		List<TestSession> testSessionList = testSessionService.getTestSessionList();
+		List<TestSession> testSessionList = testSessionService.getTestSessionListOrderByFinishedDate();
 		List<TestSessionReportDto> reportList = new ArrayList<>();
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
 
@@ -53,7 +52,6 @@ public class AdminController {
 				.stream()
 				.filter(ts -> studentGroup == null || ts.getStudent().getStudentGroup().equals(studentGroup))
 				.filter(ts -> student == null || ts.getStudent().equals(student))
-				.sorted(Comparator.comparing(TestSession::getFinishedDate).reversed())
 				.collect(Collectors.toList());
 
 		int start = (int) pageable.getOffset();

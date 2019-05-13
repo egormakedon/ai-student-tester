@@ -11,6 +11,9 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <#if isAdmin>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/question"><@spring.message "navbar.questions"/></a>
+                </li>
             <#else>
                 <li class="nav-item">
                     <a class="nav-link" href="/result"><@spring.message "navbar.result"/></a>

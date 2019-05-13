@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col">
                 <form>
-                    <table class="table">
+                    <table class="table table-sm">
                         <tbody>
                             <tr>
                                 <td>
@@ -42,7 +42,7 @@
                 </form>
             </div>
             <div class="col ml-5">
-                <table class="table">
+                <table class="table table-sm">
                     <tbody>
                         <tr>
                             <td>
@@ -55,7 +55,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <table class="table table-bordered" style="text-align:center">
+                <table class="table table-sm table-bordered" style="text-align:center">
                     <thead class="table-info">
                         <tr>
                             <th scope="col"><@spring.message "admin.test.number"/></th>
