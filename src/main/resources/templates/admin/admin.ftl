@@ -1,6 +1,7 @@
 <#ftl encoding="UTF-8">
 
 <#import "../parts/common.ftl" as c>
+<#import "../parts/pager.ftl" as p>
 <#import "/spring.ftl" as spring>
 
 <@c.page "admin.title">
@@ -39,6 +40,17 @@
                     <input type="hidden" name="studentGroupID" <#if studentGroup??>value="${studentGroup.getStudentGroupNumber()}"</#if>>
                     <input type="hidden" name="studentID" <#if student??>value="${student.getName()}"</#if>>
                 </form>
+            </div>
+            <div class="col-auto ml-5">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <@p.pager url page/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="row">

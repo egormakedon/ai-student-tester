@@ -9,6 +9,10 @@ import by.makedon.aistudenttester.service.StudentService;
 import by.makedon.aistudenttester.service.TestSessionService;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Yahor Makedon
@@ -37,39 +42,42 @@ public class AdminController {
 
 	@GetMapping
 	public String getAdmin(Model model,
+	                       @PageableDefault(value = 1, size = 1) Pageable pageable,
 	                       @RequestParam(value = "studentGroupID", required = false) StudentGroup studentGroup,
 	                       @RequestParam(value = "studentID", required = false) Student student) {
 		List<TestSession> testSessionList = testSessionService.getTestSessionList();
 		List<TestSessionReportDto> reportList = new ArrayList<>();
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
 
-		testSessionList
+		testSessionList = testSessionList
 				.stream()
 				.filter(ts -> studentGroup == null || ts.getStudent().getStudentGroup().equals(studentGroup))
 				.filter(ts -> student == null || ts.getStudent().equals(student))
 				.sorted(Comparator.comparing(TestSession::getFinishedDate).reversed())
-				.forEach(testSession -> {
-					TestSessionReportDto report = new TestSessionReportDto();
+				.collect(Collectors.toList());
 
-					report.setTestNumber(testSession.getID().toString());
-					report.setMark(testSession.getMark().toString());
+		int start = (int) pageable.getOffset();
+		int end = (start + pageable.getPageSize()) > testSessionList.size() ? testSessionList.size() : (start + pageable.getPageSize());
+		Page<TestSession> page = new PageImpl<>(testSessionList.subList(start, end), pageable, testSessionList.size());
 
-					Student studentFromTestSession = testSession.getStudent();
-					report.setGroup(String.valueOf(studentFromTestSession.getStudentGroup().getStudentGroupNumber()));
-					report.setStudent(studentFromTestSession.getName());
+		page.forEach(testSession -> {
+			TestSessionReportDto report = new TestSessionReportDto();
 
-					Duration duration = Duration.between(testSession.getCreatedDate(), testSession.getFinishedDate());
-					report.setDuration(DurationFormatUtils.formatDuration(duration.toMillis(), TIME_FORMAT));
+			report.setTestNumber(testSession.getID().toString());
+			report.setMark(testSession.getMark().toString());
 
-					report.setStart(testSession.getCreatedDate().format(dateTimeFormatter));
-					report.setFinish(testSession.getFinishedDate().format(dateTimeFormatter));
+			Student studentFromTestSession = testSession.getStudent();
+			report.setGroup(String.valueOf(studentFromTestSession.getStudentGroup().getStudentGroupNumber()));
+			report.setStudent(studentFromTestSession.getName());
 
-					reportList.add(report);
-				});
+			Duration duration = Duration.between(testSession.getCreatedDate(), testSession.getFinishedDate());
+			report.setDuration(DurationFormatUtils.formatDuration(duration.toMillis(), TIME_FORMAT));
 
-		model.addAttribute("studentGroup", studentGroup);
-		model.addAttribute("student", student);
-		model.addAttribute("reportList", reportList);
+			report.setStart(testSession.getCreatedDate().format(dateTimeFormatter));
+			report.setFinish(testSession.getFinishedDate().format(dateTimeFormatter));
+
+			reportList.add(report);
+		});
 
 		List<StudentGroup> studentGroupList = studentGroupService.getStudentGroupList();
 		model.addAttribute("studentGroupList", studentGroupList);
@@ -79,6 +87,16 @@ public class AdminController {
 		} else if (studentGroup != null) {
 			model.addAttribute("studentList", studentService.getStudentListByStudentGroupNumber(studentGroup.getStudentGroupNumber()));
 		}
+
+		String url = String.format("/admin?studentGroupID=%s&studentID=%s&page=",
+				studentGroup == null ? "" : studentGroup.getID().toString(),
+				student == null ? "" : student.getID().toString());
+		model.addAttribute("url", url);
+
+		model.addAttribute("page", page);
+		model.addAttribute("studentGroup", studentGroup);
+		model.addAttribute("student", student);
+		model.addAttribute("reportList", reportList);
 
 		return "admin/admin";
 	}
