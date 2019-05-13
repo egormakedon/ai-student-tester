@@ -7,10 +7,10 @@ import by.makedon.aistudenttester.dto.TestSessionReportDto;
 import by.makedon.aistudenttester.service.StudentGroupService;
 import by.makedon.aistudenttester.service.StudentService;
 import by.makedon.aistudenttester.service.TestSessionService;
+import by.makedon.aistudenttester.util.PageUtil;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
@@ -18,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.Duration;
 import java.time.format.DateTimeFormatter;
@@ -41,9 +42,16 @@ public class AdminController {
 
 	@GetMapping
 	public String getAdmin(Model model,
+	                       RedirectAttributes redirectAttributes,
 	                       @PageableDefault(value = 20, size = 20) Pageable pageable,
 	                       @RequestParam(value = "studentGroupID", required = false) StudentGroup studentGroup,
-	                       @RequestParam(value = "studentID", required = false) Student student) {
+	                       @RequestParam(value = "studentID", required = false) Student student,
+	                       @RequestParam(required = false) String error) {
+		if ((studentGroup != null && !studentGroup.isActive()) || (student != null && !student.isActive())) {
+			redirectAttributes.addAttribute("error", "admin.validation.id");
+			return "redirect:/admin";
+		}
+
 		List<TestSession> testSessionList = testSessionService.getTestSessionListOrderByFinishedDate();
 		List<TestSessionReportDto> reportList = new ArrayList<>();
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
@@ -54,9 +62,7 @@ public class AdminController {
 				.filter(ts -> student == null || ts.getStudent().equals(student))
 				.collect(Collectors.toList());
 
-		int start = (int) pageable.getOffset();
-		int end = (start + pageable.getPageSize()) > testSessionList.size() ? testSessionList.size() : (start + pageable.getPageSize());
-		Page<TestSession> page = new PageImpl<>(testSessionList.subList(start, end), pageable, testSessionList.size());
+		Page<TestSession> page = PageUtil.getPage(testSessionList, pageable);
 
 		page.forEach(testSession -> {
 			TestSessionReportDto report = new TestSessionReportDto();
@@ -89,9 +95,10 @@ public class AdminController {
 		String url = String.format("/admin?studentGroupID=%s&studentID=%s&page=",
 				studentGroup == null ? "" : studentGroup.getID().toString(),
 				student == null ? "" : student.getID().toString());
-		model.addAttribute("url", url);
 
+		model.addAttribute("url", url);
 		model.addAttribute("page", page);
+
 		model.addAttribute("studentGroup", studentGroup);
 		model.addAttribute("student", student);
 		model.addAttribute("reportList", reportList);

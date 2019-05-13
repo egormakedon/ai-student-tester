@@ -6,6 +6,15 @@
 
 <@c.page "admin.title">
     <div class="container mt-5">
+        <#if RequestParameters.error??>
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-danger" role="alert">
+                        <@spring.message "${RequestParameters.error}"/>
+                    </div>
+                </div>
+            </div>
+        </#if>
         <div class="row">
             <div class="col">
                 <form>

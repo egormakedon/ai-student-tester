@@ -2,9 +2,12 @@ package by.makedon.aistudenttester.service;
 
 import by.makedon.aistudenttester.domain.bean.Question;
 import by.makedon.aistudenttester.domain.bean.TestSession;
+import by.makedon.aistudenttester.repository.QuestionRepository;
 import by.makedon.aistudenttester.util.BaseConstants;
 import by.makedon.aistudenttester.util.BaseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,17 @@ import java.util.List;
  */
 @Service
 public class QuestionService {
+    private QuestionRepository repository;
+
+    public List<Question> getQuestionListOrderByName() {
+        return repository.findQuestionsByActiveIsTrueOrderByQuestionNameAsc();
+    }
+
+    @Transactional
+    public Question save(Question question) {
+        return repository.save(question);
+    }
+
     public Question getQuestionByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
         switch (questionNumber) {
             case 1:
@@ -86,5 +100,12 @@ public class QuestionService {
         questionList.add(testSession.getQ20());
 
         return questionList;
+    }
+
+//  Getters/Setters
+
+    @Autowired
+    public void setRepository(QuestionRepository repository) {
+        this.repository = repository;
     }
 }
