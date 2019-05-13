@@ -7,7 +7,7 @@
 <@c.page "admin.title">
     <div class="container mt-5">
         <div class="row">
-            <div class="col-auto">
+            <div class="col">
                 <form>
                     <table class="table">
                         <tbody>
@@ -41,7 +41,7 @@
                     <input type="hidden" name="studentID" <#if student??>value="${student.getName()}"</#if>>
                 </form>
             </div>
-            <div class="col-auto ml-5">
+            <div class="col ml-5">
                 <table class="table">
                     <tbody>
                         <tr>
