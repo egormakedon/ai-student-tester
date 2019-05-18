@@ -44,8 +44,6 @@ public class ResultController {
             model.addAttribute("mark", testSession.getMark());
         }
 
-        // TODO Remove testSessionID from httpSession in Thread in 1 min
-
         return "result";
     }
 

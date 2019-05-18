@@ -1,13 +1,10 @@
 package by.makedon.aistudenttester.domain.bean;
 
 import by.makedon.aistudenttester.domain.AbstractBean;
-import by.makedon.aistudenttester.domain.bean.Question;
-import by.makedon.aistudenttester.domain.bean.Student;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,107 +26,86 @@ public class TestSession extends AbstractBean {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "StudentID")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Student student;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q1")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q1;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q2")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q2;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q3")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q3;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q4")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q4;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q5")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q5;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q6")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q6;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q7")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q7;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q8")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q8;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q9")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q9;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q10")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q10;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q11")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q11;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q12")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q12;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q13")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q13;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q14")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q14;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q15")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q15;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q16")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q16;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q17")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q17;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q18")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q18;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q19")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q19;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Q20")
-	@Where(clause = "ActiveFlag = 'Y'")
 	private Question q20;
 
 	private LocalDateTime createdDate;

@@ -1,6 +1,7 @@
 <#ftl encoding="UTF-8">
 
 <#import "../parts/common.ftl" as c>
+<#import "../parts/confirmationModal.ftl" as m>
 <#import "../parts/pager.ftl" as p>
 <#import "/spring.ftl" as spring>
 
@@ -37,7 +38,7 @@
                                     <a class="btn btn-link" href="/admin/question/change?questionID=${report.questionNumber}"><@spring.message "question.link.change"/></a>
                                 </td>
                                 <td>
-                                    <button style="color: red" class="btn btn-link" type="button" onclick="removeQuestion(${report.questionNumber})"><@spring.message "question.link.remove"/></button>
+                                    <button style="color: red" class="btn btn-link" type="button" data-toggle="modal" data-target="#confirmationModalID" onclick="setQuestionID(${report.questionNumber})"><@spring.message "question.link.remove"/></button>
                                 </td>
                             </tr>
                         </#list>
@@ -47,7 +48,11 @@
         </div>
     </div>
 
+    <@m.confirmationModal "question.remove.confirmation.modal.title" "question.remove.confirmation.modal.body" "ajaxRemoveQuestion()"/>
+
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>
     <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/ajax.js"></script>
+    <script src="/static/js/question.js"></script>
 </@c.page>

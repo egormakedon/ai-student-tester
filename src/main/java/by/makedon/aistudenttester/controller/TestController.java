@@ -111,8 +111,6 @@ public class TestController {
 
         httpSession.removeAttribute(BaseConstants.QUESTION_NUMBER);
         httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, "false");
-
-        //TODO Tread to remove TestSessionID
     }
 
 //  Getters/Setters
