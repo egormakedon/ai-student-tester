@@ -1,5 +1,5 @@
-<#macro confirmationModal title body function>
-    <div class="modal fade" id="confirmationModalID" tabindex="-1" role="dialog" aria-labelledby="confirmationModalTitleID" aria-hidden="true">
+<#macro confirmationModal id title body additionalMessage function>
+    <div class="modal fade" id="${id}" tabindex="-1" role="dialog" aria-labelledby="confirmationModalTitleID" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <@spring.message "${body}"/>
+                    <@spring.message "${body}"/>${additionalMessage}
                 </div>
                 <div class="modal-footer">
                     <button style="background-color: #044d58" type="button" class="btn btn-primary" onclick="${function}"><@spring.message "confirmation.modal.ok"/></button>

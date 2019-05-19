@@ -2,12 +2,13 @@
 
 var csrf = document.getElementById('csrfID');
 
-function ajaxRemoveQuestion() {
+function ajaxRemoveQuestion(questionID) {
     let data = {
-        _csrf: csrf.value
+        _csrf: csrf.value,
+        questionID: questionID
     };
 
-    ajaxPost('/admin/profile/ajax/remove', data, function (result) {
-        location.replace(hostname + "/");
+    ajaxPost('/admin/question/ajax/remove', data, function (result) {
+        location.replace(hostname + "/admin/question?removedSuccess");
     });
 }

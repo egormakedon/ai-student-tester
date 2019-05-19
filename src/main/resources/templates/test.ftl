@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    <@m.confirmationModal "test.complete.confirmation.modal.title" "test.complete.confirmation.modal.body" "ajaxCompleteTest()"/>
+    <@m.confirmationModal "confirmationModalID" "test.complete.confirmation.modal.title" "test.complete.confirmation.modal.body" "" "ajaxCompleteTest()"/>
 
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>

@@ -97,7 +97,7 @@
         </div>
     </div>
 
-    <@m.confirmationModal "profile.remove.confirmation.modal.title" "profile.remove.confirmation.modal.body" "ajaxRemoveProfile()"/>
+    <@m.confirmationModal "confirmationModalID" "profile.remove.confirmation.modal.title" "profile.remove.confirmation.modal.body" "" "ajaxRemoveProfile()"/>
 
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>

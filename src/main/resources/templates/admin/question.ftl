@@ -16,39 +16,51 @@
                 </div>
             </div>
         </#if>
+        <#if RequestParameters.removedSuccess??>
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-success" role="alert">
+                        <@spring.message "question.removed.successfully"/>
+                    </div>
+                </div>
+            </div>
+        </#if>
         <div class="row">
             <div class="col">
-                <table class="table table-sm table-bordered" style="text-align:center">
-                    <thead class="table-info">
-                        <tr>
-                            <th scope="col"><@spring.message "question.number"/></th>
-                            <th scope="col"><@spring.message "question.name"/></th>
-                            <th scope="col"><@spring.message "question.topic"/></th>
-                            <th scope="col"><@spring.message "question.subject"/></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <#list reportList as report>
+                <form>
+                    <table class="table table-sm table-bordered" style="text-align:center">
+                        <thead class="table-info">
                             <tr>
-                                <td>${report.questionNumber}</td>
-                                <td>${report.questionName}</td>
-                                <td>${report.topic}</td>
-                                <td>${report.subject}</td>
-                                <td>
-                                    <a class="btn btn-link" href="/admin/question/change?questionID=${report.questionNumber}"><@spring.message "question.link.change"/></a>
-                                </td>
-                                <td>
-                                    <button style="color: red" class="btn btn-link" type="button" data-toggle="modal" data-target="#confirmationModalID" onclick="setQuestionID(${report.questionNumber})"><@spring.message "question.link.remove"/></button>
-                                </td>
+                                <th scope="col"><@spring.message "question.number"/></th>
+                                <th scope="col"><@spring.message "question.name"/></th>
+                                <th scope="col"><@spring.message "question.topic"/></th>
+                                <th scope="col"><@spring.message "question.subject"/></th>
                             </tr>
-                        </#list>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <#list reportList as report>
+                                <tr>
+                                    <td>${report.questionNumber}</td>
+                                    <td>${report.questionName}</td>
+                                    <td>${report.topic}</td>
+                                    <td>${report.subject}</td>
+                                    <td>
+                                        <a class="btn btn-link" href="/admin/question/change?questionID=${report.questionNumber}"><@spring.message "question.link.change"/></a>
+                                    </td>
+                                    <td>
+                                        <button style="color: red" class="btn btn-link" type="button" data-toggle="modal" data-target="#confirmationModalQuestion${report.questionNumber}"><@spring.message "question.link.remove"/></button>
+                                        <@m.confirmationModal "confirmationModalQuestion${report.questionNumber}" "question.remove.confirmation.modal.title" "question.remove.confirmation.modal.body" ": \"${report.questionName}\"?" "ajaxRemoveQuestion(${report.questionNumber})"/>
+                                    </td>
+                                </tr>
+                            </#list>
+                        </tbody>
+                    </table>
+
+                    <input id="csrfID" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
             </div>
         </div>
     </div>
-
-    <@m.confirmationModal "question.remove.confirmation.modal.title" "question.remove.confirmation.modal.body" "ajaxRemoveQuestion()"/>
 
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/popper.js"></script>
