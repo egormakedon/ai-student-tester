@@ -1,8 +1,6 @@
 package by.makedon.aistudenttester.domain.bean;
 
 import by.makedon.aistudenttester.domain.AbstractBean;
-import by.makedon.aistudenttester.domain.bean.Question;
-import by.makedon.aistudenttester.domain.bean.Subject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -30,7 +28,7 @@ public class Topic extends AbstractBean {
 
 	private String topicName;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SubjectID")
 	@Where(clause = "ActiveFlag = 'Y'")
 	private Subject subject;

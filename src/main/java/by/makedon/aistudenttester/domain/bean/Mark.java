@@ -27,7 +27,7 @@ public class Mark extends AbstractBean {
 	private int numberOfRightQuestions;
 	private int mark;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "StrategyID")
 	@Where(clause = "ActiveFlag = 'Y'")
 	private Strategy strategy;

@@ -18,6 +18,7 @@ import java.util.List;
 @Service
 public class QuestionService {
     private QuestionRepository repository;
+    private QuestionMapService questionMapService;
 
     public List<Question> getQuestionListOrderByName() {
         return repository.findQuestionsByActiveIsTrueOrderByQuestionNameAsc();
@@ -26,6 +27,13 @@ public class QuestionService {
     @Transactional
     public Question save(Question question) {
         return repository.save(question);
+    }
+
+    @Transactional
+    public Question remove(Question question) {
+        questionMapService.removeByQuestionID(question.getID());
+        question.setActive(false);
+        return save(question);
     }
 
     public Question getQuestionByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {
@@ -107,5 +115,10 @@ public class QuestionService {
     @Autowired
     public void setRepository(QuestionRepository repository) {
         this.repository = repository;
+    }
+
+    @Autowired
+    public void setQuestionMapService(QuestionMapService questionMapService) {
+        this.questionMapService = questionMapService;
     }
 }

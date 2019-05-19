@@ -14,35 +14,31 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"studentID", "studentTicket"})
-public class Student extends AbstractBean {
+@EqualsAndHashCode(of = {"questionMapID"})
+public class QuestionMap extends AbstractBean {
 	public static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long studentID;
-
-	private long studentTicket;
-	private String firstName;
-	private String lastName;
-	private String middleName;
+	private Long questionMapID;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "StudentGroupID")
+	@JoinColumn(name = "QuestionID")
 	@Where(clause = "ActiveFlag = 'Y'")
-	private StudentGroup studentGroup;
+	private Question question;
 
-	public String getName() {
-		return String.format("%s %s.%s.", lastName, firstName.charAt(0), middleName.charAt(0));
-	}
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TopicID")
+	@Where(clause = "ActiveFlag = 'Y'")
+	private Topic topic;
+
 	@Override
 	public void setID(Long id) {
-		setStudentID(id);
+		setQuestionMapID(id);
 	}
-	
+
 	@Override
 	public Long getID() {
-		return getStudentID();
+		return getQuestionMapID();
 	}
 }

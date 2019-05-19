@@ -23,6 +23,13 @@ public class ApplicationUserService implements UserDetailsService {
         return userRepository.save(applicationUser);
     }
 
+    @Transactional
+    public ApplicationUser remove(ApplicationUser applicationUser) {
+        //TODO
+        applicationUser.setActive(false);
+        return save(applicationUser);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<ApplicationUser> optionalApplicationUser = userRepository.findApplicationUserByUsernameAndActiveIsTrue(username);

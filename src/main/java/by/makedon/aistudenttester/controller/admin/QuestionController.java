@@ -152,8 +152,7 @@ public class QuestionController {
 	@PostMapping("/ajax/remove")
 	@ResponseStatus(HttpStatus.OK)
 	public void removeQuestion(Model model, @RequestParam(value = "questionID") Question question) {
-		question.setActive(false);
-		questionService.save(question);
+		questionService.remove(question);
 	}
 
 //	Getters/Setters

@@ -88,9 +88,7 @@ public class ProfileController {
 	                          SecurityContextLogoutHandler logoutHandler,
 	                          HttpServletRequest request,
 	                          HttpServletResponse response) {
-		ApplicationUser applicationUser = (ApplicationUser) authentication.getPrincipal();
-		applicationUser.setActive(false);
-		applicationUser = userService.save(applicationUser);
+		ApplicationUser applicationUser = userService.remove((ApplicationUser) authentication.getPrincipal());
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(applicationUser, applicationUser.getPassword(), applicationUser.getAuthorities()));
 
 		logoutHandler.logout(request, response, SecurityContextHolder.getContext().getAuthentication());
