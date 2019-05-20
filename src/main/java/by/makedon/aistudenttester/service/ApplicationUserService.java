@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 public class ApplicationUserService implements UserDetailsService {
     private ApplicationUserRepository userRepository;
+    private RoleMapService roleMapService;
 
     @Transactional
     public ApplicationUser save(ApplicationUser applicationUser) {
@@ -25,7 +26,7 @@ public class ApplicationUserService implements UserDetailsService {
 
     @Transactional
     public ApplicationUser remove(ApplicationUser applicationUser) {
-        //TODO
+        roleMapService.removeByApplicationUserID(applicationUser.getID());
         applicationUser.setActive(false);
         return save(applicationUser);
     }
@@ -46,5 +47,10 @@ public class ApplicationUserService implements UserDetailsService {
     @Autowired
     public void setUserRepository(ApplicationUserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Autowired
+    public void setRoleMapService(RoleMapService roleMapService) {
+        this.roleMapService = roleMapService;
     }
 }
