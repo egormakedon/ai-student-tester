@@ -12,16 +12,16 @@ import java.util.List;
  */
 @Service
 public class SubjectService {
-    private SubjectRepository subjectRepository;
+    private SubjectRepository repository;
 
     public List<Subject> getSubjectList() {
-        return subjectRepository.findSubjectsByActiveIsTrue();
+        return repository.findSubjects();
     }
 
 //  Getters/Setters
 
     @Autowired
-    public void setSubjectRepository(SubjectRepository subjectRepository) {
-        this.subjectRepository = subjectRepository;
+    public void setRepository(SubjectRepository repository) {
+        this.repository = repository;
     }
 }

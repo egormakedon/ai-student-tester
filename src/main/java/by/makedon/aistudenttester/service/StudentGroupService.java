@@ -15,7 +15,7 @@ public class StudentGroupService {
     private StudentGroupRepository studentGroupRepository;
 
     public List<StudentGroup> getStudentGroupList() {
-        return studentGroupRepository.findStudentGroupsByActiveIsTrue();
+        return studentGroupRepository.findStudentGroups();
     }
 
 //  Getters/Setters

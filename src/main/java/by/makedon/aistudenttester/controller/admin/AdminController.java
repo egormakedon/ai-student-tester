@@ -3,6 +3,7 @@ package by.makedon.aistudenttester.controller.admin;
 import by.makedon.aistudenttester.domain.bean.Student;
 import by.makedon.aistudenttester.domain.bean.StudentGroup;
 import by.makedon.aistudenttester.domain.bean.TestSession;
+import by.makedon.aistudenttester.dto.StudentDto;
 import by.makedon.aistudenttester.dto.TestSessionReportDto;
 import by.makedon.aistudenttester.service.StudentGroupService;
 import by.makedon.aistudenttester.service.StudentService;
@@ -107,8 +108,21 @@ public class AdminController {
 	}
 
 	@GetMapping(path = "/ajax/studentList/{studentGroupNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<Student> getStudentList(Model model, @PathVariable long studentGroupNumber) {
-		return studentService.getStudentListByStudentGroupNumber(studentGroupNumber);
+	public @ResponseBody List<StudentDto> getStudentList(Model model, @PathVariable long studentGroupNumber) {
+		List<StudentDto> reportList = new ArrayList<>();
+
+		studentService.getStudentListByStudentGroupNumber(studentGroupNumber).forEach(student -> {
+			StudentDto studentDto = new StudentDto();
+
+			studentDto.setStudentID(String.valueOf(student.getID()));
+			studentDto.setLastName(student.getLastName());
+			studentDto.setFirstName(student.getFirstName());
+			studentDto.setMiddleName(student.getMiddleName());
+
+			reportList.add(studentDto);
+		});
+
+		return reportList;
 	}
 
 //	Getters/Setters

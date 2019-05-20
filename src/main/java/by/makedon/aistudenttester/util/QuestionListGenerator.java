@@ -7,10 +7,7 @@ import by.makedon.aistudenttester.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -28,6 +25,8 @@ public class QuestionListGenerator {
 
         IntStream.range(0, questionCountList.size()).forEach(i ->
                 generateQuestionList(questionList, new ArrayList<>(topicList.get(i).getQuestions()), questionCountList.get(i)));
+
+        Collections.shuffle(questionList);
 
         return questionList;
     }

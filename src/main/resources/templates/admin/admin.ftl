@@ -46,17 +46,15 @@
                         </tbody>
                     </table>
 
-                    <input type="hidden" name="studentGroupID" <#if studentGroup??>value="${studentGroup.getStudentGroupNumber()}"</#if>>
-                    <input type="hidden" name="studentID" <#if student??>value="${student.getName()}"</#if>>
+                    <input type="hidden" name="studentGroupID" <#if studentGroup??>value="${studentGroup.ID}"</#if>>
+                    <input type="hidden" name="studentID" <#if student??>value="${student.ID}"</#if>>
                 </form>
             </div>
             <div class="col ml-5">
                 <table class="table table-sm">
                     <tbody>
                         <tr>
-                            <td>
-                                <@p.pager url page/>
-                            </td>
+                            <td><@p.pager url page/></td>
                         </tr>
                     </tbody>
                 </table>

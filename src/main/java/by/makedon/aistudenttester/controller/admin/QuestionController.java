@@ -5,7 +5,10 @@ import by.makedon.aistudenttester.domain.bean.Subject;
 import by.makedon.aistudenttester.domain.bean.Topic;
 import by.makedon.aistudenttester.dto.ChangeQuestionDto;
 import by.makedon.aistudenttester.dto.QuestionReportDto;
+import by.makedon.aistudenttester.dto.TopicDto;
 import by.makedon.aistudenttester.service.QuestionService;
+import by.makedon.aistudenttester.service.SubjectService;
+import by.makedon.aistudenttester.service.TopicService;
 import by.makedon.aistudenttester.util.PageUtil;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +35,8 @@ import java.util.stream.Collectors;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class QuestionController {
 	private QuestionService questionService;
+	private SubjectService subjectService;
+	private TopicService topicService;
 
 	@GetMapping
 	public String getQuestion(Model model,
@@ -66,14 +72,14 @@ public class QuestionController {
 			reportList.add(report);
 		});
 
-//		List<StudentGroup> studentGroupList = studentGroupService.getStudentGroupList();
-//		model.addAttribute("studentGroupList", studentGroupList);
-//
-//		if (student != null) {
-//			model.addAttribute("studentList", studentService.getStudentListByStudentGroupNumber(student.getStudentGroup().getStudentGroupNumber()));
-//		} else if (studentGroup != null) {
-//			model.addAttribute("studentList", studentService.getStudentListByStudentGroupNumber(studentGroup.getStudentGroupNumber()));
-//		}
+		List<Subject> subjectList = subjectService.getSubjectList();
+		model.addAttribute("subjectList", subjectList);
+
+		if (topic != null) {
+			model.addAttribute("topicList", topicService.getTopicListBySubjectID(topic.getSubject().getID()));
+		} else if (subject != null) {
+			model.addAttribute("topicList", topicService.getTopicListBySubjectID(subject.getID()));
+		}
 
 		String url = String.format("/admin/question?subjectID=%s&topicID=%s&page=",
 				subject == null ? "" : subject.getID().toString(),
@@ -155,10 +161,36 @@ public class QuestionController {
 		questionService.remove(question);
 	}
 
+	@GetMapping(path = "/ajax/topicList/{subjectID}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<TopicDto> getTopicList(Model model, @PathVariable long subjectID) {
+		List<TopicDto> reportList = new ArrayList<>();
+
+		topicService.getTopicListBySubjectID(subjectID).forEach(topic -> {
+			TopicDto topicDto = new TopicDto();
+
+			topicDto.setTopicID(String.valueOf(topic.getID()));
+			topicDto.setTopicName(topic.getTopicName());
+
+			reportList.add(topicDto);
+		});
+
+		return reportList;
+	}
+
 //	Getters/Setters
 
 	@Autowired
 	public void setQuestionService(QuestionService questionService) {
 		this.questionService = questionService;
+	}
+
+	@Autowired
+	public void setSubjectService(SubjectService subjectService) {
+		this.subjectService = subjectService;
+	}
+
+	@Autowired
+	public void setTopicService(TopicService topicService) {
+		this.topicService = topicService;
 	}
 }

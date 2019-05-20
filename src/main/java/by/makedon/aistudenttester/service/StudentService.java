@@ -12,16 +12,16 @@ import java.util.List;
  */
 @Service
 public class StudentService {
-    private StudentRepository studentRepository;
+    private StudentRepository repository;
 
     public List<Student> getStudentListByStudentGroupNumber(long studentGroupNumber) {
-        return studentRepository.findStudentsByActiveIsTrueAndStudentGroup_StudentGroupNumberAndStudentGroup_ActiveIsTrue(studentGroupNumber);
+        return repository.findStudentsByStudentGroupNumber(studentGroupNumber);
     }
 
 //  Getters/Setters
 
     @Autowired
-    public void setStudentRepository(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public void setRepository(StudentRepository repository) {
+        this.repository = repository;
     }
 }
