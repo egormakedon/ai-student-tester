@@ -12,16 +12,16 @@ import java.util.List;
  */
 @Service
 public class StudentGroupService {
-    private StudentGroupRepository studentGroupRepository;
+    private StudentGroupRepository repository;
 
     public List<StudentGroup> getStudentGroupList() {
-        return studentGroupRepository.findStudentGroups();
+        return repository.findStudentGroups();
     }
 
 //  Getters/Setters
 
     @Autowired
-    public void setStudentGroupRepository(StudentGroupRepository studentGroupRepository) {
-        this.studentGroupRepository = studentGroupRepository;
+    public void setRepository(StudentGroupRepository repository) {
+        this.repository = repository;
     }
 }

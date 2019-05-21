@@ -20,7 +20,9 @@ public class QuestionListGenerator {
 
     public List<Question> generate(Subject subject) {
         List<Topic> topicList = topicService.getTopicListBySubjectID(subject.getID());
-        List<Integer> questionCountList = calculateQuestionCountList(topicList);
+        int allQuestionsCount = topicService.getAllQuestionsCountBySubjectID(subject.getID());
+
+        List<Integer> questionCountList = calculateQuestionCountList(topicList, allQuestionsCount);
         List<Question> questionList = new ArrayList<>(BaseConstants.QUESTION_COUNT);
 
         IntStream.range(0, questionCountList.size()).forEach(i ->
@@ -31,11 +33,7 @@ public class QuestionListGenerator {
         return questionList;
     }
 
-    private List<Integer> calculateQuestionCountList(List<Topic> topicList) {
-        int allQuestionsCount = topicList.stream().map(Topic::getQuestions)
-                                                  .mapToInt(Set::size)
-                                                  .sum();
-
+    private List<Integer> calculateQuestionCountList(List<Topic> topicList, int allQuestionsCount) {
         if (allQuestionsCount < BaseConstants.QUESTION_COUNT) {
             throw new BaseException("Number of questions: " + allQuestionsCount + ".\nNumber of questions for the subject must be equal or more than 20!!!");
         }

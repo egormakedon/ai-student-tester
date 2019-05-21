@@ -4,6 +4,7 @@ import by.makedon.aistudenttester.domain.bean.Student;
 import by.makedon.aistudenttester.domain.bean.StudentGroup;
 import by.makedon.aistudenttester.domain.bean.Subject;
 import by.makedon.aistudenttester.domain.bean.TestSession;
+import by.makedon.aistudenttester.dto.StudentDto;
 import by.makedon.aistudenttester.service.StudentGroupService;
 import by.makedon.aistudenttester.service.StudentService;
 import by.makedon.aistudenttester.service.SubjectService;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,11 +33,8 @@ public class MainController {
 
 	@GetMapping
 	public String getMain(Model model, @RequestParam(required = false) Boolean error) {
-		List<Subject> subjectList = subjectService.getSubjectList();
-		List<StudentGroup> studentGroupList = studentGroupService.getStudentGroupList();
-
-		model.addAttribute("subjectList", subjectList);
-		model.addAttribute("studentGroupList", studentGroupList);
+		model.addAttribute("subjectList", subjectService.getValidSubjectList());
+		model.addAttribute("studentGroupList", studentGroupService.getStudentGroupList());
 
 		if (error != null && error) {
 			model.addAttribute("mainError", "main.validation");
@@ -45,8 +44,21 @@ public class MainController {
 	}
 
 	@GetMapping(path = "ajax/studentList/{studentGroupNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<Student> getStudentList(Model model, @PathVariable long studentGroupNumber) {
-		return studentService.getStudentListByStudentGroupNumber(studentGroupNumber);
+	public @ResponseBody List<StudentDto> getStudentList(Model model, @PathVariable long studentGroupNumber) {
+		List<StudentDto> reportList = new ArrayList<>();
+
+		studentService.getStudentListByStudentGroupNumber(studentGroupNumber).forEach(student -> {
+			StudentDto studentDto = new StudentDto();
+
+			studentDto.setStudentID(String.valueOf(student.getID()));
+			studentDto.setLastName(student.getLastName());
+			studentDto.setFirstName(student.getFirstName());
+			studentDto.setMiddleName(student.getMiddleName());
+
+			reportList.add(studentDto);
+		});
+
+		return reportList;
 	}
 
 	@PostMapping

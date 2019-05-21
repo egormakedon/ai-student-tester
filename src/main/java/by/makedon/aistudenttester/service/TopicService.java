@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Yahor Makedon
@@ -16,6 +17,12 @@ public class TopicService {
 
     public List<Topic> getTopicListBySubjectID(Long subjectID) {
         return repository.findTopicsBySubjectID(subjectID);
+    }
+
+    public int getAllQuestionsCountBySubjectID(Long subjectID) {
+        return repository.findTopicsBySubjectID(subjectID).stream().map(Topic::getQuestions)
+                .mapToInt(Set::size)
+                .sum();
     }
 
 //  Getters/Setters
