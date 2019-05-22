@@ -44,13 +44,14 @@ public class QuestionController {
 	                          @PageableDefault(value = 20, size = 20) Pageable pageable,
 	                          @RequestParam(value = "subjectID", required = false) Subject subject,
 	                          @RequestParam(value = "topicID", required = false) Topic topic,
-	                          @RequestParam(required = false) String error) {
+	                          @RequestParam(required = false) String error,
+	                          @RequestParam(required = false) Boolean removedSuccessfully) {
 		if ((subject != null && !subject.isActive()) || (topic != null && !topic.isActive())) {
 			redirectAttributes.addAttribute("error", "question.validation.id");
 			return "redirect:/admin/question";
 		}
 
-		List<Question> questionList = questionService.getQuestionListOrderByName();
+		List<Question> questionList = questionService.getQuestionList();
 		List<QuestionReportDto> reportList = new ArrayList<>();
 
 		questionList = questionList
@@ -75,6 +76,12 @@ public class QuestionController {
 		List<Subject> subjectList = subjectService.getSubjectList();
 		model.addAttribute("subjectList", subjectList);
 
+		List<Subject> validSubjectList = subjectService.getValidSubjectList();
+		if (subjectList.size() != validSubjectList.size()) {
+			subjectList.removeAll(validSubjectList);
+			model.addAttribute("notificationSubjectList", subjectList);
+		}
+
 		if (topic != null) {
 			model.addAttribute("topicList", topicService.getTopicListBySubjectID(topic.getSubject().getID()));
 		} else if (subject != null) {
@@ -84,6 +91,9 @@ public class QuestionController {
 		String url = String.format("/admin/question?subjectID=%s&topicID=%s&page=",
 				subject == null ? "" : subject.getID().toString(),
 				topic == null ? "" : topic.getID().toString());
+
+		model.addAttribute("error", error);
+		model.addAttribute("removedSuccessfully", removedSuccessfully);
 
 		model.addAttribute("url", url);
 		model.addAttribute("page", page);
@@ -99,7 +109,7 @@ public class QuestionController {
 	public String getChangeQuestion(Model model,
 	                                @RequestParam(value = "questionID") Question question,
 	                                @RequestParam(required = false) String error,
-	                                @RequestParam(required = false) String success) {
+	                                @RequestParam(required = false) Boolean success) {
 		if (question == null) {
 			model.addAttribute("questionError", "change.question.validation.id");
 			return "admin/changeQuestion";

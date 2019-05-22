@@ -7,16 +7,27 @@
 
 <@c.page "question.title">
     <div class="container mt-5">
-        <#if RequestParameters.error??>
+        <#if notificationSubjectList??>
             <div class="row">
                 <div class="col">
-                    <div class="alert alert-danger" role="alert">
-                        <@spring.message "${RequestParameters.error}"/>
+                    <div class="alert alert-warning" role="alert">
+                        <#list notificationSubjectList as s>
+                            <div><@spring.message "question.notification.subject"/>:${s.getSubjectName()}</div>
+                        </#list>
                     </div>
                 </div>
             </div>
         </#if>
-        <#if RequestParameters.removedSuccess??>
+        <#if error??>
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-danger" role="alert">
+                        <@spring.message "${error}"/>
+                    </div>
+                </div>
+            </div>
+        </#if>
+        <#if removedSuccessfully??>
             <div class="row">
                 <div class="col">
                     <div class="alert alert-success" role="alert">

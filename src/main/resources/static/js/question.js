@@ -38,8 +38,8 @@ function ajaxRemoveQuestion(questionID) {
 
         baseUrl = parameters === undefined ? baseUrl : baseUrl + parameters;
 
-        if (new URLSearchParams(window.location.search).get("removedSuccess") === null) {
-            baseUrl = parameters === undefined ? baseUrl + 'removedSuccess' : baseUrl + '&removedSuccess';
+        if (new URLSearchParams(window.location.search).get("removedSuccessfully") === null) {
+            baseUrl = parameters === undefined ? baseUrl + 'removedSuccessfully=true' : baseUrl + '&removedSuccessfully=true';
         }
 
         location.replace(baseUrl);

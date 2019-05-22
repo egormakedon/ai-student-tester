@@ -22,7 +22,7 @@ public class SubjectService {
     }
 
     public List<Subject> getValidSubjectList() {
-        return repository.findSubjects().stream()
+        return getSubjectList().stream()
                 .filter(s -> topicService.getAllQuestionsCountBySubjectID(s.getID()) >= BaseConstants.QUESTION_COUNT)
                 .collect(Collectors.toList());
     }

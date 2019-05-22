@@ -20,8 +20,8 @@ public class QuestionService {
     private QuestionRepository repository;
     private QuestionMapService questionMapService;
 
-    public List<Question> getQuestionListOrderByName() {
-        return repository.findQuestionsByActiveIsTrueOrderByQuestionNameAsc();
+    public List<Question> getQuestionList() {
+        return repository.findQuestions();
     }
 
     @Transactional
