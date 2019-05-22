@@ -1,7 +1,6 @@
 <#ftl encoding="UTF-8">
 
 <#import "../parts/common.ftl" as c>
-<#import "../parts/confirmationModal.ftl" as m>
 <#import "/spring.ftl" as spring>
 
 <@c.page "strategy.title">

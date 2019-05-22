@@ -32,6 +32,7 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                     <form>
                         <a class="dropdown-item" href="/admin/profile"><@spring.message "navbar.profile"/></a>
+                        <a class="dropdown-item" href="/admin/manage"><@spring.message "navbar.admin.manager"/></a>
                         <button class="dropdown-item" type="submit" formaction="/logout" formmethod="post"><@spring.message "navbar.log.out"/></button>
 
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
