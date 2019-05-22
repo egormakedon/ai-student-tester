@@ -3,7 +3,6 @@ package by.makedon.aistudenttester.controller;
 import by.makedon.aistudenttester.domain.bean.Question;
 import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.service.AnswerService;
-import by.makedon.aistudenttester.service.MarkService;
 import by.makedon.aistudenttester.service.QuestionService;
 import by.makedon.aistudenttester.service.TestSessionService;
 import by.makedon.aistudenttester.util.BaseConstants;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -27,7 +25,6 @@ public class TestController {
     private TestSessionService testSessionService;
     private QuestionService questionService;
     private AnswerService answerService;
-    private MarkService markService;
 
     @GetMapping
     public String getTest(Model model, HttpSession httpSession) {
@@ -100,14 +97,7 @@ public class TestController {
     @PostMapping("/ajax/complete")
     @ResponseStatus(HttpStatus.OK)
     public void completeTest(Model model, HttpSession httpSession) {
-        TestSession testSession = testSessionService.getTestSessionByID((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
-
-        int mark = markService.calculateMark(testSession);
-
-        testSession.setMark(mark);
-        testSession.setFinishedDate(LocalDateTime.now());
-        testSession.setActive(true);
-        testSessionService.save(testSession);
+        testSessionService.completeTest((Long) httpSession.getAttribute(BaseConstants.TEST_SESSION_ID));
 
         httpSession.removeAttribute(BaseConstants.QUESTION_NUMBER);
         httpSession.setAttribute(BaseConstants.IS_TEST_STARTED, "false");
@@ -128,10 +118,5 @@ public class TestController {
     @Autowired
     public void setAnswerService(AnswerService answerService) {
         this.answerService = answerService;
-    }
-
-    @Autowired
-    public void setMarkService(MarkService markService) {
-        this.markService = markService;
     }
 }

@@ -14,6 +14,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/question"><@spring.message "navbar.questions"/></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/strategy"><@spring.message "navbar.strategy"/></a>
+                </li>
             <#else>
                 <li class="nav-item">
                     <a class="nav-link" href="/result"><@spring.message "navbar.result"/></a>

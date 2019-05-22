@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col">
                 <#if Session.testSessionID??>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-sm table-striped table-bordered" style="text-align:center">
                         <tbody>
                             <tr>
                                 <td><@spring.message "result.test.number"/></td>

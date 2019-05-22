@@ -38,34 +38,34 @@
                         <div class="form-group row">
                             <table class="table table-sm">
                                 <tbody>
-                                <tr>
-                                    <td><@spring.message "change.question.question"/>:</td>
-                                    <td><input class="form-control" type="text" name="questionName" value="${questionName}"></td>
-                                </tr>
-                                <tr>
-                                    <td><@spring.message "change.question.first.answer"/>:</td>
-                                    <td><input class="form-control" type="text" name="firstAnswer" value="${firstAnswer}"></td>
-                                </tr>
-                                <tr>
-                                    <td><@spring.message "change.question.second.answer"/>:</td>
-                                    <td><input class="form-control" type="text" name="secondAnswer" value="${secondAnswer}"></td>
-                                </tr>
-                                <tr>
-                                    <td><@spring.message "change.question.third.answer"/>:</td>
-                                    <td><input class="form-control" type="text" name="thirdAnswer" value="${thirdAnswer}"></td>
-                                </tr>
-                                <tr>
-                                    <td><@spring.message "change.question.fourth.answer"/>:</td>
-                                    <td><input class="form-control" type="text" name="fourthAnswer" value="${fourthAnswer}"></td>
-                                </tr>
-                                <tr>
-                                    <td><@spring.message "change.question.fifth.answer"/>:</td>
-                                    <td><input class="form-control" type="text" name="fifthAnswer" value="${fifthAnswer}"></td>
-                                </tr>
-                                <tr>
-                                    <td><@spring.message "change.question.right.answer"/>:</td>
-                                    <td><input class="form-control" type="text" name="rightAnswer" value="${rightAnswer}"></td>
-                                </tr>
+                                    <tr>
+                                        <td><@spring.message "change.question.question"/>:</td>
+                                        <td><input class="form-control" type="text" name="questionName" value="${questionName}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><@spring.message "change.question.first.answer"/>:</td>
+                                        <td><input class="form-control" type="text" name="firstAnswer" value="${firstAnswer}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><@spring.message "change.question.second.answer"/>:</td>
+                                        <td><input class="form-control" type="text" name="secondAnswer" value="${secondAnswer}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><@spring.message "change.question.third.answer"/>:</td>
+                                        <td><input class="form-control" type="text" name="thirdAnswer" value="${thirdAnswer}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><@spring.message "change.question.fourth.answer"/>:</td>
+                                        <td><input class="form-control" type="text" name="fourthAnswer" value="${fourthAnswer}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><@spring.message "change.question.fifth.answer"/>:</td>
+                                        <td><input class="form-control" type="text" name="fifthAnswer" value="${fifthAnswer}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><@spring.message "change.question.right.answer"/>:</td>
+                                        <td><input class="form-control" type="text" name="rightAnswer" value="${rightAnswer}"></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

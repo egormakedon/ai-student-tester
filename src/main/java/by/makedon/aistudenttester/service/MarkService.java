@@ -1,29 +1,42 @@
 package by.makedon.aistudenttester.service;
 
+import by.makedon.aistudenttester.domain.bean.Mark;
 import by.makedon.aistudenttester.domain.bean.Question;
 import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.repository.MarkRepository;
 import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Yahor Makedon
  */
 @Service
 public class MarkService {
-    private MarkRepository markRepository;
+    private MarkRepository repository;
     private QuestionService questionService;
     private AnswerService answerService;
 
+    public Optional<Mark> getMark(Long markID) {
+        return repository.findById(markID);
+    }
+
+    public List<Mark> getMarkList() {
+        return repository.findMarks();
+    }
+
     public int calculateMark(TestSession testSession) {
         int numberOfRightQuestions = calculateNumberOfRightQuestions(testSession);
+        return repository.findMarkByNumberOfRightQuestions(numberOfRightQuestions).getMark();
+    }
 
-        return markRepository
-                .findMarkByNumberOfRightQuestionsAndActiveIsTrueAndStrategy_ActiveIsTrue(numberOfRightQuestions)
-                .getMark();
+    @Transactional
+    public void save(List<Mark> markList) {
+        markList.forEach(repository::save);
     }
 
     private int calculateNumberOfRightQuestions(TestSession testSession) {
@@ -42,10 +55,9 @@ public class MarkService {
     }
 
 //  Getters/Setters
-
     @Autowired
-    public void setMarkRepository(MarkRepository markRepository) {
-        this.markRepository = markRepository;
+    public void setRepository(MarkRepository repository) {
+        this.repository = repository;
     }
 
     @Autowired

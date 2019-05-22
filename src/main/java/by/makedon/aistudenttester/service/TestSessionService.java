@@ -21,16 +21,21 @@ import java.util.stream.IntStream;
  */
 @Service
 public class TestSessionService {
-    private TestSessionRepository testSessionRepository;
+    private TestSessionRepository repository;
     private QuestionListGenerator questionListGenerator;
+    private MarkService markService;
+
+    public TestSession getTestSessionByID(Long testSessionID) {
+        return repository.findTestSessionByTestSessionID(testSessionID);
+    }
+
+    public List<TestSession> getTestSessionList() {
+        return repository.findTestSessions();
+    }
 
     @Transactional
     public TestSession save(TestSession testSession) {
-        return testSessionRepository.save(testSession);
-    }
-
-    public TestSession getTestSessionByID(Long testSessionID) {
-        return testSessionRepository.findTestSessionByTestSessionID(testSessionID);
+        return repository.save(testSession);
     }
 
     @Transactional
@@ -48,22 +53,35 @@ public class TestSessionService {
                 .forEach(index -> builder.build(questionList.get(index), index + 1));
         builder.build();
 
-        return testSessionRepository.save(testSession);
+        return save(testSession);
     }
 
-    public List<TestSession> getTestSessionListOrderByFinishedDate() {
-        return testSessionRepository.findTestSessionsByActiveIsTrueOrderByFinishedDateDesc();
+    @Transactional
+    public TestSession completeTest(Long testSessionID) {
+        TestSession testSession = getTestSessionByID(testSessionID);
+
+        int mark = markService.calculateMark(testSession);
+
+        testSession.setMark(mark);
+        testSession.setFinishedDate(LocalDateTime.now());
+        testSession.setActive(true);
+        return save(testSession);
     }
 
 //  Getters/Setters
 
     @Autowired
-    public void setTestSessionRepository(TestSessionRepository testSessionRepository) {
-        this.testSessionRepository = testSessionRepository;
+    public void setRepository(TestSessionRepository repository) {
+        this.repository = repository;
     }
 
     @Autowired
     public void setQuestionListGenerator(QuestionListGenerator questionListGenerator) {
         this.questionListGenerator = questionListGenerator;
+    }
+
+    @Autowired
+    public void setMarkService(MarkService markService) {
+        this.markService = markService;
     }
 }

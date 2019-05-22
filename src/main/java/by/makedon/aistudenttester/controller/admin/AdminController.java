@@ -53,7 +53,7 @@ public class AdminController {
 			return "redirect:/admin";
 		}
 
-		List<TestSession> testSessionList = testSessionService.getTestSessionListOrderByFinishedDate();
+		List<TestSession> testSessionList = testSessionService.getTestSessionList();
 		List<TestSessionReportDto> reportList = new ArrayList<>();
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
 

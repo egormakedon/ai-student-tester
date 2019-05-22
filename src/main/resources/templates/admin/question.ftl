@@ -83,25 +83,25 @@
                                 <th scope="col" colspan="2"><@spring.message "question.edit"/></th>
                             </tr>
                         </thead>
-                            <tbody>
-                                <#list reportList as report>
-                                    <tr>
-                                        <td>${report.questionNumber}</td>
-                                        <td>${report.questionName}</td>
-                                        <td>${report.topic}</td>
-                                        <td>${report.subject}</td>
-                                        <td>
-                                            <a class="btn btn-link"
-                                               href="/admin/question/change?questionID=${report.questionNumber}"><@spring.message "question.link.change"/></a>
-                                        </td>
-                                        <td>
-                                            <button style="color: red" class="btn btn-link" type="button" data-toggle="modal"
-                                                    data-target="#confirmationModalQuestion${report.questionNumber}"><@spring.message "question.link.remove"/></button>
-                                            <@m.confirmationModal "confirmationModalQuestion${report.questionNumber}" "question.remove.confirmation.modal.title" "question.remove.confirmation.modal.body" ": \"${report.questionName}\"?" "ajaxRemoveQuestion(${report.questionNumber})"/>
-                                        </td>
-                                    </tr>
-                                </#list>
-                            </tbody>
+                        <tbody>
+                            <#list reportList as report>
+                                <tr>
+                                    <td>${report.questionNumber}</td>
+                                    <td>${report.questionName}</td>
+                                    <td>${report.topic}</td>
+                                    <td>${report.subject}</td>
+                                    <td>
+                                        <a class="btn btn-link"
+                                           href="/admin/question/change?questionID=${report.questionNumber}"><@spring.message "question.link.change"/></a>
+                                    </td>
+                                    <td>
+                                        <button style="color: red" class="btn btn-link" type="button" data-toggle="modal"
+                                                data-target="#confirmationModalQuestion${report.questionNumber}"><@spring.message "question.link.remove"/></button>
+                                        <@m.confirmationModal "confirmationModalQuestion${report.questionNumber}" "question.remove.confirmation.modal.title" "question.remove.confirmation.modal.body" ": \"${report.questionName}\"?" "ajaxRemoveQuestion(${report.questionNumber})"/>
+                                    </td>
+                                </tr>
+                            </#list>
+                        </tbody>
                     </table>
 
                     <input id="csrfID" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
