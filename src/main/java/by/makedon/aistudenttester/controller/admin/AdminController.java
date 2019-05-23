@@ -2,11 +2,13 @@ package by.makedon.aistudenttester.controller.admin;
 
 import by.makedon.aistudenttester.domain.bean.Student;
 import by.makedon.aistudenttester.domain.bean.StudentGroup;
+import by.makedon.aistudenttester.domain.bean.Subject;
 import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.dto.StudentDto;
 import by.makedon.aistudenttester.dto.TestSessionReportDto;
 import by.makedon.aistudenttester.service.StudentGroupService;
 import by.makedon.aistudenttester.service.StudentService;
+import by.makedon.aistudenttester.service.SubjectService;
 import by.makedon.aistudenttester.service.TestSessionService;
 import by.makedon.aistudenttester.util.PageUtil;
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -41,6 +43,7 @@ public class AdminController {
 	private TestSessionService testSessionService;
 	private StudentGroupService studentGroupService;
 	private StudentService studentService;
+	private SubjectService subjectService;
 
 	@GetMapping
 	public String getAdmin(Model model,
@@ -48,8 +51,11 @@ public class AdminController {
 	                       @PageableDefault(value = 20, size = 20) Pageable pageable,
 	                       @RequestParam(value = "studentGroupID", required = false) StudentGroup studentGroup,
 	                       @RequestParam(value = "studentID", required = false) Student student,
+	                       @RequestParam(value = "subjectID", required = false) Subject subject,
 	                       @RequestParam(required = false) String error) {
-		if ((studentGroup != null && !studentGroup.isActive()) || (student != null && !student.isActive())) {
+		if ((studentGroup != null && !studentGroup.isActive()) ||
+				(student != null && !student.isActive()) ||
+				(subject != null && !subject.isActive())) {
 			redirectAttributes.addAttribute("error", "admin.validation.id");
 			return "redirect:/admin";
 		}
@@ -58,6 +64,7 @@ public class AdminController {
 				.stream()
 				.filter(ts -> studentGroup == null || ts.getStudent().getStudentGroup().equals(studentGroup))
 				.filter(ts -> student == null || ts.getStudent().equals(student))
+				.filter(ts -> subject == null || ts.getSubject().equals(subject))
 				.collect(Collectors.toList());
 
 		List<TestSessionReportDto> reportList = new ArrayList<>();
@@ -91,9 +98,13 @@ public class AdminController {
 			model.addAttribute("studentList", studentService.getStudentListByStudentGroupNumber(studentGroup.getStudentGroupNumber()));
 		}
 
-		String url = String.format("/admin?studentGroupID=%s&studentID=%s&page=",
+		List<Subject> subjectList = subjectService.getSubjectList();
+		model.addAttribute("subjectList", subjectList);
+
+		String url = String.format("/admin?studentGroupID=%s&studentID=%s&subjectID=%s&page=",
 				studentGroup == null ? "" : studentGroup.getID().toString(),
-				student == null ? "" : student.getID().toString());
+				student == null ? "" : student.getID().toString(),
+				subject == null ? "" : subject.getID().toString());
 
 		model.addAttribute("url", url);
 		model.addAttribute("page", page);
@@ -101,6 +112,7 @@ public class AdminController {
 
 		model.addAttribute("studentGroup", studentGroup);
 		model.addAttribute("student", student);
+		model.addAttribute("subject", subject);
 		model.addAttribute("reportList", reportList);
 
 		return "admin/admin";
@@ -139,5 +151,10 @@ public class AdminController {
 	@Autowired
 	public void setStudentService(StudentService studentService) {
 		this.studentService = studentService;
+	}
+
+	@Autowired
+	public void setSubjectService(SubjectService subjectService) {
+		this.subjectService = subjectService;
 	}
 }

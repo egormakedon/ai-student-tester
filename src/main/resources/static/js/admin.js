@@ -27,6 +27,7 @@ function getStudentList() {
 function setInputValues() {
     $("input[name='studentGroupID']").val($('#studentGroupSelectorID option:selected').attr('value'));
     $("input[name='studentID']").val($('#studentSelectorID option:selected').attr('value'));
+    $("input[name='subjectID']").val($('#subjectSelectorID option:selected').attr('value'));
 }
 
 function hrefToTestDetails(testSessionID) {

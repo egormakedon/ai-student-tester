@@ -6,19 +6,26 @@
 
 <@c.page "admin.title">
     <div class="container mt-5">
-        <#if RequestParameters.error??>
+        <#if error??>
             <div class="row">
                 <div class="col">
                     <div class="alert alert-danger" role="alert">
-                        <@spring.message "${RequestParameters.error}"/>
+                        <@spring.message "${error}"/>
                     </div>
                 </div>
             </div>
         </#if>
         <div class="row">
             <div class="col">
+                <div>
+                    <@p.pager url page/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <form>
-                    <table class="table table-sm">
+                    <table class="table table-sm" style="text-align:center">
                         <tbody>
                             <tr>
                                 <td>
@@ -40,6 +47,14 @@
                                     </select>
                                 </td>
                                 <td>
+                                    <select class="custom-select" id="subjectSelectorID">
+                                        <option <#if !subject??>selected</#if>><@spring.message "admin.choose.subject"/></option>
+                                        <#list subjectList as sl>
+                                            <option <#if subject?? && subject.ID == sl.ID>selected</#if> value="${sl.ID}">${sl.subjectName}</option>
+                                        </#list>
+                                    </select>
+                                </td>
+                                <td>
                                     <button style="background-color: #044d58" class="btn btn-primary" type="submit" onclick="setInputValues()"><@spring.message "admin.button.search"/></button>
                                 </td>
                             </tr>
@@ -48,16 +63,8 @@
 
                     <input type="hidden" name="studentGroupID" <#if studentGroup??>value="${studentGroup.ID}"</#if>>
                     <input type="hidden" name="studentID" <#if student??>value="${student.ID}"</#if>>
+                    <input type="hidden" name="subjectID" <#if subject??>value="${subject.ID}"</#if>>
                 </form>
-            </div>
-            <div class="col ml-5">
-                <table class="table table-sm">
-                    <tbody>
-                        <tr>
-                            <td><@p.pager url page/></td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
         <div class="row">

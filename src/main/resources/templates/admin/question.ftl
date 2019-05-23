@@ -38,8 +38,15 @@
         </#if>
         <div class="row">
             <div class="col">
+                <div>
+                    <@p.pager url page/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <form>
-                    <table class="table table-sm">
+                    <table class="table table-sm" style="text-align:center">
                         <tbody>
                             <tr>
                                 <td>
@@ -70,15 +77,6 @@
                     <input type="hidden" name="subjectID" <#if subject??>value="${subject.ID}"</#if>>
                     <input type="hidden" name="topicID" <#if topic??>value="${topic.ID}"</#if>>
                 </form>
-            </div>
-            <div class="col ml-5">
-                <table class="table table-sm">
-                    <tbody>
-                        <tr>
-                            <td><@p.pager url page/></td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
         <div class="row">

@@ -5,6 +5,7 @@
 
 <@c.page "test.details.title">
     <div class="container mt-5">
+        <div class=""
     </div>
 
     <script src="/static/js/jquery.js"></script>
