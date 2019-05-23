@@ -12,14 +12,18 @@
                         <tbody>
                             <tr>
                                 <td><@spring.message "result.test.number"/></td>
-                                <td>${Session.testSessionID}</td>
+                                <td>${testSessionID}</td>
                             </tr>
                             <tr>
-                                <td><@spring.message "result.start.time"/></td>
+                                <td><@spring.message "result.subject"/></td>
+                                <td>${subjectName}</td>
+                            </tr>
+                            <tr>
+                                <td><@spring.message "result.begin"/></td>
                                 <td>${createdDate}</td>
                             </tr>
                             <tr>
-                                <td><@spring.message "result.finish.time"/></td>
+                                <td><@spring.message "result.end"/></td>
                                 <td>${finishedDate}</td>
                             </tr>
                             <tr>

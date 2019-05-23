@@ -68,8 +68,9 @@
                             <th scope="col"><@spring.message "admin.test.number"/></th>
                             <th scope="col"><@spring.message "admin.group"/></th>
                             <th scope="col"><@spring.message "admin.student"/></th>
-                            <th scope="col"><@spring.message "admin.start"/></th>
-                            <th scope="col"><@spring.message "admin.finish"/></th>
+                            <th scope="col"><@spring.message "admin.subject"/></th>
+                            <th scope="col"><@spring.message "admin.begin"/></th>
+                            <th scope="col"><@spring.message "admin.end"/></th>
                             <th scope="col"><@spring.message "admin.duration"/></th>
                             <th scope="col"><@spring.message "admin.mark"/></th>
                         </tr>
@@ -80,8 +81,9 @@
                                 <td>${report.testNumber}</td>
                                 <td>${report.group}</td>
                                 <td>${report.student}</td>
-                                <td>${report.start}</td>
-                                <td>${report.finish}</td>
+                                <td>${report.subject}</td>
+                                <td>${report.begin}</td>
+                                <td>${report.end}</td>
                                 <td>${report.duration}</td>
                                 <td>${report.mark}</td>
                             </tr>

@@ -51,17 +51,14 @@ public class QuestionController {
 			return "redirect:/admin/question";
 		}
 
-		List<Question> questionList = questionService.getQuestionList();
-		List<QuestionReportDto> reportList = new ArrayList<>();
-
-		questionList = questionList
+		List<Question> questionList = questionService.getQuestionList()
 				.stream()
 				.filter(ql -> subject == null || ql.getTopics().iterator().next().getSubject().equals(subject))
 				.filter(ql -> topic == null || ql.getTopics().iterator().next().equals(topic))
 				.collect(Collectors.toList());
 
+		List<QuestionReportDto> reportList = new ArrayList<>();
 		Page<Question> page = PageUtil.getPage(questionList, pageable);
-
 		page.forEach(question -> {
 			QuestionReportDto report = new QuestionReportDto();
 
@@ -92,11 +89,10 @@ public class QuestionController {
 				subject == null ? "" : subject.getID().toString(),
 				topic == null ? "" : topic.getID().toString());
 
-		model.addAttribute("error", error);
-		model.addAttribute("removedSuccessfully", removedSuccessfully);
-
 		model.addAttribute("url", url);
 		model.addAttribute("page", page);
+		model.addAttribute("error", error);
+		model.addAttribute("removedSuccessfully", removedSuccessfully);
 
 		model.addAttribute("subject", subject);
 		model.addAttribute("topic", topic);

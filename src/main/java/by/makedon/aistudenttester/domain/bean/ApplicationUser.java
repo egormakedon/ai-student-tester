@@ -19,8 +19,8 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"applicationUserID", "username"})
-@ToString(exclude = {"password"})
+@EqualsAndHashCode(of = {"applicationUserID", "username"}, callSuper = true)
+@ToString(exclude = {"password"}, callSuper = true)
 public class ApplicationUser extends AbstractBean implements UserDetails {
     public static final long serialVersionUID = 1L;
 

@@ -35,7 +35,8 @@ import java.util.stream.Collectors;
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
 	private static final String TIME_FORMAT = "HH:mm:ss";
-	private static final String DATE_TIME_FORMAT = "yyyy-MM-dd, HH:mm:ss";
+
+	private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
 
 	private TestSessionService testSessionService;
 	private StudentGroupService studentGroupService;
@@ -53,22 +54,19 @@ public class AdminController {
 			return "redirect:/admin";
 		}
 
-		List<TestSession> testSessionList = testSessionService.getTestSessionList();
-		List<TestSessionReportDto> reportList = new ArrayList<>();
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
-
-		testSessionList = testSessionList
+		List<TestSession> testSessionList = testSessionService.getTestSessionList()
 				.stream()
 				.filter(ts -> studentGroup == null || ts.getStudent().getStudentGroup().equals(studentGroup))
 				.filter(ts -> student == null || ts.getStudent().equals(student))
 				.collect(Collectors.toList());
 
+		List<TestSessionReportDto> reportList = new ArrayList<>();
 		Page<TestSession> page = PageUtil.getPage(testSessionList, pageable);
-
 		page.forEach(testSession -> {
 			TestSessionReportDto report = new TestSessionReportDto();
 
 			report.setTestNumber(testSession.getID().toString());
+			report.setSubject(testSession.getSubject().getSubjectName());
 			report.setMark(testSession.getMark().toString());
 
 			Student studentFromTestSession = testSession.getStudent();
@@ -78,8 +76,8 @@ public class AdminController {
 			Duration duration = Duration.between(testSession.getCreatedDate(), testSession.getFinishedDate());
 			report.setDuration(DurationFormatUtils.formatDuration(duration.toMillis(), TIME_FORMAT));
 
-			report.setStart(testSession.getCreatedDate().format(dateTimeFormatter));
-			report.setFinish(testSession.getFinishedDate().format(dateTimeFormatter));
+			report.setBegin(testSession.getCreatedDate().format(dateTimeFormatter));
+			report.setEnd(testSession.getFinishedDate().format(dateTimeFormatter));
 
 			reportList.add(report);
 		});
@@ -99,6 +97,7 @@ public class AdminController {
 
 		model.addAttribute("url", url);
 		model.addAttribute("page", page);
+		model.addAttribute("error", error);
 
 		model.addAttribute("studentGroup", studentGroup);
 		model.addAttribute("student", student);

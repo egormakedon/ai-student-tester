@@ -4,6 +4,7 @@ import by.makedon.aistudenttester.domain.AbstractBean;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -14,7 +15,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"questionMapID"})
+@EqualsAndHashCode(of = {"questionMapID"}, callSuper = true)
+@ToString(callSuper = true)
 public class QuestionMap extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 

@@ -4,6 +4,7 @@ import by.makedon.aistudenttester.domain.AbstractBean;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
@@ -17,7 +18,8 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"questionID"})
+@EqualsAndHashCode(of = {"questionID"}, callSuper = true)
+@ToString(callSuper = true)
 public class Question extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	

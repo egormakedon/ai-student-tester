@@ -17,8 +17,8 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"topicID", "topicName"})
-@ToString(of = {"topicID", "topicName"})
+@EqualsAndHashCode(of = {"topicID", "topicName"}, callSuper = true)
+@ToString(of = {"topicID", "topicName"}, callSuper = true)
 public class Topic extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	

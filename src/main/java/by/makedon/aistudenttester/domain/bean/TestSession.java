@@ -16,14 +16,19 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"testSessionID"})
-@ToString(of = {"testSessionID", "mark", "student"})
+@EqualsAndHashCode(of = {"testSessionID"}, callSuper = true)
+@ToString(of = {"testSessionID", "subject", "student", "mark"}, callSuper = true)
 public class TestSession extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long testSessionID;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SubjectID")
+	@Where(clause = "ActiveFlag = 'Y'")
+	private Subject subject;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "StudentID")

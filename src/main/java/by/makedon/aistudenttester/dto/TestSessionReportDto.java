@@ -14,8 +14,9 @@ public class TestSessionReportDto implements Serializable {
 	private String testNumber;
 	private String group;
 	private String student;
-	private String start;
-	private String finish;
+	private String subject;
+	private String begin;
+	private String end;
 	private String duration;
 	private String mark;
 }

@@ -2,7 +2,9 @@ package by.makedon.aistudenttester.domain.bean;
 
 import by.makedon.aistudenttester.domain.AbstractBean;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,8 @@ import javax.persistence.Id;
 @Entity
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 public class Subject extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	

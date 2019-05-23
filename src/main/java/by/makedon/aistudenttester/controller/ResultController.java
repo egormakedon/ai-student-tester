@@ -36,6 +36,7 @@ public class ResultController {
             model.addAttribute("finishedDate", testSession.getFinishedDate().format(dateTimeFormatter));
 
             model.addAttribute("testSessionID", testSession.getTestSessionID());
+            model.addAttribute("subjectName", testSession.getSubject().getSubjectName());
             model.addAttribute("studentGroupNumber", testSession.getStudent().getStudentGroup().getStudentGroupNumber());
             model.addAttribute("studentTicket", testSession.getStudent().getStudentTicket());
             model.addAttribute("firstName", testSession.getStudent().getFirstName());

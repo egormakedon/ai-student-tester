@@ -42,6 +42,7 @@ public class TestSessionService {
     public TestSession generateTest(Subject subject, Student student) {
         TestSession testSession = new TestSession();
 
+        testSession.setSubject(subject);
         testSession.setStudent(student);
         testSession.setCreatedDate(LocalDateTime.now());
         testSession.setActive(false);

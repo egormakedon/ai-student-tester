@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.Topic
     INDEX SubjectID_Index (SubjectID ASC),
     UNIQUE INDEX TopicName_Index (TopicName ASC),
 
-    CONSTRAINT SubjectID
+    CONSTRAINT Topic_SubjectID
     FOREIGN KEY (SubjectID)
     REFERENCES aistudenttesterdb.Subject (SubjectID)
 )
@@ -184,6 +184,7 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.Mark
 CREATE TABLE IF NOT EXISTS aistudenttesterdb.TestSession
 (
     TestSessionID    BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    SubjectID        BIGINT UNSIGNED NOT NULL,
     StudentID        BIGINT UNSIGNED NOT NULL,
     CreatedDate      DATETIME NOT NULL,
     FinishedDate     DATETIME,
@@ -231,6 +232,7 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.TestSession
     ActiveFlag       CHAR(1) NOT NULL,
 
     PRIMARY KEY(TestSessionID),
+    INDEX SubjectID_Index (SubjectID ASC),
     INDEX StudentID_Index (StudentID ASC),
     INDEX Q1_Index (Q1 ASC),
     INDEX Q2_Index (Q2 ASC),
@@ -252,6 +254,10 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.TestSession
     INDEX Q18_Index (Q18 ASC),
     INDEX Q19_Index (Q19 ASC),
     INDEX Q20_Index (Q20 ASC),
+
+    CONSTRAINT TestSession_SubjectID
+    FOREIGN KEY (SubjectID)
+    REFERENCES aistudenttesterdb.Subject (SubjectID),
 
     CONSTRAINT StudentID
     FOREIGN KEY (StudentID)

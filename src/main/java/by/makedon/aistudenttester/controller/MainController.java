@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -64,12 +65,14 @@ public class MainController {
 	@PostMapping
 	public String startTest(
 			Model model,
+			RedirectAttributes redirectAttributes,
 			HttpSession httpSession,
 			@RequestParam(value = "subjectID") Subject subject,
 			@RequestParam(value = "studentGroupID") StudentGroup studentGroup,
 			@RequestParam(value = "studentID") Student student) {
 		if (subject == null || studentGroup == null || student == null) {
-			return "redirect:/?error=true";
+			redirectAttributes.addAttribute("error", true);
+			return "redirect:/";
 		}
 
 		TestSession testSession = testSessionService.generateTest(subject, student);
