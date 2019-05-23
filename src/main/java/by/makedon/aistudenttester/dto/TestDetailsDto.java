@@ -1,8 +1,10 @@
 package by.makedon.aistudenttester.dto;
 
+import by.makedon.aistudenttester.domain.bean.Question;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author Yahor Makedon
@@ -20,4 +22,6 @@ public class TestDetailsDto implements Serializable {
 	private String end;
 	private String duration;
 	private String mark;
+	private List<Question> questionList;
+	private List<Integer> answerList;
 }

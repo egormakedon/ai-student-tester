@@ -3,7 +3,10 @@ package by.makedon.aistudenttester.controller.admin;
 import by.makedon.aistudenttester.domain.bean.Student;
 import by.makedon.aistudenttester.domain.bean.TestSession;
 import by.makedon.aistudenttester.dto.TestDetailsDto;
+import by.makedon.aistudenttester.service.AnswerService;
+import by.makedon.aistudenttester.service.QuestionService;
 import org.apache.commons.lang3.time.DurationFormatUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +28,9 @@ public class TestDetailsController {
 
 	private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd, HH:mm:ss");
 
+	private QuestionService questionService;
+	private AnswerService answerService;
+
 	@GetMapping("/{testSessionID}")
 	public String getTestDetails(Model model, @PathVariable("testSessionID") TestSession testSession) {
 		if (testSession == null || !testSession.isActive()) {
@@ -36,6 +42,10 @@ public class TestDetailsController {
 		testDetailsDto.setTestNumber(testSession.getID().toString());
 		testDetailsDto.setSubject(testSession.getSubject().getSubjectName());
 		testDetailsDto.setMark(testSession.getMark().toString());
+		testDetailsDto.setBegin(testSession.getCreatedDate().format(dateTimeFormatter));
+		testDetailsDto.setEnd(testSession.getFinishedDate().format(dateTimeFormatter));
+		testDetailsDto.setQuestionList(questionService.getQuestionListByTestSession(testSession));
+		testDetailsDto.setAnswerList(answerService.getAnswerListByTestSession(testSession));
 
 		Student student = testSession.getStudent();
 		testDetailsDto.setStudent(String.format("%s %s %s", student.getLastName(), student.getFirstName(), student.getMiddleName()));
@@ -45,10 +55,19 @@ public class TestDetailsController {
 		Duration duration = Duration.between(testSession.getCreatedDate(), testSession.getFinishedDate());
 		testDetailsDto.setDuration(DurationFormatUtils.formatDuration(duration.toMillis(), TIME_FORMAT));
 
-		testDetailsDto.setBegin(testSession.getCreatedDate().format(dateTimeFormatter));
-		testDetailsDto.setEnd(testSession.getFinishedDate().format(dateTimeFormatter));
-
 		model.addAttribute("testDetailsDto", testDetailsDto);
 		return "admin/testDetails";
+	}
+
+//	Getters/Setters
+
+	@Autowired
+	public void setQuestionService(QuestionService questionService) {
+		this.questionService = questionService;
+	}
+
+	@Autowired
+	public void setAnswerService(AnswerService answerService) {
+		this.answerService = answerService;
 	}
 }
