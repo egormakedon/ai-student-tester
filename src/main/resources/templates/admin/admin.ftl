@@ -62,7 +62,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <table class="table table-sm table-bordered" style="text-align:center">
+                <table class="table table-sm table-bordered table-hover" style="text-align:center">
                     <thead class="table-info">
                         <tr>
                             <th scope="col"><@spring.message "admin.test.number"/></th>
@@ -76,7 +76,7 @@
                     </thead>
                     <tbody>
                         <#list reportList as report>
-                            <tr>
+                            <tr onclick="hrefToTestDetails(${report.testNumber})">
                                 <td>${report.testNumber}</td>
                                 <td>${report.group}</td>
                                 <td>${report.student}</td>
