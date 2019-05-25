@@ -17,7 +17,6 @@ import java.util.List;
 @Component
 public class ProfileDtoValidator {
 	private static final int MAX_DISPLAY_NAME_LENGTH = 30;
-	private static final int MAX_PASSWORD_LENGTH = 20;
 
 	private BCryptPasswordEncoder passwordEncoder;
 
@@ -59,10 +58,6 @@ public class ProfileDtoValidator {
 
 			if (!passwordEncoder.matches(oldPassword.trim(), currentPassword)) {
 				errors.add("profile.old.password.validation.incorrect");
-			}
-
-			if (newPassword.trim().length() > MAX_PASSWORD_LENGTH) {
-				errors.add("profile.new.password.validation.size");
 			}
 
 			if (!newPassword.trim().equals(confirmationPassword.trim())) {

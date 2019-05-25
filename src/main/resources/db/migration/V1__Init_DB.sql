@@ -1,19 +1,3 @@
--- Create hibernate sequence
-CREATE TABLE hibernate_sequence
-(
-    next_val    BIGINT
-)
-    ENGINE = InnoDB;
-INSERT INTO hibernate_sequence VALUES ( 1 );
-INSERT INTO hibernate_sequence VALUES ( 1 );
-INSERT INTO hibernate_sequence VALUES ( 1 );
-INSERT INTO hibernate_sequence VALUES ( 1 );
-INSERT INTO hibernate_sequence VALUES ( 1 );
-INSERT INTO hibernate_sequence VALUES ( 1 );
-INSERT INTO hibernate_sequence VALUES ( 1 );
-INSERT INTO hibernate_sequence VALUES ( 1 );
-INSERT INTO hibernate_sequence VALUES ( 1 );
-
 -- Create table Question
 CREATE TABLE IF NOT EXISTS aistudenttesterdb.Question
 (
@@ -35,11 +19,10 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.Question
 CREATE TABLE IF NOT EXISTS aistudenttesterdb.Subject
 (
     SubjectID      BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    SubjectName    VARCHAR(100) NOT NULL,
+    SubjectName    TEXT NOT NULL,
     ActiveFlag     CHAR(1) NOT NULL,
 
-    PRIMARY KEY(SubjectID),
-    UNIQUE INDEX SubjectName_Index (SubjectName ASC)
+    PRIMARY KEY(SubjectID)
 )
     ENGINE = InnoDB;
 
@@ -48,14 +31,13 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.Topic
 (
     TopicID       BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     SubjectID     BIGINT UNSIGNED NOT NULL,
-    TopicName     VARCHAR(100) NOT NULL,
+    TopicName     TEXT NOT NULL,
     ActiveFlag    CHAR(1) NOT NULL,
 
     PRIMARY KEY(TopicID),
-    INDEX SubjectID_Index (SubjectID ASC),
-    UNIQUE INDEX TopicName_Index (TopicName ASC),
+    INDEX Topic_SubjectID_Index (SubjectID ASC),
 
-    CONSTRAINT Topic_SubjectID
+    CONSTRAINT Topic_Subject
     FOREIGN KEY (SubjectID)
     REFERENCES aistudenttesterdb.Subject (SubjectID)
 )
@@ -70,14 +52,14 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.QuestionMap
     ActiveFlag       CHAR(1) NOT NULL,
 
     PRIMARY KEY(QuestionMapID),
-    INDEX QuestionID_Index (QuestionID ASC),
-    INDEX TopicID_Index (TopicID ASC),
+    INDEX QuestionMap_QuestionID_Index (QuestionID ASC),
+    INDEX QuestionMap_TopicID_Index (TopicID ASC),
 
-    CONSTRAINT QuestionID
+    CONSTRAINT QuestionMap_Question
     FOREIGN KEY (QuestionID)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT TopicID
+    CONSTRAINT QuestionMap_Topic
     FOREIGN KEY (TopicID)
     REFERENCES aistudenttesterdb.Topic (TopicID)
 )
@@ -87,13 +69,13 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.QuestionMap
 CREATE TABLE IF NOT EXISTS aistudenttesterdb.ApplicationUser
 (
     ApplicationUserID    BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    Username             VARCHAR(20) NOT NULL,
-    Password             VARCHAR(200) NOT NULL,
+    Username             VARCHAR(100) NOT NULL,
+    Password             TEXT NOT NULL,
     DisplayName          VARCHAR(30) NOT NULL,
     ActiveFlag           CHAR(1) NOT NULL,
 
     PRIMARY KEY(ApplicationUserID),
-    UNIQUE INDEX Username_Index (Username ASC)
+    INDEX ApplicationUser_Username_Index (Username ASC)
 )
     ENGINE = InnoDB;
 
@@ -106,10 +88,9 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.RoleMap
     ActiveFlag           CHAR(1) NOT NULL,
 
     PRIMARY KEY(RoleMapID),
-    INDEX ApplicationUserID_Index (ApplicationUserID ASC),
-    INDEX Roles_Index (Roles ASC),
+    INDEX RoleMap_ApplicationUserID_Index (ApplicationUserID ASC),
 
-    CONSTRAINT ApplicationUserID
+    CONSTRAINT RoleMap_ApplicationUser
     FOREIGN KEY (ApplicationUserID)
     REFERENCES aistudenttesterdb.ApplicationUser (ApplicationUserID)
 )
@@ -120,10 +101,10 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.StudentGroup
 (
     StudentGroupID        BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     StudentGroupNumber    BIGINT UNSIGNED NOT NULL,
-    StudentGroupYear      INT UNSIGNED NOT NULL,
     ActiveFlag            CHAR(1) NOT NULL,
 
-    PRIMARY KEY(StudentGroupID)
+    PRIMARY KEY(StudentGroupID),
+    INDEX StudentGroup_StudentGroupNumber_Index (StudentGroupNumber ASC)
 )
     ENGINE = InnoDB;
 
@@ -133,19 +114,15 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.Student
     StudentID         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     StudentGroupID    BIGINT UNSIGNED NOT NULL,
     StudentTicket     BIGINT UNSIGNED NOT NULL,
-    FirstName         VARCHAR(100) NOT NULL,
-    LastName          VARCHAR(100) NOT NULL,
-    MiddleName        VARCHAR(100) NOT NULL,
+    LastName          TEXT NOT NULL,
+    FirstName         TEXT NOT NULL,
+    MiddleName        TEXT NOT NULL,
     ActiveFlag        CHAR(1) NOT NULL,
 
     PRIMARY KEY(StudentID),
-    INDEX StudentGroupID_Index (StudentGroupID ASC),
-    UNIQUE INDEX StudentTicket_Index (StudentTicket ASC),
-    INDEX FirstName_Index (FirstName ASC),
-    INDEX LastName_Index (LastName ASC),
-    INDEX MiddleName_Index (MiddleName ASC),
+    INDEX Student_StudentGroupID_Index (StudentGroupID ASC),
 
-    CONSTRAINT StudentGroupID
+    CONSTRAINT Student_StudentGroup
     FOREIGN KEY (StudentGroupID)
     REFERENCES aistudenttesterdb.StudentGroup (StudentGroupID)
 )
@@ -172,9 +149,9 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.Mark
     ActiveFlag                CHAR(1) NOT NULL,
 
     PRIMARY KEY(MarkID),
-    INDEX StrategyID_Index (StrategyID ASC),
+    INDEX Mark_StrategyID_Index (StrategyID ASC),
 
-    CONSTRAINT StrategyID
+    CONSTRAINT Mark_Strategy
     FOREIGN KEY (StrategyID)
     REFERENCES aistudenttesterdb.Strategy (StrategyID)
 )
@@ -232,114 +209,114 @@ CREATE TABLE IF NOT EXISTS aistudenttesterdb.TestSession
     ActiveFlag       CHAR(1) NOT NULL,
 
     PRIMARY KEY(TestSessionID),
-    INDEX SubjectID_Index (SubjectID ASC),
-    INDEX StudentID_Index (StudentID ASC),
-    INDEX Q1_Index (Q1 ASC),
-    INDEX Q2_Index (Q2 ASC),
-    INDEX Q3_Index (Q3 ASC),
-    INDEX Q4_Index (Q4 ASC),
-    INDEX Q5_Index (Q5 ASC),
-    INDEX Q6_Index (Q6 ASC),
-    INDEX Q7_Index (Q7 ASC),
-    INDEX Q8_Index (Q8 ASC),
-    INDEX Q9_Index (Q9 ASC),
-    INDEX Q10_Index (Q10 ASC),
-    INDEX Q11_Index (Q11 ASC),
-    INDEX Q12_Index (Q12 ASC),
-    INDEX Q13_Index (Q13 ASC),
-    INDEX Q14_Index (Q14 ASC),
-    INDEX Q15_Index (Q15 ASC),
-    INDEX Q16_Index (Q16 ASC),
-    INDEX Q17_Index (Q17 ASC),
-    INDEX Q18_Index (Q18 ASC),
-    INDEX Q19_Index (Q19 ASC),
-    INDEX Q20_Index (Q20 ASC),
+    INDEX TestSession_SubjectID_Index (SubjectID ASC),
+    INDEX TestSession_StudentID_Index (StudentID ASC),
+    INDEX TestSession_Q1_Index (Q1 ASC),
+    INDEX TestSession_Q2_Index (Q2 ASC),
+    INDEX TestSession_Q3_Index (Q3 ASC),
+    INDEX TestSession_Q4_Index (Q4 ASC),
+    INDEX TestSession_Q5_Index (Q5 ASC),
+    INDEX TestSession_Q6_Index (Q6 ASC),
+    INDEX TestSession_Q7_Index (Q7 ASC),
+    INDEX TestSession_Q8_Index (Q8 ASC),
+    INDEX TestSession_Q9_Index (Q9 ASC),
+    INDEX TestSession_Q10_Index (Q10 ASC),
+    INDEX TestSession_Q11_Index (Q11 ASC),
+    INDEX TestSession_Q12_Index (Q12 ASC),
+    INDEX TestSession_Q13_Index (Q13 ASC),
+    INDEX TestSession_Q14_Index (Q14 ASC),
+    INDEX TestSession_Q15_Index (Q15 ASC),
+    INDEX TestSession_Q16_Index (Q16 ASC),
+    INDEX TestSession_Q17_Index (Q17 ASC),
+    INDEX TestSession_Q18_Index (Q18 ASC),
+    INDEX TestSession_Q19_Index (Q19 ASC),
+    INDEX TestSession_Q20_Index (Q20 ASC),
 
-    CONSTRAINT TestSession_SubjectID
+    CONSTRAINT TestSession_Subject
     FOREIGN KEY (SubjectID)
     REFERENCES aistudenttesterdb.Subject (SubjectID),
 
-    CONSTRAINT StudentID
+    CONSTRAINT TestSession_Student
     FOREIGN KEY (StudentID)
     REFERENCES aistudenttesterdb.Student (StudentID),
 
-    CONSTRAINT Q1
+    CONSTRAINT TestSession_Question_Q1
     FOREIGN KEY (Q1)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q2
+    CONSTRAINT TestSession_Question_Q2
     FOREIGN KEY (Q2)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q3
+    CONSTRAINT TestSession_Question_Q3
     FOREIGN KEY (Q3)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q4
+    CONSTRAINT TestSession_Question_Q4
     FOREIGN KEY (Q4)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q5
+    CONSTRAINT TestSession_Question_Q5
     FOREIGN KEY (Q5)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q6
+    CONSTRAINT TestSession_Question_Q6
     FOREIGN KEY (Q6)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q7
+    CONSTRAINT TestSession_Question_Q7
     FOREIGN KEY (Q7)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q8
+    CONSTRAINT TestSession_Question_Q8
     FOREIGN KEY (Q8)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q9
+    CONSTRAINT TestSession_Question_Q9
     FOREIGN KEY (Q9)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q10
+    CONSTRAINT TestSession_Question_Q10
     FOREIGN KEY (Q10)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q11
+    CONSTRAINT TestSession_Question_Q11
     FOREIGN KEY (Q11)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q12
+    CONSTRAINT TestSession_Question_Q12
     FOREIGN KEY (Q12)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q13
+    CONSTRAINT TestSession_Question_Q13
     FOREIGN KEY (Q13)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q14
+    CONSTRAINT TestSession_Question_Q14
     FOREIGN KEY (Q14)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q15
+    CONSTRAINT TestSession_Question_Q15
     FOREIGN KEY (Q15)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q16
+    CONSTRAINT TestSession_Question_Q16
     FOREIGN KEY (Q16)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q17
+    CONSTRAINT TestSession_Question_Q17
     FOREIGN KEY (Q17)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q18
+    CONSTRAINT TestSession_Question_Q18
     FOREIGN KEY (Q18)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q19
+    CONSTRAINT TestSession_Question_Q19
     FOREIGN KEY (Q19)
     REFERENCES aistudenttesterdb.Question (QuestionID),
 
-    CONSTRAINT Q20
+    CONSTRAINT TestSession_Question_Q20
     FOREIGN KEY (Q20)
     REFERENCES aistudenttesterdb.Question (QuestionID)
 )

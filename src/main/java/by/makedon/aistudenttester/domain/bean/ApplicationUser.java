@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,11 +26,13 @@ public class ApplicationUser extends AbstractBean implements UserDetails {
     public static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long applicationUserID;
 
-    private String username;
+    @Type(type = "text")
     private String password;
+
+    private String username;
     private String displayName;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

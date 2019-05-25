@@ -1,6 +1,6 @@
 -- Insert data to table StudentGroup
-INSERT INTO aistudenttesterdb.StudentGroup (StudentGroupNumber, StudentGroupYear, ActiveFlag) VALUES (521701, 2015, 'Y');
-INSERT INTO aistudenttesterdb.StudentGroup (StudentGroupNumber, StudentGroupYear, ActiveFlag) VALUES (521702, 2015, 'Y');
+INSERT INTO aistudenttesterdb.StudentGroup (StudentGroupNumber, ActiveFlag) VALUES (521701, 'Y');
+INSERT INTO aistudenttesterdb.StudentGroup (StudentGroupNumber, ActiveFlag) VALUES (521702, 'Y');
 
 -- Insert students to table Student for 521701 student group
 INSERT INTO aistudenttesterdb.Student (StudentGroupID, StudentTicket, LastName, FirstName, MiddleName, ActiveFlag) VALUES (1, 5217006, 'Белявский', 'Владислав', 'Александрович', 'Y');

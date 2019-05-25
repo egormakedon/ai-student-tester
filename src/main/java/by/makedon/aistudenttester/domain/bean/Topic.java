@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -23,9 +24,10 @@ public class Topic extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long topicID;
 
+	@Type(type = "text")
 	private String topicName;
 
 	@ManyToOne(fetch = FetchType.LAZY)

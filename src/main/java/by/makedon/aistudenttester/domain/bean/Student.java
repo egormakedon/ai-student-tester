@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -21,13 +22,19 @@ public class Student extends AbstractBean {
 	public static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long studentID;
 
-	private long studentTicket;
+	@Type(type = "text")
 	private String firstName;
+
+	@Type(type = "text")
 	private String lastName;
+
+	@Type(type = "text")
 	private String middleName;
+
+	private long studentTicket;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "StudentGroupID")
