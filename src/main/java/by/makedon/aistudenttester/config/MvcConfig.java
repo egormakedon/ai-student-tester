@@ -2,7 +2,6 @@ package by.makedon.aistudenttester.config;
 
 import by.makedon.aistudenttester.config.filter.AdminFilter;
 import by.makedon.aistudenttester.config.filter.TestFilter;
-import by.makedon.aistudenttester.config.listener.SessionListener;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,11 +31,6 @@ public class MvcConfig implements WebMvcConfigurer {
 		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
 		localeResolver.setDefaultLocale(new Locale("ru", ""));
 		return localeResolver;
-	}
-
-	@Bean
-	public SessionListener sessionListener() {
-		return new SessionListener();
 	}
 
 	@Bean
