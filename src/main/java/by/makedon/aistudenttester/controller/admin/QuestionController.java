@@ -3,13 +3,15 @@ package by.makedon.aistudenttester.controller.admin;
 import by.makedon.aistudenttester.domain.bean.Question;
 import by.makedon.aistudenttester.domain.bean.Subject;
 import by.makedon.aistudenttester.domain.bean.Topic;
-import by.makedon.aistudenttester.dto.ChangeQuestionDto;
+import by.makedon.aistudenttester.dto.QuestionDto;
 import by.makedon.aistudenttester.dto.QuestionReportDto;
+import by.makedon.aistudenttester.dto.SubjectTopicDto;
 import by.makedon.aistudenttester.dto.TopicDto;
 import by.makedon.aistudenttester.service.QuestionService;
 import by.makedon.aistudenttester.service.SubjectService;
 import by.makedon.aistudenttester.service.TopicService;
 import by.makedon.aistudenttester.util.PageUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,8 +25,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -129,7 +130,7 @@ public class QuestionController {
 	@PostMapping("/change/save")
 	public String changeQuestionSave(Model model,
 	                                 RedirectAttributes redirectAttributes,
-	                                 ChangeQuestionDto changeQuestionDto,
+	                                 QuestionDto changeQuestionDto,
 	                                 @RequestParam(value = "questionID") Question question) {
 		String rightAnswer = changeQuestionDto.getRightAnswer().trim();
 		if (NumberUtils.isCreatable(rightAnswer)) {
@@ -181,6 +182,143 @@ public class QuestionController {
 		});
 
 		return reportList;
+	}
+
+	@GetMapping("/add")
+	public String getAddQuestion(Model model) {
+		return "redirect:/admin/question/add/1";
+	}
+
+	@GetMapping("/add/{addTypeID}")
+	public String getAddQuestionByAddTypeID(Model model,
+	                                        @PathVariable String addTypeID,
+	                                        @RequestParam(required = false, value = "topicID") Topic topic,
+	                                        @RequestParam(required = false) String questionName,
+	                                        @RequestParam(required = false) String firstAnswer,
+	                                        @RequestParam(required = false) String secondAnswer,
+	                                        @RequestParam(required = false) String thirdAnswer,
+	                                        @RequestParam(required = false) String fourthAnswer,
+	                                        @RequestParam(required = false) String fifthAnswer,
+	                                        @RequestParam(required = false) String rightAnswer,
+	                                        @RequestParam(required = false) String addedSuccessfully,
+	                                        @RequestParam(required = false) List<String> errors) {
+		Optional<AddType> optionalAddType = Arrays.stream(AddType.values())
+				.filter(at -> at.getAddTypeID().equals(addTypeID))
+				.findFirst();
+
+		if (!optionalAddType.isPresent() || (topic != null && !topic.isActive())) {
+			return "redirect:/admin/question/add/1";
+		}
+
+		AddType addType = optionalAddType.get();
+		switch (addType) {
+			case ONE_QUESTION:
+				List<SubjectTopicDto> reportList = new ArrayList<>();
+
+				subjectService.getSubjectList().forEach(subject -> {
+					topicService.getTopicListBySubjectID(subject.getID()).forEach(t -> {
+						SubjectTopicDto report = new SubjectTopicDto();
+						report.setSubjectTopicName(String.format("%s - %s", subject.getSubjectName(), t.getTopicName()));
+						report.setTopicID(t.getID());
+						reportList.add(report);
+					});
+				});
+
+				model.addAttribute("topic", topic);
+
+				model.addAttribute("questionName", questionName);
+				model.addAttribute("firstAnswer", firstAnswer);
+				model.addAttribute("secondAnswer", secondAnswer);
+				model.addAttribute("thirdAnswer", thirdAnswer);
+				model.addAttribute("fourthAnswer", fourthAnswer);
+				model.addAttribute("fifthAnswer", fifthAnswer);
+				model.addAttribute("rightAnswer", rightAnswer);
+
+				model.addAttribute("reportList", reportList);
+				break;
+			case FEW_QUESTIONS:
+				break;
+		}
+
+		model.addAttribute("addedSuccessfully", addedSuccessfully);
+		model.addAttribute("errors", errors);
+		model.addAttribute("addTypeID", addTypeID);
+		return "admin/addQuestion";
+	}
+
+	@PostMapping("/add/save")
+	public String saveQuestion(Model model,
+	                           RedirectAttributes redirectAttributes,
+	                           @RequestParam(value = "topicID") Topic topic,
+	                           @RequestParam String questionName,
+	                           @RequestParam String firstAnswer,
+	                           @RequestParam String secondAnswer,
+	                           @RequestParam String thirdAnswer,
+	                           @RequestParam String fourthAnswer,
+	                           @RequestParam String fifthAnswer,
+	                           @RequestParam String rightAnswer) {
+		Set<String> errors = new TreeSet<>();
+
+		if (topic == null || StringUtils.isBlank(questionName.trim()) || StringUtils.isBlank(firstAnswer.trim()) ||
+				StringUtils.isBlank(secondAnswer.trim()) || StringUtils.isBlank(thirdAnswer.trim()) || StringUtils.isBlank(fourthAnswer.trim()) ||
+				StringUtils.isBlank(fifthAnswer.trim()) || StringUtils.isBlank(rightAnswer.trim())) {
+			errors.add("add.question.validation.blank");
+		}
+
+		if (NumberUtils.isCreatable(rightAnswer.trim())) {
+			int answer = Integer.valueOf(rightAnswer.trim());
+			if (answer < 1 || answer > 5) {
+				errors.add("add.question.validation.right.answer.incorrect.size");
+			}
+		} else {
+			errors.add("add.question.validation.right.answer.not.number");
+		}
+
+		if (errors.isEmpty()) {
+			Question question = new Question();
+			question.setQuestionName(questionName.trim());
+			question.setFirstAnswer(firstAnswer.trim());
+			question.setSecondAnswer(secondAnswer.trim());
+			question.setThirdAnswer(thirdAnswer.trim());
+			question.setFourthAnswer(fourthAnswer.trim());
+			question.setFifthAnswer(fifthAnswer.trim());
+			question.setRightAnswer(Integer.valueOf(rightAnswer.trim()));
+			question.setActive(true);
+
+			questionService.addQuestion(question, topic);
+
+			redirectAttributes.addAttribute("addedSuccessfully", "add.question.question.added.successfully");
+		} else {
+			if (topic != null) {
+				redirectAttributes.addAttribute("topicID", topic.getID());
+			}
+
+			redirectAttributes.addAttribute("errors", errors);
+			redirectAttributes.addAttribute("questionName", questionName);
+			redirectAttributes.addAttribute("firstAnswer", firstAnswer);
+			redirectAttributes.addAttribute("secondAnswer", secondAnswer);
+			redirectAttributes.addAttribute("thirdAnswer", thirdAnswer);
+			redirectAttributes.addAttribute("fourthAnswer", fourthAnswer);
+			redirectAttributes.addAttribute("fifthAnswer", fifthAnswer);
+			redirectAttributes.addAttribute("rightAnswer", rightAnswer);
+		}
+
+		return "redirect:/admin/question/add/1";
+	}
+
+	enum AddType {
+		ONE_QUESTION("1"),
+		FEW_QUESTIONS("2");
+
+		private String addTypeID;
+
+		AddType(String addTypeID) {
+			this.addTypeID = addTypeID;
+		}
+
+		public String getAddTypeID() {
+			return addTypeID;
+		}
 	}
 
 //	Getters/Setters

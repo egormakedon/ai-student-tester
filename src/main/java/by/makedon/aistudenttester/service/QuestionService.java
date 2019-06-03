@@ -1,7 +1,9 @@
 package by.makedon.aistudenttester.service;
 
 import by.makedon.aistudenttester.domain.bean.Question;
+import by.makedon.aistudenttester.domain.bean.QuestionMap;
 import by.makedon.aistudenttester.domain.bean.TestSession;
+import by.makedon.aistudenttester.domain.bean.Topic;
 import by.makedon.aistudenttester.repository.QuestionRepository;
 import by.makedon.aistudenttester.util.BaseConstants;
 import by.makedon.aistudenttester.util.BaseException;
@@ -22,6 +24,19 @@ public class QuestionService {
 
     public List<Question> getQuestionList() {
         return repository.findQuestions();
+    }
+
+    @Transactional
+    public Question addQuestion(Question question, Topic topic) {
+        Question savedQuestion = save(question);
+
+        QuestionMap questionMap = new QuestionMap();
+        questionMap.setQuestion(savedQuestion);
+        questionMap.setTopic(topic);
+        questionMap.setActive(true);
+        questionMapService.save(questionMap);
+
+        return savedQuestion;
     }
 
     @Transactional

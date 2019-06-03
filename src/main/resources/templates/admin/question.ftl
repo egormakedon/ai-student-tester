@@ -38,6 +38,11 @@
         </#if>
         <div class="row">
             <div class="col">
+                <a style="background-color: #044d58" class="btn btn-primary" href="/admin/question/add"><@spring.message "question.button.add.question"/></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
                 <div>
                     <@p.pager url page/>
                 </div>

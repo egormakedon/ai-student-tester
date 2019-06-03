@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Yahor Makedon
  */
 @Data
-public class ChangeQuestionDto implements Serializable {
+public class QuestionDto implements Serializable {
 	public static final long serialVersionUID = 1L;
 
 	private String questionName;
