@@ -33,10 +33,10 @@
                 <div class="col">
                     <div class="alert alert-danger" role="alert">
                         <#list errors as error>
-                            <#if error?contains(":")>
-                                <#assign messages = error?split(":")
+                            <#if error?contains(";;;")>
+                                <#assign messages = error?split(";;;")
                                          code = messages[0]
-                                         args = messages[1]?split(";")
+                                         args = messages[1]?split(";;")
                                 >
                                 <div><@spring.messageArgs code="${code}" args=["${args[0]}", "${args[1]}"]/></div>
                             <#else>
