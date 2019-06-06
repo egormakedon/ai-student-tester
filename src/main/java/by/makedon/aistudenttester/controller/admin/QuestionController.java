@@ -1,5 +1,6 @@
 package by.makedon.aistudenttester.controller.admin;
 
+import by.makedon.aistudenttester.docapi.FileValidator;
 import by.makedon.aistudenttester.domain.bean.Question;
 import by.makedon.aistudenttester.domain.bean.Subject;
 import by.makedon.aistudenttester.domain.bean.Topic;
@@ -23,6 +24,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
@@ -38,6 +40,8 @@ public class QuestionController {
 	private QuestionService questionService;
 	private SubjectService subjectService;
 	private TopicService topicService;
+
+	private FileValidator fileValidator;
 
 	@GetMapping
 	public String getQuestion(Model model,
@@ -306,6 +310,27 @@ public class QuestionController {
 		return "redirect:/admin/question/add/1";
 	}
 
+	@PostMapping("/add/upload")
+	public String uploadFile(Model model,
+	                         RedirectAttributes redirectAttributes,
+	                         @RequestParam MultipartFile file) {
+		List<String> errors = fileValidator.validate(file);
+
+		//TODO валидация
+
+		//TODO Save
+
+		//TODO download template
+
+		if (errors.isEmpty()) {
+			//TODO
+		} else {
+			redirectAttributes.addAttribute("errors", errors);
+		}
+
+		return "redirect:/admin/question/add/2";
+	}
+
 	enum AddType {
 		ONE_QUESTION("1"),
 		FEW_QUESTIONS("2");
@@ -336,5 +361,10 @@ public class QuestionController {
 	@Autowired
 	public void setTopicService(TopicService topicService) {
 		this.topicService = topicService;
+	}
+
+	@Autowired
+	public void setFileValidator(FileValidator fileValidator) {
+		this.fileValidator = fileValidator;
 	}
 }

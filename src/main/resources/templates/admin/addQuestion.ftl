@@ -33,7 +33,15 @@
                 <div class="col">
                     <div class="alert alert-danger" role="alert">
                         <#list errors as error>
-                            <div><@spring.message "${error}"/></div>
+                            <#if error?contains(":")>
+                                <#assign messages = error?split(":")
+                                         code = messages[0]
+                                         args = messages[1]?split(";")
+                                >
+                                <div><@spring.messageArgs code="${code}" args=["${args[0]}", "${args[1]}"]/></div>
+                            <#else>
+                                <div><@spring.message "${error}"/></div>
+                            </#if>
                         </#list>
                     </div>
                 </div>
@@ -100,7 +108,29 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         <#elseif addTypeID == "2">
-            2
+            <#--<div class="row mt-5">-->
+                <#--<div class="col">-->
+                    <#--<div class="alert alert-success" role="alert">-->
+                        <#--<div><@spring.message "${addedSuccessfully}"/></div>-->
+                    <#--</div>-->
+                <#--</div>-->
+            <#--</div>-->
+            <div class="row mt-5">
+                <div class="col">
+                    <div>
+                        <form action="/admin/question/add/upload" method="post" enctype="multipart/form-data">
+                            <div class="form-group row">
+                                <input class="form-control-file" type="file" name="file" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                            </div>
+                            <div class="form-group row mt-5">
+                                <button style="background-color: #044d58" class="btn btn-primary" type="submit"><@spring.message "add.question.button.upload.file"/></button>
+                            </div>
+
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </#if>
     </div>
 
