@@ -30,20 +30,27 @@ public class QuestionService {
     @Transactional
     public Question addQuestion(Question question, Topic topic) {
         Question savedQuestion = save(question);
-
-        QuestionMap questionMap = new QuestionMap();
-        questionMap.setQuestion(savedQuestion);
-        questionMap.setTopic(topic);
-        questionMap.setActive(true);
-        questionMapService.save(questionMap);
+        addQuestionMap(savedQuestion, topic);
 
         return savedQuestion;
     }
 
     @Transactional
     public void addQuestion(Map<Topic, List<Question>> topicQuestionListMap) {
-        topicQuestionListMap.forEach((key, value) -> repository.saveAll(value));
-        //TODO
+        topicQuestionListMap.forEach((topic, questionList) ->
+                repository.saveAll(questionList)
+                        .forEach(question -> addQuestionMap(question, topic))
+        );
+    }
+
+    @Transactional
+    public QuestionMap addQuestionMap(Question question, Topic topic) {
+        QuestionMap questionMap = new QuestionMap();
+        questionMap.setQuestion(question);
+        questionMap.setTopic(topic);
+        questionMap.setActive(true);
+
+        return questionMapService.save(questionMap);
     }
 
     @Transactional
