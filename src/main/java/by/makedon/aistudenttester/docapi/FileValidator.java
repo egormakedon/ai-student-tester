@@ -4,12 +4,8 @@ import by.makedon.aistudenttester.domain.bean.Topic;
 import by.makedon.aistudenttester.service.SubjectService;
 import by.makedon.aistudenttester.service.TopicService;
 import by.makedon.aistudenttester.util.BaseException;
-import org.apache.commons.lang3.StringUtils;
+import lombok.Getter;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +37,14 @@ public class FileValidator {
 	private SubjectService subjectService;
 	private TopicService topicService;
 
-	public List<String> validate(MultipartFile file) {
-		List<String> errors = new ArrayList<>();
+	@Getter
+	private List<String> text;
+
+	@Getter
+	private List<String> errors;
+
+	public void validate(MultipartFile file) {
+		errors = new ArrayList<>();
 
 		if (file == null) {
 			errors.add("add.question.validation.no.file.selected");
@@ -53,31 +55,8 @@ public class FileValidator {
 		} else if (!file.getOriginalFilename().matches(REGEX_DOC) && !file.getOriginalFilename().matches(REGEX_DOCX)) {
 			errors.add("add.question.validation.not.document");
 		} else {
-			List<String> text;
-
-			if (file.getOriginalFilename().matches(REGEX_DOC)) {
-				try (HWPFDocument document = new HWPFDocument(file.getInputStream())) {
-					WordExtractor extractor = new WordExtractor(document);
-
-					text = Arrays.stream(extractor.getParagraphText())
-							.map(String::trim)
-							.filter(s -> !StringUtils.isBlank(s))
-							.collect(Collectors.toList());
-				} catch (Exception e) {
-					throw new BaseException("Error on validating upload document", e);
-				}
-			} else {
-				try (XWPFDocument document = new XWPFDocument(file.getInputStream())) {
-					text = document.getParagraphs()
-							.stream()
-							.map(XWPFParagraph::getText)
-							.map(String::trim)
-							.filter(s -> !StringUtils.isBlank(s))
-							.collect(Collectors.toList());
-				} catch (Exception e) {
-					throw new BaseException("Error on validating upload document", e);
-				}
-			}
+			DocumentParser documentParser = new DocumentParser();
+			text = documentParser.parseDocument(file);
 
 			if (text.isEmpty()) {
 				errors.add("add.question.validation.file.empty");
@@ -90,8 +69,6 @@ public class FileValidator {
 				validateText(text, errors);
 			}
 		}
-
-		return errors;
 	}
 
 	private Map<String, Set<String>> getSubjectTopicsMap()

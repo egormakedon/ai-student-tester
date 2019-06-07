@@ -15,4 +15,8 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
            "WHERE t.active = true AND t.subject.subjectID = :subjectID AND t.subject.active = true " +
            "ORDER BY t.topicName ASC")
     List<Topic> findTopicsBySubjectID(@Param("subjectID") Long subjectID);
+
+    @Query("SELECT t FROM Topic t " +
+            "WHERE t.active = true AND t.topicName = :topicName AND t.subject.active = true AND t.subject.subjectName = :subjectName")
+    Topic findTopic(@Param("topicName") String topicName, @Param("subjectName") String subjectName);
 }

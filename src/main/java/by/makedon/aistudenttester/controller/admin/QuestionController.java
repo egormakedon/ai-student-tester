@@ -1,6 +1,7 @@
 package by.makedon.aistudenttester.controller.admin;
 
 import by.makedon.aistudenttester.docapi.FileValidator;
+import by.makedon.aistudenttester.docapi.QuestionParser;
 import by.makedon.aistudenttester.domain.bean.Question;
 import by.makedon.aistudenttester.domain.bean.Subject;
 import by.makedon.aistudenttester.domain.bean.Topic;
@@ -42,6 +43,7 @@ public class QuestionController {
 	private TopicService topicService;
 
 	private FileValidator fileValidator;
+	private QuestionParser questionParser;
 
 	@GetMapping
 	public String getQuestion(Model model,
@@ -314,16 +316,16 @@ public class QuestionController {
 	public String uploadFile(Model model,
 	                         RedirectAttributes redirectAttributes,
 	                         @RequestParam MultipartFile file) {
-		List<String> errors = fileValidator.validate(file);
-
-		//TODO валидация
-
-		//TODO Save
+		fileValidator.validate(file);
 
 		//TODO download template
 
+		List<String> errors = fileValidator.getErrors();
 		if (errors.isEmpty()) {
-			//TODO
+			questionParser.parseText(fileValidator.getText());
+			questionService.addQuestion(questionParser.getTopicQuestionListMap());
+
+			redirectAttributes.addAttribute("addedSuccessfully", "add.question.question.list.added.successfully");
 		} else {
 			redirectAttributes.addAttribute("errors", errors);
 		}
@@ -366,5 +368,10 @@ public class QuestionController {
 	@Autowired
 	public void setFileValidator(FileValidator fileValidator) {
 		this.fileValidator = fileValidator;
+	}
+
+	@Autowired
+	public void setQuestionParser(QuestionParser questionParser) {
+		this.questionParser = questionParser;
 	}
 }

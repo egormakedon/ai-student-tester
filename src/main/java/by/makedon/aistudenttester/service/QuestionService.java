@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Yahor Makedon
@@ -37,6 +38,12 @@ public class QuestionService {
         questionMapService.save(questionMap);
 
         return savedQuestion;
+    }
+
+    @Transactional
+    public void addQuestion(Map<Topic, List<Question>> topicQuestionListMap) {
+        topicQuestionListMap.forEach((key, value) -> repository.saveAll(value));
+        //TODO
     }
 
     @Transactional

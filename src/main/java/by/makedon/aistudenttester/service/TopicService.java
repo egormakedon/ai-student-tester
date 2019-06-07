@@ -15,6 +15,10 @@ import java.util.Set;
 public class TopicService {
     private TopicRepository repository;
 
+    public Topic getTopicByTopicNameAndSubjectName(String topicName, String subjectName) {
+        return repository.findTopic(topicName, subjectName);
+    }
+
     public List<Topic> getTopicListBySubjectID(Long subjectID) {
         return repository.findTopicsBySubjectID(subjectID);
     }
