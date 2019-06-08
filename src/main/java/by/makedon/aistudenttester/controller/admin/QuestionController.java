@@ -16,18 +16,24 @@ import by.makedon.aistudenttester.util.PageUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -318,8 +324,6 @@ public class QuestionController {
 	                         @RequestParam MultipartFile file) {
 		fileValidator.validate(file);
 
-		//TODO download template
-
 		List<String> errors = fileValidator.getErrors();
 		if (errors.isEmpty()) {
 			questionParser.parseText(fileValidator.getText());
@@ -331,6 +335,20 @@ public class QuestionController {
 		}
 
 		return "redirect:/admin/question/add/2";
+	}
+
+	@GetMapping("/template/download")
+	public ResponseEntity<Resource> downloadTemplate(Model model,
+	                                                 HttpServletRequest request,
+	                                                 CookieLocaleResolver localeResolver) {
+		final String DIR_PATH = "static/files/";
+		final String TEMPLATE_FILENAME = String.format("Question template (%s).pdf", localeResolver.resolveLocale(request));
+		Resource resource = new ClassPathResource(String.format("%s%s", DIR_PATH, TEMPLATE_FILENAME));
+
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_PDF)
+				.header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;filename=\"%s\"", TEMPLATE_FILENAME))
+				.body(resource);
 	}
 
 	enum AddType {
