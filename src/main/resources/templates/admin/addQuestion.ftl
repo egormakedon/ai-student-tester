@@ -108,13 +108,17 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         <#elseif addTypeID == "2">
-            <#--<div class="row mt-5">-->
-                <#--<div class="col">-->
-                    <#--<div class="alert alert-success" role="alert">-->
-                        <#--<div><@spring.message "${addedSuccessfully}"/></div>-->
-                    <#--</div>-->
-                <#--</div>-->
-            <#--</div>-->
+            <div class="row mt-5">
+                <div class="col">
+                    <div class="alert alert-info" role="alert">
+                        <div>
+                            <@spring.message "add.question.download.template"/>
+                            (<a href="/admin/question/template/download"><@spring.message "add.question.link"/></a>).
+                            <@spring.message "add.question.max.file.size"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row mt-5">
                 <div class="col">
                     <div>
