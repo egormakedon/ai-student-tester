@@ -113,7 +113,12 @@
                     <div class="alert alert-info" role="alert">
                         <div>
                             <@spring.message "add.question.download.template"/>
-                            (<a href="/admin/question/template/download"><@spring.message "add.question.link"/></a>).
+                            (<a href="/admin/question/template/download"><@spring.message "add.question.link"/></a>)
+                        </div>
+                        <div>
+                            <@spring.message "add.question.uploading.file.extension"/>
+                        </div>
+                        <div>
                             <@spring.message "add.question.max.file.size"/>
                         </div>
                     </div>
