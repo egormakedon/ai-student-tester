@@ -12,6 +12,9 @@
         <ul class="navbar-nav mr-auto">
             <#if isAdmin>
                 <li class="nav-item">
+                    <a class="nav-link" href="/admin/subjecttopic"><@spring.message "navbar.subject.topic"/></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/admin/question"><@spring.message "navbar.questions"/></a>
                 </li>
                 <li class="nav-item">

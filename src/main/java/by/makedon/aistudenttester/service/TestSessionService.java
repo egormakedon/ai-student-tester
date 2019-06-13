@@ -34,6 +34,13 @@ public class TestSessionService {
     }
 
     @Transactional
+    public List<TestSession> remove(Subject subject) {
+        List<TestSession> testSessionList = repository.findTestSessionsBySubjectID(subject.getID());
+        testSessionList.forEach(testSession -> testSession.setActive(false));
+        return repository.saveAll(testSessionList);
+    }
+
+    @Transactional
     public TestSession save(TestSession testSession) {
         return repository.save(testSession);
     }

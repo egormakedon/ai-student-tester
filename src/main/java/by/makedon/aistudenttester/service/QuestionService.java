@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Yahor Makedon
@@ -63,6 +61,16 @@ public class QuestionService {
         questionMapService.removeByQuestionID(question.getID());
         question.setActive(false);
         return save(question);
+    }
+
+    @Transactional
+    public Set<Question> remove(Set<Question> questions) {
+        questions.forEach(question -> {
+            questionMapService.removeByQuestionID(question.getID());
+            question.setActive(false);
+        });
+
+        return new HashSet<>(repository.saveAll(questions));
     }
 
     public Question getQuestionByTestSessionAndQuestionNumber(TestSession testSession, int questionNumber) {

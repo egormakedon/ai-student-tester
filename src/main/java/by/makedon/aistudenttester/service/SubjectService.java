@@ -5,6 +5,7 @@ import by.makedon.aistudenttester.repository.SubjectRepository;
 import by.makedon.aistudenttester.util.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,17 @@ import java.util.stream.Collectors;
 public class SubjectService {
     private SubjectRepository repository;
     private TopicService topicService;
+    private TestSessionService testSessionService;
+
+    @Transactional
+    public Subject remove(Subject subject) {
+        topicService.remove(subject);
+
+        testSessionService.remove(subject);
+
+        subject.setActive(false);
+        return repository.save(subject);
+    }
 
     public List<Subject> getSubjectList() {
         return repository.findSubjects();
@@ -37,5 +49,10 @@ public class SubjectService {
     @Autowired
     public void setTopicService(TopicService topicService) {
         this.topicService = topicService;
+    }
+
+    @Autowired
+    public void setTestSessionService(TestSessionService testSessionService) {
+        this.testSessionService = testSessionService;
     }
 }
