@@ -15,4 +15,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
            "WHERE s.active = true AND s.studentGroup.studentGroupNumber = :studentGroupNumber AND s.studentGroup.active = true " +
            "ORDER BY s.lastName ASC, s.firstName ASC, s.middleName ASC")
     List<Student> findStudentsByStudentGroupNumber(@Param("studentGroupNumber") long studentGroupNumber);
+
+    @Query("SELECT s FROM Student s " +
+            "WHERE s.studentGroup.studentGroupID = :studentGroupID AND s.active = true " +
+            "ORDER BY s.lastName ASC, s.firstName ASC, s.middleName ASC")
+    List<Student> findStudentsByStudentGroupID(@Param("studentGroupID") Long studentGroupID);
 }

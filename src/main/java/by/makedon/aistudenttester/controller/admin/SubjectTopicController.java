@@ -36,6 +36,7 @@ public class SubjectTopicController {
 		model.addAttribute("removedSuccessfully", removedSuccessfully);
 		model.addAttribute("subject", subject);
 		model.addAttribute("subjectList", subjectService.getSubjectList());
+
 		return "admin/subjectTopic";
 	}
 

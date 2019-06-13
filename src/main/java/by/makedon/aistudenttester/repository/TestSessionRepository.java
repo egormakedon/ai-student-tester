@@ -22,4 +22,9 @@ public interface TestSessionRepository extends JpaRepository<TestSession, Long> 
 			"WHERE ts.subject.subjectID = :subjectID AND ts.active = true " +
 			"ORDER BY ts.finishedDate DESC")
 	List<TestSession> findTestSessionsBySubjectID(@Param("subjectID") Long subjectID);
+
+	@Query("SELECT ts FROM TestSession  ts " +
+			"WHERE ts.student.studentID = :studentID AND ts.active = true " +
+			"ORDER BY ts.finishedDate DESC")
+	List<TestSession> findTestSessionsByStudentID(@Param("studentID") Long studentID);
 }
