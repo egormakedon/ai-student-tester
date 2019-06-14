@@ -19,10 +19,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private ApplicationUserService userService;
-	private BCryptPasswordEncoder passwordEncoder;
 
 	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder()
+	public BCryptPasswordEncoder passwordEncoder()
 	{
 		return new BCryptPasswordEncoder(8);
 	}
@@ -52,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userService)
-			.passwordEncoder(passwordEncoder);
+			.passwordEncoder(passwordEncoder());
 	}
 
 //	Getters/Setters
@@ -60,10 +59,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void setUserService(ApplicationUserService userService) {
 		this.userService = userService;
-	}
-
-	@Autowired
-	public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
-		this.passwordEncoder = passwordEncoder;
 	}
 }
