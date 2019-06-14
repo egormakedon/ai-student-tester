@@ -13,7 +13,7 @@ function ajaxRemoveStudentGroup(studentGroupID) {
     };
 
     ajaxPost('/admin/groupstudent/ajax/group/remove', data, function (result) {
-        location.replace(hostname + "/admin/groupstudent?removedSuccessfully=group.student.group.removed.successfully");
+        location.replace(hostname + "/admin/groupstudent?success=group.student.group.removed.successfully");
     });
 }
 
@@ -29,9 +29,9 @@ function ajaxRemoveStudent(studentID) {
 
         baseUrl = parameters === undefined ? baseUrl : baseUrl + parameters;
 
-        if (new URLSearchParams(window.location.search).get("removedSuccessfully") === null) {
-            baseUrl = parameters === undefined ? baseUrl + 'removedSuccessfully=group.student.student.removed.successfully'
-                : baseUrl + '&removedSuccessfully=group.student.student.removed.successfully';
+        if (new URLSearchParams(window.location.search).get("success") === null) {
+            baseUrl = parameters === undefined ? baseUrl + 'success=group.student.student.removed.successfully'
+                : baseUrl + '&success=group.student.student.removed.successfully';
         }
 
         location.replace(baseUrl);

@@ -86,10 +86,12 @@ public class QuestionController {
 		List<Subject> subjectList = subjectService.getSubjectList();
 		model.addAttribute("subjectList", subjectList);
 
-		List<Subject> validSubjectList = subjectService.getValidSubjectList();
-		if (subjectList.size() != validSubjectList.size()) {
-			subjectList.removeAll(validSubjectList);
-			model.addAttribute("notificationSubjectList", subjectList);
+		Set<Subject> validSubjectSet = new HashSet<>(subjectService.getValidSubjectList());
+
+		if (subjectList.size() != validSubjectSet.size()) {
+			model.addAttribute("notificationSubjectList", subjectList.stream()
+					.filter(s -> !validSubjectSet.contains(s))
+					.collect(Collectors.toList()));
 		}
 
 		if (topic != null) {

@@ -13,7 +13,7 @@ function ajaxRemoveSubject(subjectID) {
     };
 
     ajaxPost('/admin/subjecttopic/ajax/subject/remove', data, function (result) {
-        location.replace(hostname + "/admin/subjecttopic?removedSuccessfully=subject.topic.subject.removed.successfully");
+        location.replace(hostname + "/admin/subjecttopic?success=subject.topic.subject.removed.successfully");
     });
 }
 
@@ -29,9 +29,9 @@ function ajaxRemoveTopic(topicID) {
 
         baseUrl = parameters === undefined ? baseUrl : baseUrl + parameters;
 
-        if (new URLSearchParams(window.location.search).get("removedSuccessfully") === null) {
-            baseUrl = parameters === undefined ? baseUrl + 'removedSuccessfully=subject.topic.topic.removed.successfully'
-                : baseUrl + '&removedSuccessfully=subject.topic.topic.removed.successfully';
+        if (new URLSearchParams(window.location.search).get("success") === null) {
+            baseUrl = parameters === undefined ? baseUrl + 'success=subject.topic.topic.removed.successfully'
+                : baseUrl + '&success=subject.topic.topic.removed.successfully';
         }
 
         location.replace(baseUrl);

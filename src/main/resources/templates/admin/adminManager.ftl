@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="col-auto">
-                        <button class="btn btn-primary" type="submit"><@spring.message "admin.manager.button.add"/></button>
+                        <button style="background-color: #044d58" class="btn btn-primary" type="submit"><@spring.message "admin.manager.button.add"/></button>
                     </div>
                 </div>
 

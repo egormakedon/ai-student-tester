@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +21,11 @@ public class SubjectService {
     private TestSessionService testSessionService;
 
     @Transactional
+    public Subject save(Subject subject) {
+        return repository.save(subject);
+    }
+
+    @Transactional
     public Subject remove(Subject subject) {
         topicService.remove(subject);
 
@@ -27,6 +33,10 @@ public class SubjectService {
 
         subject.setActive(false);
         return repository.save(subject);
+    }
+
+    public Optional<Subject> getSubjectBySubjectName(String subjectName) {
+        return repository.findSubjectBySubjectName(subjectName);
     }
 
     public List<Subject> getSubjectList() {

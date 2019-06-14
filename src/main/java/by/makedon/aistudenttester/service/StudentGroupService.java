@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Yahor Makedon
@@ -17,10 +18,19 @@ public class StudentGroupService {
     private StudentService studentService;
 
     @Transactional
+    public StudentGroup save(StudentGroup studentGroup) {
+        return repository.save(studentGroup);
+    }
+
+    @Transactional
     public StudentGroup remove(StudentGroup studentGroup) {
         studentService.remove(studentGroup);
         studentGroup.setActive(false);
         return repository.save(studentGroup);
+    }
+
+    public Optional<StudentGroup> getStudentGroupByStudentGroupNumber(long studentGroupNumber) {
+        return repository.findStudentGroupByStudentGroupNumber(studentGroupNumber);
     }
 
     public List<StudentGroup> getStudentGroupList() {
