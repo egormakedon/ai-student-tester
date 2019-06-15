@@ -37,3 +37,7 @@ function ajaxRemoveTopic(topicID) {
         location.replace(baseUrl);
     });
 }
+
+function setInputValues() {
+    $("input[name='subjectID']").val($('#subjectSelectorID option:selected').attr('value'));
+}

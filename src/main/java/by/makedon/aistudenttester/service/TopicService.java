@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -17,6 +18,11 @@ import java.util.Set;
 public class TopicService {
     private TopicRepository repository;
     private QuestionService questionService;
+
+    @Transactional
+    public Topic save(Topic topic) {
+        return repository.save(topic);
+    }
 
     @Transactional
     public Topic remove(Topic topic) {
@@ -35,6 +41,10 @@ public class TopicService {
         });
 
         return repository.saveAll(topicList);
+    }
+
+    public Optional<Topic> getTopicBySubjectIDAndTopicName(Long subjectID, String topicName) {
+        return repository.findTopicBySubjectIDAndTopicName(subjectID, topicName);
     }
 
     public Topic getTopicByTopicNameAndSubjectName(String topicName, String subjectName) {

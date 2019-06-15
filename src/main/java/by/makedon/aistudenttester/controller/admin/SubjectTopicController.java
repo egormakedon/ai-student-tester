@@ -47,6 +47,39 @@ public class SubjectTopicController {
 		return "admin/subjectTopic";
 	}
 
+	@PostMapping("/topic/add")
+	public String addTopic(Model model,
+	                       RedirectAttributes redirectAttributes,
+	                       @RequestParam(value = "subjectID") Subject subject,
+	                       @RequestParam String topicName) {
+		if (subject == null || !subject.isActive()) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("subject.topic.validation.subject.not.selected"));
+			return "redirect:/admin/subjecttopic";
+		}
+
+		if (StringUtils.isBlank(topicName)) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("subject.topic.validation.topic.name.blank"));
+			return "redirect:/admin/subjecttopic";
+		}
+
+		topicName = topicName.trim();
+
+		if (topicService.getTopicBySubjectIDAndTopicName(subject.getID(), topicName).isPresent()) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("subject.topic.validation.topic.exists"));
+			return "redirect:/admin/subjecttopic";
+		}
+
+		Topic topic = new Topic();
+		topic.setSubject(subject);
+		topic.setTopicName(topicName);
+		topic.setActive(true);
+		topicService.save(topic);
+
+		redirectAttributes.addAttribute("success", "subject.topic.topic.added.successfully");
+		redirectAttributes.addAttribute("subjectID", subject.getID());
+		return "redirect:/admin/subjecttopic";
+	}
+
 	@PostMapping("/subject/add")
 	public String addSubject(Model model,
 	                         RedirectAttributes redirectAttributes,
@@ -69,6 +102,7 @@ public class SubjectTopicController {
 		subjectService.save(subject);
 
 		redirectAttributes.addAttribute("success", "subject.topic.subject.added.successfully");
+		redirectAttributes.addAttribute("subjectID", subject.getID());
 		return "redirect:/admin/subjecttopic";
 	}
 
