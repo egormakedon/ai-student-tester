@@ -48,7 +48,7 @@
                             <tbody>
                                 <tr>
                                     <td style="border: none" colspan="3">
-                                        <select class="custom-select">
+                                        <select class="custom-select" id="studentGroupSelectorID">
                                             <option <#if !studentGroup??>selected</#if>><@spring.message "group.student.choose.group"/></option>
                                             <#list studentGroupList as sg>
                                                 <option <#if studentGroup?? && studentGroup.ID == sg.ID>selected</#if> value="${sg.ID}">${sg.studentGroupNumber}</option>
@@ -65,11 +65,12 @@
                                     <td style="border: none" colspan="3"><input class="form-control" type="text" name="studentTicket" placeholder="<@spring.message "group.student.student.ticket"/>"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3" style="border: none"><button style="background-color: #044d58" class="btn btn-primary" type="submit"><@spring.message "group.student.button.add"/></button></td>
+                                    <td colspan="3" style="border: none"><button style="background-color: #044d58" class="btn btn-primary" type="submit" onclick="setInputValues()"><@spring.message "group.student.button.add"/></button></td>
                                 </tr>
                             </tbody>
                         </table>
 
+                        <input type="hidden" name="studentGroupID" <#if studentGroup??>value="${studentGroup.ID}"</#if>>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
                 </div>

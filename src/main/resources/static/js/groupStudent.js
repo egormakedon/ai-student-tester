@@ -37,3 +37,7 @@ function ajaxRemoveStudent(studentID) {
         location.replace(baseUrl);
     });
 }
+
+function setInputValues() {
+    $("input[name='studentGroupID']").val($('#studentGroupSelectorID option:selected').attr('value'));
+}

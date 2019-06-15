@@ -48,6 +48,66 @@ public class StudentGroupStudentController {
 		return "admin/groupStudent";
 	}
 
+	@PostMapping("/student/add")
+	public String addStudent(Model model,
+	                         RedirectAttributes redirectAttributes,
+	                         @RequestParam(value = "studentGroupID") StudentGroup studentGroup,
+	                         @RequestParam String lastName,
+	                         @RequestParam String firstName,
+	                         @RequestParam String middleName,
+	                         @RequestParam String studentTicket) {
+		if (studentGroup == null || !studentGroup.isActive()) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("group.student.validation.group.not.selected"));
+			return "redirect:/admin/groupstudent";
+		}
+
+		if (StringUtils.isBlank(lastName)) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("group.student.validation.lastname.blank"));
+			return "redirect:/admin/groupstudent";
+		}
+
+		if (StringUtils.isBlank(firstName)) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("group.student.validation.firstname.blank"));
+			return "redirect:/admin/groupstudent";
+		}
+
+		if (StringUtils.isBlank(studentTicket)) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("group.student.validation.student.ticket.blank"));
+			return "redirect:/admin/groupstudent";
+		}
+
+		lastName = lastName.trim();
+		firstName = firstName.trim();
+		studentTicket = studentTicket.trim();
+
+		middleName = StringUtils.isBlank(middleName) ? " " : middleName.trim();
+
+		if (!NumberUtils.isCreatable(studentTicket)) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("group.student.validation.student.ticket.not.number"));
+			return "redirect:/admin/groupstudent";
+		}
+
+		long studentTicketLong = Long.valueOf(studentTicket);
+
+		if (studentService.getStudent(studentGroup.getID(), lastName, firstName, middleName, studentTicketLong).isPresent()) {
+			redirectAttributes.addAttribute("errors", Collections.singletonList("group.student.validation.student.exists"));
+			return "redirect:/admin/groupstudent";
+		}
+
+		Student student = new Student();
+		student.setStudentGroup(studentGroup);
+		student.setLastName(lastName);
+		student.setFirstName(firstName);
+		student.setMiddleName(middleName);
+		student.setStudentTicket(studentTicketLong);
+		student.setActive(true);
+		studentService.save(student);
+
+		redirectAttributes.addAttribute("success", "group.student.student.added.successfully");
+		redirectAttributes.addAttribute("studentGroupID", studentGroup.getID());
+		return "redirect:/admin/groupstudent";
+	}
+
 	@PostMapping("/group/add")
 	public String addStudentGroup(Model model,
 	                              RedirectAttributes redirectAttributes,
@@ -75,6 +135,7 @@ public class StudentGroupStudentController {
 		studentGroupService.save(studentGroup);
 
 		redirectAttributes.addAttribute("success", "group.student.group.added.successfully");
+		redirectAttributes.addAttribute("studentGroupID", studentGroup.getID());
 		return "redirect:/admin/groupstudent";
 	}
 
